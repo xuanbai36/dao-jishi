@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026春节倒计时 - 距离2026年春节还有多少天</title>
+<meta name="description" content="距离2026年春节还有多少天?春节倒计时工具,实时计算距离春节还有几天几小时几分几秒,2026年春节是几月几号、春节倒计时。">
+<meta name="keywords" content="春节倒计时,2026春节,过年还有几天,春节是几月几号,除夕倒计时">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(160deg, #831843 0%, #db2777 60%, #fbcfe8 100%);
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px 60px;
+  }
+  .container { max-width: 720px; width: 100%; text-align: center; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 36px; }
+  .days-box {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 36px 24px;
+    backdrop-filter: blur(6px);
+    margin-bottom: 24px;
+  }
+  .days-label { font-size: 15px; opacity: 0.9; margin-bottom: 6px; }
+  .days-number { font-size: 96px; font-weight: 800; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+  .days-unit { font-size: 24px; font-weight: 600; margin-left: 8px; }
+  .time-row { display: flex; justify-content: center; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
+  .time-item { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 10px 16px; min-width: 88px; }
+  .time-item .num { font-size: 26px; font-weight: 700; }
+  .time-item .txt { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+  .date-info { font-size: 14px; opacity: 0.9; margin-bottom: 32px; }
+  .encourage { font-size: 17px; font-weight: 600; margin-bottom: 36px; letter-spacing: 2px; }
+  .article {
+    background: #fff; color: #1f2937; border-radius: 16px;
+    padding: 28px 24px; text-align: left; margin-top: 20px;
+  }
+  .article h2 { font-size: 20px; color: #831843; margin-bottom: 16px; }
+  .article p { font-size: 15px; line-height: 1.9; margin-bottom: 12px; }
+  .footer { margin-top: 32px; font-size: 12px; opacity: 0.7; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>2026 春节倒计时</h1>
+  <div class="subtitle">有钱没钱,回家过年</div>
+
+  <div class="days-box">
+    <div class="days-label">距离 2026 年春节(正月初一)</div>
+    <div class="days-number"><span id="days">--</span><span class="days-unit">天</span></div>
+    <div class="time-row">
+      <div class="time-item"><div class="num" id="hours">--</div><div class="txt">小时</div></div>
+      <div class="time-item"><div class="num" id="minutes">--</div><div class="txt">分钟</div></div>
+      <div class="time-item"><div class="num" id="seconds">--</div><div class="txt">秒</div></div>
+    </div>
+  </div>
+
+  <div class="date-info">2026 年春节:2 月 17 日(农历正月初一)</div>
+  <div class="encourage" id="encourage">归家的日子,一天比一天近!</div>
+
+  <div class="article">
+    <h2>春节倒计时怎么用?</h2>
+    <p>2026 年春节是 2 月 17 日,农历丙午马年正月初一。除夕是 2 月 16 日。这里实时显示距离春节还剩多少天、多少小时、多少分钟。</p>
+    <p>💡 春节出行高峰一般在除夕前一周开始,建议提前规划抢票和返乡安排。春运车票、机票都要提前订。</p>
+    <p>📌 春节攻略(占位区):这里后续可以补充春运抢票时间表、年货清单、年夜饭菜单、春节祝福语等内容。</p>
+  </div>
+
+  <div class="footer">春节倒计时 · 每天更新 · 2026 年春节为 2 月 17 日</div>
+</div>
+
+<script>
+// 2026年春节:农历正月初一 = 公历 2026年2月17日
+var targetDate = new Date("2026-02-17T00:00:00");
+
+function update() {
+  var now = new Date();
+  var diff = targetDate - now;
+  if (diff <= 0) {
+    document.getElementById("days").textContent = "0";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+    document.getElementById("encourage").textContent = "春节快乐!恭喜发财!";
+    return;
+  }
+  var days = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var minutes = Math.floor((diff % 3600000) / 60000);
+  var seconds = Math.floor((diff % 60000) / 1000);
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+}
+update();
+setInterval(update, 1000);
+</script>
+</body>
+</html>

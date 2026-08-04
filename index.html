@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>倒计时工具 - 考研/国考/春节/高考倒计时</title>
+<meta name="description" content="免费在线倒计时工具:考研倒计时、国考倒计时、春节倒计时等,实时计算距离重要日期还有多少天。">
+<meta name="keywords" content="倒计时,考研倒计时,国考倒计时,春节倒计时,高考倒计时,倒计时工具">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #f3f4f6;
+    min-height: 100vh;
+    color: #1f2937;
+  }
+  .header {
+    background: linear-gradient(160deg, #1e3a8a 0%, #3b82f6 100%);
+    color: #fff;
+    text-align: center;
+    padding: 48px 16px 56px;
+  }
+  .header h1 { font-size: 30px; font-weight: 800; margin-bottom: 10px; }
+  .header p { font-size: 15px; opacity: 0.85; }
+  .container { max-width: 860px; margin: -28px auto 60px; padding: 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+  .card .name { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+  .card .date { font-size: 13px; color: #6b7280; margin-bottom: 14px; }
+  .card .days { font-size: 36px; font-weight: 800; color: #1e3a8a; line-height: 1; }
+  .card .days small { font-size: 14px; font-weight: 600; color: #6b7280; margin-left: 4px; }
+  .card.orange .days { color: #ea580c; }
+  .card.pink .days { color: #db2777; }
+  .card.green .days { color: #059669; }
+  .tip {
+    background: #fff; border-radius: 16px; padding: 20px 24px; margin-top: 20px;
+    font-size: 14px; line-height: 1.8; color: #4b5563; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .tip b { color: #1e3a8a; }
+  .footer { text-align: center; font-size: 12px; color: #9ca3af; padding: 0 16px 40px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>重要日子倒计时</h1>
+  <p>考研、考公、过年……距离重要的那一天,还有多久?</p>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid"></div>
+
+  <div class="tip">
+    <b>使用说明:</b>点击上方任意卡片进入对应倒计时页面,实时显示距离目标日期还剩几天几小时几分几秒。<br>
+    <b>提醒:</b>考试类倒计时的具体日期以官方最终公告为准,页面内会及时更新。
+  </div>
+</div>
+
+<div class="footer">倒计时工具 · 免费使用 · 每天更新</div>
+
+<script>
+var events = [
+  { name: "2026 考研", date: "2025-12-20", url: "kaoyan-daojishi.html", css: "", note: "以官方公告为准" },
+  { name: "2026 国考", date: "2025-11-30", url: "guokao-daojishi.html", css: "orange", note: "以官方公告为准" },
+  { name: "2026 春节", date: "2026-02-17", url: "chunjie-daojishi.html", css: "pink", note: "2月17日 正月初一" }
+];
+
+function daysLeft(dateStr) {
+  var diff = new Date(dateStr + "T00:00:00") - new Date();
+  return diff > 0 ? Math.floor(diff / 86400000) : 0;
+}
+
+var grid = document.getElementById("grid");
+events.forEach(function (e) {
+  var d = daysLeft(e.date);
+  var dateText = e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日";
+  var card = document.createElement("a");
+  card.className = "card " + e.css;
+  card.href = e.url;
+  card.innerHTML =
+    '<div class="name">' + e.name + "</div>" +
+    '<div class="date">' + dateText + " · " + e.note + "</div>" +
+    '<div class="days">' + d + "<small>天</small></div>";
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
