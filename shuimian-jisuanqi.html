@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>睡眠计算器 - 科学安排入睡与起床时间</title>
+<meta name="description" content="睡眠周期计算器:输入起床时间或入睡时间,按 90 分钟睡眠周期科学计算最佳入睡/起床时间,在周期结束时醒来精神更好。">
+<meta name="keywords" content="睡眠计算器,睡眠周期,几点睡几点起,最佳睡眠时间,睡眠周期计算">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    min-height: 100vh;
+    color: #e2e8f0;
+    background: linear-gradient(160deg, #0b1026 0%, #1e1b4b 55%, #312e81 100%);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* 星星层 */
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .stars span {
+    position: absolute; background: #fff; border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+  .moon {
+    position: fixed; top: 48px; right: 9%; width: 88px; height: 88px; z-index: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fef9c3, #fde68a 60%, #fbbf24);
+    box-shadow: 0 0 60px rgba(253, 230, 138, 0.5);
+  }
+  .moon::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 60% 45%, transparent 0 18%, rgba(180, 140, 40, 0.25) 20% 24%, transparent 26%),
+                radial-gradient(circle at 30% 65%, transparent 0 12%, rgba(180, 140, 40, 0.2) 14% 18%, transparent 20%);
+  }
+
+  .header { position: relative; z-index: 1; text-align: center; padding: 64px 20px 40px; }
+  .header h1 {
+    font-size: 34px; font-weight: 800;
+    background: linear-gradient(120deg, #fff 20%, #c7d2fe 60%, #fbcfe8 90%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+  .header p { font-size: 14px; color: #94a3b8; letter-spacing: 1px; }
+
+  .container { position: relative; z-index: 1; max-width: 720px; margin: 0 auto 60px; padding: 0 20px; }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 24px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 16px 48px rgba(0,0,0,0.35);
+    padding: 28px 26px;
+    margin-bottom: 20px;
+  }
+  .glass h2 { font-size: 17px; font-weight: 700; color: #f1f5f9; margin-bottom: 6px; }
+  .glass .desc { font-size: 13px; color: #94a3b8; margin-bottom: 18px; }
+  .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .row label { font-size: 14px; color: #cbd5e1; }
+  .row input[type="time"] {
+    font-size: 16px; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.1); color: #fff; font-family: inherit;
+  }
+  .btn {
+    background: linear-gradient(135deg, #818cf8, #6366f1);
+    color: #fff; border: none; border-radius: 12px;
+    font-size: 15px; font-weight: 600; padding: 11px 26px; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  }
+  .btn:active { transform: scale(0.97); }
+  .result { margin-top: 20px; display: none; }
+  .result .item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 18px; margin-bottom: 10px;
+    background: rgba(255,255,255,0.08); border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+  .result .item .t { font-size: 14px; color: #cbd5e1; }
+  .result .item .v { font-size: 22px; font-weight: 800; color: #a5b4fc; }
+  .result .item.hot .v { color: #fde68a; }
+  .tip { font-size: 13px; line-height: 2; color: #94a3b8; }
+  .tip b { color: #c7d2fe; }
+  .footer { position: relative; z-index: 1; text-align: center; font-size: 12px; color: #64748b; padding: 0 16px 40px; }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="moon"></div>
+
+<div class="header">
+  <h1>睡眠计算器</h1>
+  <p>按 90 分钟睡眠周期,科学安排入睡与起床</p>
+</div>
+
+<div class="container">
+
+  <div class="glass">
+    <h2>🌅 按「起床时间」倒推入睡</h2>
+    <div class="desc">选择你明天必须起床的时间,计算器给出推荐入睡时间</div>
+    <div class="row">
+      <label>起床时间</label>
+      <input type="time" id="wakeTime" value="07:00">
+      <button class="btn" onclick="calcFromWake()">计算</button>
+    </div>
+    <div class="result" id="wakeResult"></div>
+  </div>
+
+  <div class="glass">
+    <h2>🌙 按「入睡时间」顺推起床</h2>
+    <div class="desc">选择你打算几点睡,计算器给出睡满周期的最佳起床时间</div>
+    <div class="row">
+      <label>入睡时间</label>
+      <input type="time" id="sleepTime" value="23:30">
+      <button class="btn" onclick="calcFromSleep()">计算</button>
+    </div>
+    <div class="result" id="sleepResult"></div>
+  </div>
+
+  <div class="glass tip">
+    <h2>💡 睡眠周期小知识</h2>
+    <p>一个完整睡眠周期约 <b>90 分钟</b>,包括浅睡、深睡、快速眼动(做梦)等阶段。在<b>周期结束时刻</b>醒来,精神状态最好;在深睡阶段被叫醒,会昏昏沉沉。</p>
+    <p>建议:按整数周期睡(4~5 个周期 ≈ 6~7.5 小时),并提前 <b>15 分钟上床</b>酝酿睡意。熬夜后补觉也要按整周期睡,效果更好。</p>
+  </div>
+</div>
+
+<div class="footer">睡眠计算器 · 仅供参考 · 规律作息最重要</div>
+
+<script>
+// 生成星空
+(function () {
+  var box = document.getElementById("stars");
+  for (var i = 0; i < 70; i++) {
+    var s = document.createElement("span");
+    var size = Math.random() * 2.2 + 1;
+    s.style.width = s.style.height = size + "px";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.opacity = Math.random() * 0.8 + 0.2;
+    s.style.animationDelay = Math.random() * 3 + "s";
+    box.appendChild(s);
+  }
+})();
+
+function fmt(mins) {
+  mins = ((mins % 1440) + 1440) % 1440;
+  var h = Math.floor(mins / 60);
+  var m = mins % 60;
+  return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+}
+
+function toMins(timeStr) {
+  var p = timeStr.split(":");
+  return parseInt(p[0]) * 60 + parseInt(p[1]);
+}
+
+function calcFromWake() {
+  var wake = toMins(document.getElementById("wakeTime").value);
+  var html = "";
+  [
+    { n: 5, label: "睡 5 个周期(7.5 小时)· 推荐", hot: true },
+    { n: 4, label: "睡 4 个周期(6 小时)", hot: false },
+    { n: 3, label: "睡 3 个周期(4.5 小时)", hot: false }
+  ].forEach(function (o) {
+    var sleep = wake - o.n * 90;
+    html += '<div class="item' + (o.hot ? ' hot' : '') + '">' +
+      '<span class="t">' + o.label + '</span>' +
+      '<span class="v">' + fmt(sleep) + ' 入睡</span></div>';
+  });
+  html += '<div class="item"><span class="t">建议提前 15 分钟上床酝酿睡意</span><span class="v" style="color:#94a3b8;font-size:14px;">约为 ' + fmt(wake - 7.5 * 60 - 15) + ' 上床</span></div>';
+  var box = document.getElementById("wakeResult");
+  box.innerHTML = html;
+  box.style.display = "block";
+}
+
+function calcFromSleep() {
+  var sleep = toMins(document.getElementById("sleepTime").value);
+  var html = "";
+  [
+    { n: 5, label: "睡 5 个周期(7.5 小时)· 推荐", hot: true },
+    { n: 4, label: "睡 4 个周期(6 小时)", hot: false },
+    { n: 3, label: "睡 3 个周期(4.5 小时)", hot: false }
+  ].forEach(function (o) {
+    var wake = sleep + o.n * 90;
+    html += '<div class="item' + (o.hot ? ' hot' : '') + '">' +
+      '<span class="t">' + o.label + '</span>' +
+      '<span class="v">' + fmt(wake) + ' 起床</span></div>';
+  });
+  var box = document.getElementById("sleepResult");
+  box.innerHTML = html;
+  box.style.display = "block";
+}
+</script>
+</body>
+</html>

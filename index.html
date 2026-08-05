@@ -6,110 +6,107 @@
 <meta name="msvalidate.01" content="3F720A11A4FE574ED28562EB2E9ADA12" />
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
 <title>倒计时与工具箱 - 考研/高考/国考倒计时·在线工具·攻略大全</title>
-<meta name="description" content="免费在线工具站:考研倒计时、高考倒计时、国考倒计时、四六级倒计时、春节倒计时、自定义倒计时、文本工具箱、备考攻略与考试时间表。">
-<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,四六级倒计时,春节倒计时,中考倒计时,预产期倒计时,自定义倒计时,文本工具箱,字数统计,考试时间表">
+<meta name="description" content="免费在线工具站:考研倒计时、高考倒计时、国考倒计时、四六级倒计时、春节倒计时、自定义倒计时、睡眠计算器、文本工具箱、备考攻略与考试时间表。">
+<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,四六级倒计时,春节倒计时,中考倒计时,预产期倒计时,自定义倒计时,睡眠计算器,文本工具箱,考试时间表">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
-    background: #f8fafc;
     min-height: 100vh;
-    color: #0f172a;
+    color: #1e293b;
+    background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 35%, #e0f2fe 70%, #fce7f3 100%);
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  .header {
-    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
-    text-align: center;
-    padding: 72px 20px 48px;
-    border-bottom: 1px solid #eef2f7;
-  }
+  /* 流动光斑 */
+  .orb { position: fixed; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none; }
+  .orb-1 { width: 420px; height: 420px; background: rgba(129,140,248,0.35); top: -120px; left: -100px; animation: drift1 16s ease-in-out infinite; }
+  .orb-2 { width: 360px; height: 360px; background: rgba(103,232,249,0.3); top: 30%; right: -120px; animation: drift2 20s ease-in-out infinite; }
+  .orb-3 { width: 380px; height: 380px; background: rgba(244,114,182,0.22); bottom: -140px; left: 25%; animation: drift3 18s ease-in-out infinite; }
+  @keyframes drift1 { 50% { transform: translate(70px, 50px) scale(1.1); } }
+  @keyframes drift2 { 50% { transform: translate(-60px, -40px) scale(1.15); } }
+  @keyframes drift3 { 50% { transform: translate(50px, -60px) scale(1.05); } }
+
+  .header { position: relative; z-index: 1; text-align: center; padding: 68px 20px 44px; }
   .header .badge {
-    display: inline-block;
-    font-size: 12px; font-weight: 600; letter-spacing: 2px;
-    color: #4f46e5;
-    background: #eef2ff;
-    border: 1px solid #e0e7ff;
-    border-radius: 999px;
-    padding: 6px 18px;
-    margin-bottom: 20px;
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #6366f1;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 999px; padding: 7px 20px; margin-bottom: 20px;
+    backdrop-filter: blur(10px); box-shadow: 0 4px 16px rgba(99,102,241,0.12);
   }
-  .header h1 {
-    font-size: 38px; font-weight: 800; letter-spacing: 0.5px;
-    color: #0f172a;
-    margin-bottom: 12px;
-  }
-  .header h1 em { font-style: normal; color: #4f46e5; }
+  .header h1 { font-size: 38px; font-weight: 800; letter-spacing: 0.5px; color: #1e1b4b; margin-bottom: 12px; }
+  .header h1 em { font-style: normal; background: linear-gradient(120deg, #6366f1, #0ea5e9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .header p { font-size: 15px; color: #64748b; letter-spacing: 1px; }
 
-  .container { max-width: 960px; margin: 0 auto 70px; padding: 0 20px; }
+  .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto 70px; padding: 0 20px; }
   .group-title {
-    font-size: 13px; font-weight: 700; letter-spacing: 3px; color: #94a3b8;
-    margin: 44px 0 18px; display: flex; align-items: center; gap: 14px;
+    font-size: 13px; font-weight: 800; letter-spacing: 3px; color: #818cf8;
+    margin: 40px 0 18px; display: flex; align-items: center; gap: 14px;
   }
-  .group-title::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+  .group-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(129,140,248,0.4), transparent); }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
   .card {
-    background: #ffffff;
-    border: 1px solid #eef2f7;
-    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18));
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 26px;
     padding: 26px 24px;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.05);
-    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), inset 0 -14px 28px rgba(255,255,255,0.25), 0 10px 36px rgba(99,102,241,0.14);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     display: block;
     position: relative;
   }
   .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(15,23,42,0.04), 0 20px 40px rgba(15,23,42,0.1);
-    border-color: #e0e7ff;
+    transform: translateY(-5px);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.95), inset 0 -14px 28px rgba(255,255,255,0.3), 0 24px 56px rgba(99,102,241,0.28);
   }
   .card .tag {
-    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
-    color: #4f46e5; background: #eef2ff; border-radius: 6px; padding: 3px 10px;
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    color: #6366f1; background: rgba(255,255,255,0.7); border-radius: 8px; padding: 3px 10px;
     margin-bottom: 14px;
   }
-  .card .name { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-  .card .date { font-size: 13px; color: #94a3b8; margin-bottom: 18px; }
-  .card .days {
-    font-size: 44px; font-weight: 800; line-height: 1; color: #4f46e5;
-    letter-spacing: -1px;
-  }
+  .card .name { font-size: 18px; font-weight: 800; color: #1e1b4b; margin-bottom: 4px; }
+  .card .date { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+  .card .days { font-size: 44px; font-weight: 800; line-height: 1; color: #6366f1; letter-spacing: -1px; }
   .card .days small { font-size: 15px; font-weight: 600; color: #94a3b8; margin-left: 6px; letter-spacing: 0; }
-  .card .go {
-    position: absolute; top: 26px; right: 22px;
-    font-size: 14px; color: #cbd5e1; transition: color 0.2s, transform 0.2s;
-  }
-  .card:hover .go { color: #4f46e5; transform: translateX(3px); }
-  .card.orange .tag { color: #ea580c; background: #fff7ed; }
+  .card .go { position: absolute; top: 26px; right: 22px; font-size: 15px; color: #c7d2fe; transition: color 0.2s, transform 0.2s; }
+  .card:hover .go { color: #6366f1; transform: translateX(3px); }
+  .card.orange .tag { color: #ea580c; background: rgba(255,237,213,0.85); }
   .card.orange .days { color: #ea580c; }
-  .card.orange:hover { border-color: #ffedd5; }
-  .card.pink .tag { color: #db2777; background: #fdf2f8; }
+  .card.pink .tag { color: #db2777; background: rgba(253,242,248,0.85); }
   .card.pink .days { color: #db2777; }
-  .card.pink:hover { border-color: #fce7f3; }
-  .card.green .tag { color: #059669; background: #ecfdf5; }
+  .card.green .tag { color: #059669; background: rgba(236,253,245,0.85); }
   .card.green .days { color: #059669; }
-  .card.green:hover { border-color: #d1fae5; }
-  .card.tool-card { display: flex; flex-direction: column; justify-content: space-between; }
+  .card.purple .tag { color: #7c3aed; background: rgba(245,243,255,0.9); }
   .card .tool-icon { font-size: 30px; margin-bottom: 14px; }
   .pill {
-    display: inline-block; font-size: 13px; font-weight: 600; color: #4f46e5;
-    background: #eef2ff; border-radius: 999px; padding: 8px 18px; margin-top: 6px;
+    display: inline-block; font-size: 13px; font-weight: 700; color: #6366f1;
+    background: rgba(255,255,255,0.7); border-radius: 999px; padding: 8px 18px; margin-top: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
   .tip {
-    margin-top: 48px; background: #ffffff; border: 1px solid #eef2f7;
-    border-radius: 20px; padding: 24px 28px;
+    position: relative; z-index: 1;
+    margin-top: 44px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+    border: 1px solid rgba(255,255,255,0.75); border-radius: 24px; padding: 24px 28px;
     font-size: 13.5px; line-height: 2; color: #64748b;
-    box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+    backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 10px 32px rgba(99,102,241,0.1);
   }
-  .tip b { color: #4f46e5; }
-  .footer { text-align: center; font-size: 12px; color: #cbd5e1; padding: 0 16px 44px; letter-spacing: 1px; }
+  .tip b { color: #6366f1; }
+  .footer { position: relative; z-index: 1; text-align: center; font-size: 12px; color: #94a3b8; padding: 0 16px 44px; letter-spacing: 1px; }
 </style>
 </head>
 <body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
 <div class="header">
   <div class="badge">免费在线工具</div>
@@ -139,6 +136,7 @@ var groups = [
   {
     title: "在线工具",
     items: [
+      { name: "睡眠计算器", date: "", url: "shuimian-jisuanqi.html", css: "purple", tag: "健康", note: "科学安排入睡与起床", type: "tool", icon: "🌙" },
       { name: "文本工具箱", date: "", url: "wenben-gongju.html", css: "green", tag: "文本处理", note: "字数统计 / 大小写 / 去重 / 反转", type: "tool", icon: "🧰" }
     ]
   },
