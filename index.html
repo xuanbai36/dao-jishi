@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="msvalidate.01" content="3F720A11A4FE574ED28562EB2E9ADA12" />
-<title>倒计时工具大全 - 考研/高考/国考/四六级/春节倒计时</title>
-<meta name="description" content="免费在线倒计时工具:考研倒计时、高考倒计时、国考倒计时、四六级倒计时、春节倒计时、中考倒计时、预产期倒计时、自定义倒计时,实时计算距离重要日期还有多少天。">
-<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,四六级倒计时,春节倒计时,中考倒计时,预产期倒计时,自定义倒计时">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>倒计时与工具箱 - 考研/高考/国考倒计时·在线工具·攻略大全</title>
+<meta name="description" content="免费在线工具站:考研倒计时、高考倒计时、国考倒计时、四六级倒计时、春节倒计时、自定义倒计时、文本工具箱、备考攻略与考试时间表。">
+<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,四六级倒计时,春节倒计时,中考倒计时,预产期倒计时,自定义倒计时,文本工具箱,字数统计,考试时间表">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -20,16 +20,20 @@
     background: linear-gradient(160deg, #1e3a8a 0%, #3b82f6 100%);
     color: #fff;
     text-align: center;
-    padding: 48px 16px 56px;
+    padding: 44px 16px 52px;
   }
   .header h1 { font-size: 30px; font-weight: 800; margin-bottom: 10px; }
   .header p { font-size: 15px; opacity: 0.85; }
-  .container { max-width: 860px; margin: -28px auto 60px; padding: 0 16px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .container { max-width: 900px; margin: -28px auto 60px; padding: 0 16px; }
+  .group-title {
+    font-size: 18px; font-weight: 700; color: #374151;
+    margin: 28px 0 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
   .card {
     background: #fff;
     border-radius: 16px;
-    padding: 24px 20px;
+    padding: 20px;
     text-decoration: none;
     color: inherit;
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -37,15 +41,17 @@
     display: block;
   }
   .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
-  .card .name { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
-  .card .date { font-size: 13px; color: #6b7280; margin-bottom: 14px; }
-  .card .days { font-size: 36px; font-weight: 800; color: #1e3a8a; line-height: 1; }
-  .card .days small { font-size: 14px; font-weight: 600; color: #6b7280; margin-left: 4px; }
+  .card .name { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .card .date { font-size: 13px; color: #6b7280; margin-bottom: 12px; }
+  .card .days { font-size: 32px; font-weight: 800; color: #1e3a8a; line-height: 1; }
+  .card .days small { font-size: 13px; font-weight: 600; color: #6b7280; margin-left: 4px; }
+  .card .days.tool { font-size: 18px; font-weight: 700; color: #4d7c0f; }
+  .card .days.content { font-size: 18px; font-weight: 700; color: #6b21a8; }
   .card.orange .days { color: #ea580c; }
   .card.pink .days { color: #db2777; }
   .card.green .days { color: #059669; }
   .tip {
-    background: #fff; border-radius: 16px; padding: 20px 24px; margin-top: 20px;
+    background: #fff; border-radius: 16px; padding: 20px 24px; margin-top: 28px;
     font-size: 14px; line-height: 1.8; color: #4b5563; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   }
   .tip b { color: #1e3a8a; }
@@ -54,57 +60,88 @@
 </head>
 <body>
 <div class="header">
-  <h1>重要日子倒计时</h1>
-  <p>考研、考公、过年……距离重要的那一天,还有多久?</p>
+  <h1>重要日子倒计时 · 工具箱</h1>
+  <p>考研、高考、国考倒计时 · 在线工具 · 考试攻略大全</p>
 </div>
 
-<div class="container">
-  <div class="grid" id="grid"></div>
+<div class="container" id="container"></div>
 
-  <div class="tip">
-    <b>使用说明:</b>点击上方任意卡片进入对应倒计时页面,实时显示距离目标日期还剩几天几小时几分几秒。<br>
-    <b>提醒:</b>考试类倒计时的具体日期以官方最终公告为准,页面内会及时更新。
-  </div>
-</div>
-
-<div class="footer">倒计时工具 · 免费使用 · 每天更新</div>
+<div class="footer">倒计时与工具箱 · 免费使用 · 内容持续更新</div>
 
 <script>
-var events = [
-  { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", note: "以官方公告为准" },
-  { name: "四六级(12月)", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", note: "以官方公告为准" },
-  { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", note: "以官方公告为准" },
-  { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", note: "2月6日 正月初一" },
-  { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", css: "green", note: "以官方公告为准" },
-  { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", note: "以当地公告为准" },
-  { name: "预产期", date: "", url: "yuchanqi-daojishi.html", css: "pink", note: "输入日期自动计算", input: true },
-  { name: "自定义倒计时", date: "", url: "zidingyi-daojishi.html", css: "", note: "创建属于你的倒计时", input: true }
+var groups = [
+  {
+    title: "⏰ 倒计时",
+    items: [
+      { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", note: "以官方公告为准", type: "count" },
+      { name: "四六级(12月)", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", note: "以官方公告为准", type: "count" },
+      { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", note: "以官方公告为准", type: "count" },
+      { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", note: "2月6日 正月初一", type: "count" },
+      { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", css: "green", note: "以官方公告为准", type: "count" },
+      { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", note: "以当地公告为准", type: "count" },
+      { name: "自定义倒计时", date: "", url: "zidingyi-daojishi.html", css: "", note: "创建属于你的倒计时", type: "input" }
+    ]
+  },
+  {
+    title: "🛠️ 在线工具",
+    items: [
+      { name: "预产期倒计时", date: "", url: "yuchanqi-daojishi.html", css: "pink", note: "输入日期自动计算", type: "input" },
+      { name: "文本工具箱", date: "", url: "wenben-gongju.html", css: "green", note: "字数统计/大小写/去重/反转", type: "tool" }
+    ]
+  },
+  {
+    title: "📖 文章攻略",
+    items: [
+      { name: "考试时间表与攻略", date: "", url: "wenzhang.html", css: "", note: "考试安排/放假安排/备考指南", type: "content" }
+    ]
+  }
 ];
 
 function daysLeft(dateStr) {
+  if (!dateStr) return 0;
   var diff = new Date(dateStr + "T00:00:00") - new Date();
   return diff > 0 ? Math.floor(diff / 86400000) : 0;
 }
 
-var grid = document.getElementById("grid");
-events.forEach(function (e) {
-  var card = document.createElement("a");
-  card.className = "card " + e.css;
-  card.href = e.url;
-  if (e.input) {
+var container = document.getElementById("container");
+groups.forEach(function (g) {
+  var title = document.createElement("div");
+  title.className = "group-title";
+  title.textContent = g.title;
+  container.appendChild(title);
+
+  var grid = document.createElement("div");
+  grid.className = "grid";
+
+  g.items.forEach(function (e) {
+    var card = document.createElement("a");
+    card.className = "card " + e.css;
+    card.href = e.url;
+
+    var dateText = e.date
+      ? e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日"
+      : e.note;
+
+    var daysHtml;
+    if (e.type === "count") {
+      var d = daysLeft(e.date);
+      daysHtml = '<div class="days">' + d + "<small>天</small></div>";
+    } else if (e.type === "input") {
+      daysHtml = '<div class="days">--<small>天</small></div>';
+    } else if (e.type === "tool") {
+      daysHtml = '<div class="days tool">🧰 在线使用</div>';
+    } else {
+      daysHtml = '<div class="days content">📖 阅读</div>';
+    }
+
     card.innerHTML =
       '<div class="name">' + e.name + "</div>" +
-      '<div class="date">' + e.note + "</div>" +
-      '<div class="days">--<small>天</small></div>';
-  } else {
-    var d = daysLeft(e.date);
-    var dateText = e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日";
-    card.innerHTML =
-      '<div class="name">' + e.name + "</div>" +
-      '<div class="date">' + dateText + " · " + e.note + "</div>" +
-      '<div class="days">' + d + "<small>天</small></div>";
-  }
-  grid.appendChild(card);
+      '<div class="date">' + dateText + "</div>" +
+      daysHtml;
+    grid.appendChild(card);
+  });
+
+  container.appendChild(grid);
 });
 </script>
 </body>
