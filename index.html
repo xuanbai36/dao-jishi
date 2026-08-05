@@ -6,10 +6,10 @@
 <meta name="msvalidate.01" content="3F720A11A4FE574ED28562EB2E9ADA12" />
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1E6465">
+<meta name="theme-color" content="#0b1020">
 <title>上岸日历 - 把重要考试,变成每天看得见的进度</title>
-<meta name="description" content="考研、高考、国考、教资、四六级考试倒计时,备考进度与里程碑提醒,番茄钟、睡眠计算器、日期计算器等备考工具,免费使用,无需注册。">
-<meta name="keywords" content="考试倒计时,考研倒计时,高考倒计时,国考倒计时,备考进度,上岸日历,番茄钟">
+<meta name="description" content="考研、高考、国考、教资、四六级考试倒计时,备考进度与状态提醒,番茄钟、睡眠计算器、下班倒计时等工具,免费使用,无需注册。">
+<meta name="keywords" content="考试倒计时,考研倒计时,高考倒计时,国考倒计时,备考进度,上岸日历,下班倒计时">
 <link rel="canonical" href="https://daojishicn.top/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="上岸日历 - 把重要考试,变成每天看得见的进度">
@@ -18,139 +18,194 @@
 <meta name="twitter:card" content="summary">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --bg: #F4F5F1; --text: #1B211E; --primary: #1E6465; --accent: #E8755D;
-    --warn: #E6B84F; --border: #D9DED8; --muted: #6B7670;
-  }
   html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
-    background: var(--bg); color: var(--text); min-height: 100vh;
+    min-height: 100vh; color: #e2e8f0; overflow-x: hidden;
+    background: linear-gradient(160deg, #0b1020 0%, #131a35 55%, #1e1b4b 100%);
+    transition: background 0.5s ease;
     -webkit-font-smoothing: antialiased;
   }
+  body.theme-cyan { background: linear-gradient(160deg, #082f2e 0%, #134e4a 55%, #0f766e 100%); }
+  body.theme-sunset { background: linear-gradient(160deg, #2d0f1e 0%, #4c1d3d 55%, #7f1d1d 100%); }
+  .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none; }
+  .orb-1 { width: 420px; height: 420px; background: rgba(56,189,248,0.16); top: -140px; left: -100px; animation: dr1 18s ease-in-out infinite; }
+  .orb-2 { width: 380px; height: 380px; background: rgba(129,140,248,0.15); bottom: -120px; right: -100px; animation: dr2 22s ease-in-out infinite; }
+  .orb-3 { width: 320px; height: 320px; background: rgba(244,114,182,0.1); top: 40%; left: 55%; animation: dr3 20s ease-in-out infinite; }
+  @keyframes dr1 { 50% { transform: translate(60px, 40px) scale(1.1); } }
+  @keyframes dr2 { 50% { transform: translate(-50px, -40px) scale(1.12); } }
+  @keyframes dr3 { 50% { transform: translate(40px, -50px) scale(1.05); } }
+
+  /* Zen 沉浸模式 */
+  body.zen .nav, body.zen .section, body.zen .tools-area, body.zen .mine-area, body.zen .hero .tag, body.zen .hero .sub, body.zen .target-select, body.zen .hero-actions, body.zen .tip, body.zen .footer, body.zen .bottom-add { display: none !important; }
+  body.zen .hero { max-width: none; padding: 6vh 4vw; }
+  body.zen .big-card { background: transparent; border: none; box-shadow: none; padding: 0; }
+  body.zen .big-card .t-name { font-size: 4vh; }
+  body.zen .big-card .t-full { font-size: 2.2vh; }
+  body.zen .big-card .t-days { font-size: clamp(120px, 26vw, 240px); }
+  body.zen .big-card .t-hms { font-size: 6vh; }
+  body.zen .big-card .t-date { font-size: 2.4vh; }
+  body.zen .big-card .t-status { font-size: 2.4vh; padding: 10px 28px; }
+  .zen-hint { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 40; font-size: 12px; color: rgba(226,232,240,0.5); display: none; }
+  body.zen .zen-hint { display: block; }
+
   .nav {
     position: sticky; top: 0; z-index: 20;
-    display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
-    padding: 14px 24px; background: rgba(244,245,241,0.92);
-    border-bottom: 1px solid var(--border); backdrop-filter: blur(10px);
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    padding: 14px 24px;
+    background: rgba(13,17,33,0.6); border-bottom: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   }
-  .nav .brand { font-size: 18px; font-weight: 800; color: var(--primary); text-decoration: none; letter-spacing: 0.5px; }
+  .nav .brand { font-size: 18px; font-weight: 800; color: #e2e8f0; text-decoration: none; letter-spacing: 1px; }
+  .nav .brand span { color: #38bdf8; }
   .nav .links { display: flex; gap: 18px; flex: 1; flex-wrap: wrap; }
-  .nav .links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 600; }
-  .nav .links a:hover { color: var(--primary); }
+  .nav .links a { font-size: 14px; color: #94a3b8; text-decoration: none; font-weight: 600; }
+  .nav .links a:hover { color: #38bdf8; }
+  .nav .right { display: flex; gap: 10px; align-items: center; }
+  .theme-dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); cursor: pointer; }
+  .theme-dot.navy { background: #131a35; }
+  .theme-dot.cyan { background: #134e4a; }
+  .theme-dot.sunset { background: #4c1d3d; }
   .nav .add {
-    background: var(--primary); color: #fff; border: none; border-radius: 999px;
+    background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; border: none; border-radius: 999px;
     padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
   }
 
-  .hero { max-width: 880px; margin: 0 auto; padding: 52px 20px 20px; text-align: center; }
-  .hero .tag { font-size: 13px; color: var(--muted); letter-spacing: 2px; margin-bottom: 10px; }
-  .hero h1 { font-size: 32px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
-  .hero h1 span { color: var(--primary); }
-  .hero .sub { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
-
-  .target-select { margin-bottom: 24px; }
+  .hero { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 48px 20px 16px; text-align: center; }
+  .hero .tag { font-size: 12px; color: #64748b; letter-spacing: 3px; margin-bottom: 8px; }
+  .hero h1 { font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+  .hero h1 span { background: linear-gradient(120deg, #38bdf8, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .sub { font-size: 14px; color: #94a3b8; margin-bottom: 22px; }
+  .target-select { margin-bottom: 20px; }
   .target-select select {
-    font-size: 15px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 12px;
-    background: #fff; color: var(--text); min-height: 44px; min-width: 220px;
+    font-size: 14px; padding: 10px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
+    background: rgba(255,255,255,0.07); color: #e2e8f0; min-height: 44px; min-width: 220px; backdrop-filter: blur(8px);
   }
   .big-card {
-    background: #fff; border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px 28px; box-shadow: 0 2px 12px rgba(27,33,30,0.05);
+    position: relative; z-index: 1;
+    background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 28px;
+    padding: 40px 28px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 24px 60px rgba(0,0,0,0.4);
   }
-  .big-card .t-name { font-size: 20px; font-weight: 800; }
-  .big-card .t-full { font-size: 13px; color: var(--muted); margin: 4px 0 18px; }
-  .big-card .t-days { font-size: clamp(72px, 16vw, 110px); font-weight: 800; line-height: 1; color: var(--primary); letter-spacing: -2px; font-variant-numeric: tabular-nums; }
-  .big-card .t-days small { font-size: 26px; color: var(--muted); letter-spacing: 0; }
-  .big-card .t-hms { font-size: 22px; color: var(--text); font-variant-numeric: tabular-nums; margin: 10px 0 6px; }
-  .big-card .t-date { font-size: 14px; color: var(--muted); }
+  .big-card .t-name { font-size: 22px; font-weight: 800; }
+  .big-card .t-full { font-size: 13px; color: #94a3b8; margin: 5px 0 18px; }
+  .big-card .t-days {
+    font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
+    font-size: clamp(76px, 15vw, 118px); font-weight: 800; line-height: 1;
+    color: #38bdf8; letter-spacing: -2px; font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 40px rgba(56,189,248,0.35);
+  }
+  .big-card .t-days small { font-family: inherit; font-size: 26px; color: #94a3b8; letter-spacing: 0; text-shadow: none; }
+  .big-card .t-hms {
+    font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
+    font-size: 24px; color: #e2e8f0; font-variant-numeric: tabular-nums; margin: 12px 0 8px; letter-spacing: 2px;
+  }
+  .big-card .t-hms.flip { animation: fadeNum 0.25s ease; }
+  @keyframes fadeNum { from { opacity: 0.3; } to { opacity: 1; } }
+  .big-card .t-date { font-size: 14px; color: #94a3b8; }
   .big-card .t-status {
     display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 700;
-    color: #fff; background: var(--primary); border-radius: 999px; padding: 8px 20px;
+    color: #fff; background: linear-gradient(135deg, #38bdf8, #6366f1); border-radius: 999px; padding: 9px 22px;
   }
-  .big-card .t-status.warn { background: var(--accent); }
+  .big-card .t-status.warn { background: linear-gradient(135deg, #f87171, #fbbf24); }
   .hero-actions { margin-top: 22px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .hero-actions a {
     display: inline-block; padding: 13px 28px; border-radius: 999px; font-size: 15px; font-weight: 700;
     text-decoration: none; min-height: 46px; line-height: 20px;
   }
-  .hero-actions .primary { background: var(--primary); color: #fff; }
-  .hero-actions .ghost { background: #fff; color: var(--primary); border: 1px solid var(--border); }
+  .hero-actions .primary { background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; box-shadow: 0 8px 26px rgba(56,189,248,0.3); }
+  .hero-actions .ghost { background: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.18); }
 
-  .section { max-width: 880px; margin: 0 auto; padding: 40px 20px 10px; }
-  .section-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-  .section-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+  .section { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 38px 20px 8px; }
+  .section-title { font-size: 15px; font-weight: 800; color: #e2e8f0; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent); }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
   .card {
-    background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 18px;
-    text-decoration: none; color: inherit; display: block; transition: transform 0.18s ease, box-shadow 0.18s ease;
+    background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 18px;
+    text-decoration: none; color: inherit; display: block;
+    backdrop-filter: blur(12px);
+    transition: transform 0.18s ease, border-color 0.18s ease;
   }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27,33,30,0.08); }
-  .card .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .card .date { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
-  .card .days { font-size: 26px; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
-  .card .days small { font-size: 12px; color: var(--muted); font-weight: 600; }
-  .card .days.hot { color: var(--accent); }
+  .card:hover { transform: translateY(-3px); border-color: rgba(56,189,248,0.45); }
+  .card .name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .card .date { font-size: 12px; color: #64748b; margin-bottom: 10px; }
+  .card .days { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 24px; font-weight: 800; color: #38bdf8; font-variant-numeric: tabular-nums; }
+  .card .days small { font-size: 12px; color: #64748b; font-weight: 600; }
+  .card .days.hot { color: #f87171; }
 
-  .mine { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 8px 20px; }
-  .mine-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .mine-area { background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 6px 20px; }
+  .mine-item { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
   .mine-item:last-child { border-bottom: none; }
   .mine-item .n { font-size: 15px; font-weight: 700; }
-  .mine-item .d { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .mine-item .days { font-size: 22px; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
-  .mine-empty { text-align: center; padding: 26px 0; color: var(--muted); font-size: 14px; line-height: 2; }
-  .mine-empty a { color: var(--primary); font-weight: 700; text-decoration: none; }
+  .mine-item .d { font-size: 12px; color: #64748b; margin-top: 2px; }
+  .mine-item .days { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 21px; font-weight: 800; color: #38bdf8; font-variant-numeric: tabular-nums; }
+  .mine-empty { text-align: center; padding: 24px 0; color: #64748b; font-size: 14px; line-height: 2; }
+  .mine-empty a { color: #38bdf8; font-weight: 700; text-decoration: none; }
 
-  .tool-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tools-area { display: flex; gap: 12px; flex-wrap: wrap; }
   .tool-chip {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #fff; border: 1px solid var(--border); border-radius: 999px;
-    padding: 10px 20px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 600;
+    background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 999px;
+    padding: 10px 20px; text-decoration: none; color: #e2e8f0; font-size: 14px; font-weight: 600;
   }
-  .tool-chip:hover { border-color: var(--primary); color: var(--primary); }
+  .tool-chip:hover { border-color: #38bdf8; color: #38bdf8; }
 
-  .tip { max-width: 880px; margin: 0 auto; padding: 8px 20px; font-size: 13px; color: var(--muted); line-height: 2; }
-  .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 30px 16px 44px; }
-  .footer a { color: var(--primary); text-decoration: none; }
+  .tip { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 6px 20px; font-size: 13px; color: #64748b; line-height: 2; }
+  .tip a { color: #38bdf8; }
+  .footer { position: relative; z-index: 1; text-align: center; font-size: 12px; color: #475569; padding: 26px 16px 44px; }
+  .footer a { color: #38bdf8; text-decoration: none; }
 
   .bottom-add {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
-    display: none; background: rgba(244,245,241,0.95); border-top: 1px solid var(--border); padding: 10px 16px;
+    display: none; background: rgba(13,17,33,0.9); border-top: 1px solid rgba(255,255,255,0.08); padding: 10px 16px;
   }
   .bottom-add a {
-    display: block; text-align: center; background: var(--primary); color: #fff;
+    display: block; text-align: center; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff;
     border-radius: 999px; padding: 13px; font-size: 15px; font-weight: 700; text-decoration: none;
   }
-
   @media (max-width: 640px) {
     .nav { padding: 12px 14px; gap: 12px; }
     .nav .links { order: 3; width: 100%; justify-content: space-between; }
-    .hero { padding: 36px 16px 16px; }
-    .hero h1 { font-size: 26px; }
-    .big-card { padding: 28px 18px; }
+    .nav .links a { font-size: 13px; }
+    .hero { padding: 32px 14px 12px; }
+    .hero h1 { font-size: 24px; }
+    .big-card { padding: 28px 16px; }
     .bottom-add { display: block; }
     .footer { padding-bottom: 90px; }
   }
 </style>
 </head>
 <body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="zen-hint">沉浸模式已开启 · 按 F 或 Esc 退出</div>
 
 <nav class="nav">
-  <a class="brand" href="index.html">上岸日历</a>
+  <a class="brand" href="index.html">上岸<span>日历</span></a>
   <div class="links">
     <a href="#exam">热门考试</a>
     <a href="#mine">我的目标</a>
     <a href="#tools">在线工具</a>
     <a href="wenzhang.html">备考攻略</a>
   </div>
-  <a class="add" href="zidingyi-daojishi.html">＋ 添加目标</a>
+  <div class="right">
+    <span class="theme-dot navy" onclick="setTheme('navy')" title="深空蓝"></span>
+    <span class="theme-dot cyan" onclick="setTheme('cyan')" title="深海青"></span>
+    <span class="theme-dot sunset" onclick="setTheme('sunset')" title="晚霞紫"></span>
+    <a class="add" href="zidingyi-daojishi.html">＋ 添加目标</a>
+  </div>
 </nav>
 
 <div class="hero">
   <div class="tag">TODAY · 距离目标还有</div>
   <h1>把重要考试,变成每天<span>看得见的进度</span></h1>
-  <div class="sub">每天打开一次,清楚知道自己的备考进度</div>
+  <div class="sub">每天打开一次,清楚知道自己的备考进度 · 按 F 进入沉浸模式</div>
   <div class="target-select">
     <select id="targetSel" onchange="setTarget(this.value)">
       <option value="">— 选择主目标 —</option>
@@ -167,6 +222,7 @@
   <div class="hero-actions">
     <a class="primary" id="focusBtn" href="#">进入专注模式</a>
     <a class="ghost" href="zidingyi-daojishi.html">创建我的目标</a>
+    <a class="ghost" href="xiaban-daojishi.html">⏰ 下班倒计时</a>
   </div>
 </div>
 
@@ -177,12 +233,13 @@
 
 <div class="section" id="mine">
   <div class="section-title">我的目标(本设备保存)</div>
-  <div class="mine" id="mineBox"></div>
+  <div class="mine-area" id="mineBox"></div>
 </div>
 
 <div class="section" id="tools">
   <div class="section-title">在线工具</div>
-  <div class="tool-row">
+  <div class="tools-area">
+    <a class="tool-chip" href="xiaban-daojishi.html">⏰ 下班倒计时</a>
     <a class="tool-chip" href="fanqiezhong.html">🍅 番茄钟</a>
     <a class="tool-chip" href="riqi-jisuanqi.html">📅 日期计算器</a>
     <a class="tool-chip" href="shuimian-jisuanqi.html">🌙 睡眠计算器</a>
@@ -191,14 +248,13 @@
   </div>
 </div>
 
-<div class="tip">💡 数据默认只保存在本设备,不上传服务器。自定义目标可导出备份,也可通过分享链接在其他设备打开。<a href="about.html" style="color:var(--primary);">关于与隐私</a></div>
+<div class="tip">💡 数据默认只保存在本设备,不上传服务器。自定义目标可导出备份,也可通过分享链接在其他设备打开。<a href="about.html">关于与隐私</a></div>
 
-<div class="footer">上岸日历 · 免费使用 · <a href="about.html">关于与隐私</a> · 内容持续更新</div>
+<div class="footer">上岸日历 · 免费使用 · <a href="about.html">关于与隐私</a> · 按 F 进入沉浸模式</div>
 
 <div class="bottom-add"><a href="zidingyi-daojishi.html">＋ 添加目标</a></div>
 
 <script>
-// 热门考试数据
 var events = [
   { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", full: "国家公务员考试笔试" },
   { name: "四六级", date: "2026-12-19", url: "siliuji-daojishi.html", full: "大学英语四六级考试" },
@@ -220,7 +276,6 @@ function daysLeft(dateStr) {
   return diff > 0 ? Math.floor(diff / 86400000) : 0;
 }
 
-// 热门网格
 var grid = document.getElementById("examGrid");
 events.forEach(function (e) {
   var d = daysLeft(e.date);
@@ -234,7 +289,6 @@ events.forEach(function (e) {
   grid.appendChild(card);
 });
 
-// 主目标第一屏
 var cur = null;
 var sel = document.getElementById("targetSel");
 events.forEach(function (e) {
@@ -276,8 +330,14 @@ function tick() {
   var m = Math.floor((diff % 3600000) / 60000);
   var s = Math.floor((diff % 60000) / 1000);
   document.getElementById("tDays").textContent = days;
-  document.getElementById("tHms").textContent =
-    (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  var hmsEl = document.getElementById("tHms");
+  var hms = (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  if (hmsEl.textContent !== hms) {
+    hmsEl.textContent = hms;
+    hmsEl.classList.remove("flip");
+    void hmsEl.offsetWidth;
+    hmsEl.classList.add("flip");
+  }
   var st = document.getElementById("tStatus");
   if (days > 90) { st.textContent = "保持节奏,稳步推进"; st.className = "t-status"; }
   else if (days > 30) { st.textContent = "进入冲刺阶段,加油!"; st.className = "t-status"; }
@@ -286,7 +346,6 @@ function tick() {
   else { st.textContent = "目标时刻就要到了!"; st.className = "t-status warn"; }
 }
 
-// 我的目标(读取自定义倒计时的 localStorage)
 function renderMine() {
   var box = document.getElementById("mineBox");
   var list = [];
@@ -314,10 +373,36 @@ function renderMine() {
   }
 }
 
+// 主题切换
+function setTheme(t) {
+  document.body.className = t === "navy" ? "" : "theme-" + t;
+  try { localStorage.setItem("homeTheme", t); } catch (e) {}
+}
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("homeTheme"); } catch (e) {}
+  if (t) setTheme(t);
+})();
+
+// Zen 沉浸模式(F/Esc)
+function toggleZen() {
+  document.body.classList.toggle("zen");
+  if (document.body.classList.contains("zen") && !document.fullscreenElement) {
+    try { document.documentElement.requestFullscreen(); } catch (e) {}
+  }
+}
+document.addEventListener("keydown", function (e) {
+  if (e.key === "f" || e.key === "F") toggleZen();
+  if (e.key === "Escape" && document.body.classList.contains("zen")) toggleZen();
+});
+
 loadTarget();
 renderHero();
 setInterval(tick, 1000);
 renderMine();
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

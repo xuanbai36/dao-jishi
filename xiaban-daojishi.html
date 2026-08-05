@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>下班倒计时 - 距离下班还有多久</title>
+<meta name="description" content="下班倒计时工具:实时计算距离下班还有多少时间,今日已赚工资金额,打工人必备,免费使用。">
+<meta name="keywords" content="下班倒计时,还有多久下班,下班时间,摸鱼倒计时,今日已赚">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    min-height: 100vh; color: #e2e8f0; overflow-x: hidden;
+    background: linear-gradient(160deg, #0c0a1d 0%, #1e1b4b 55%, #312e81 100%);
+    display: flex; flex-direction: column; align-items: center; padding: 40px 16px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .glow { position: fixed; border-radius: 50%; filter: blur(110px); z-index: 0; pointer-events: none; }
+  .glow-1 { width: 380px; height: 380px; background: rgba(251,191,36,0.14); top: -120px; right: -80px; }
+  .glow-2 { width: 340px; height: 340px; background: rgba(139,92,246,0.16); bottom: -100px; left: -100px; }
+  .container { position: relative; z-index: 1; max-width: 520px; width: 100%; text-align: center; }
+  .back { color: #a5b4fc; text-decoration: none; font-size: 14px; font-weight: 600; }
+  h1 { font-size: 30px; font-weight: 800; margin: 8px 0 4px; }
+  h1 span { background: linear-gradient(120deg, #fbbf24, #f472b6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { font-size: 14px; color: #94a3b8; margin-bottom: 24px; }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.11), rgba(255,255,255,0.04));
+    border: 1px solid rgba(255,255,255,0.16); border-radius: 26px;
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 16px 48px rgba(0,0,0,0.35);
+    padding: 30px 26px; margin-bottom: 16px;
+  }
+  .set-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .set-row .f { display: flex; flex-direction: column; gap: 6px; }
+  .set-row label { font-size: 12px; color: #94a3b8; }
+  .set-row input {
+    font-size: 14px; padding: 9px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
+    background: rgba(255,255,255,0.08); color: #fff; min-height: 42px; min-width: 110px;
+  }
+  .big { font-size: clamp(56px, 15vw, 88px); font-weight: 800; font-variant-numeric: tabular-nums; font-family: ui-monospace, Menlo, Consolas, monospace; margin: 16px 0 4px; color: #fbbf24; text-shadow: 0 0 36px rgba(251,191,36,0.3); }
+  .big small { font-size: 22px; color: #94a3b8; }
+  .state { font-size: 15px; color: #e2e8f0; margin-bottom: 10px; }
+  .money { font-size: 22px; font-weight: 800; color: #34d399; }
+  .money small { font-size: 13px; color: #94a3b8; font-weight: 600; }
+  .weekend { margin-top: 10px; font-size: 13px; color: #94a3b8; }
+  .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .btn {
+    background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 42px; text-decoration: none;
+  }
+  .btn:hover { border-color: #fbbf24; color: #fbbf24; }
+  .tip { font-size: 12px; color: #64748b; line-height: 2; }
+  .footer { position: relative; z-index: 1; margin-top: 6px; font-size: 12px; color: #475569; }
+</style>
+<link rel="canonical" href="https://daojishicn.top/xiaban-daojishi.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="下班倒计时 - 距离下班还有多久">
+<meta property="og:description" content="下班倒计时工具:实时计算距离下班还有多少时间,今日已赚工资金额,打工人必备,免费使用。">
+<meta property="og:url" content="https://daojishicn.top/xiaban-daojishi.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="container">
+  <a class="back" href="index.html">← 返回首页</a>
+  <h1>下班<span>倒计时</span></h1>
+  <div class="subtitle">距离下班还有多久?今天又赚了多少?</div>
+
+  <div class="glass">
+    <div class="set-row">
+      <div class="f"><label>上班时间</label><input type="time" id="inTime" value="09:00"></div>
+      <div class="f"><label>下班时间</label><input type="time" id="outTime" value="18:00"></div>
+      <div class="f"><label>今日日薪(元)</label><input type="number" id="salary" value="200"></div>
+    </div>
+    <div class="big" id="big">--:--:--</div>
+    <div class="state" id="state">加载中…</div>
+    <div class="money" id="money">今日已赚:¥ --</div>
+    <div class="weekend" id="weekend"></div>
+    <div class="btn-row">
+      <button class="btn" onclick="share()">🔗 复制分享链接</button>
+      <a class="btn" id="posterBtn" href="fenxiang-haibao.html?title=距离%20下班&date=" target="_blank">🖼️ 生成海报</a>
+    </div>
+  </div>
+
+  <div class="glass tip">
+    💡 趣味提示:已赚金额 = 从上班到现在的时长 ÷ 总工作时长 × 日薪,仅供参考娱乐。<br>
+    🎉 分享给同事朋友,一起等下班!
+  </div>
+  <div class="footer">下班倒计时 · 免费使用</div>
+</div>
+
+<script>
+// 读取 URL 参数
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (q.get("time")) document.getElementById("outTime").value = q.get("time");
+  if (q.get("salary")) document.getElementById("salary").value = q.get("salary");
+})();
+
+function toMin(v) { var p = v.split(":"); return parseInt(p[0]) * 60 + parseInt(p[1]); }
+function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+function tick() {
+  var now = new Date();
+  var inM = toMin(document.getElementById("inTime").value);
+  var outM = toMin(document.getElementById("outTime").value);
+  var salary = parseFloat(document.getElementById("salary").value) || 0;
+  var nowM = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+
+  var big = document.getElementById("big");
+  var state = document.getElementById("state");
+  var money = document.getElementById("money");
+
+  if (nowM < outM) {
+    var diffM = outM - nowM;
+    var h = Math.floor(diffM / 60), m = Math.floor(diffM % 60), s = 60 - now.getSeconds();
+    if (s === 60) s = 0;
+    big.textContent = pad(h) + ":" + pad(m) + ":" + pad(s);
+    state.textContent = "距离下班还有";
+    big.style.color = "#fbbf24";
+  } else {
+    big.textContent = "00:00:00";
+    state.textContent = "🎉 已下班,摸鱼快乐(或加班中)";
+    big.style.color = "#34d399";
+  }
+
+  // 已赚金额:从上班到现在的时长 / 总时长 × 日薪
+  var earned = 0;
+  var totalMin = outM - inM;
+  if (totalMin > 0 && nowM > inM && nowM < outM) {
+    earned = ((nowM - inM) / totalMin) * salary;
+  } else if (nowM >= outM && totalMin > 0) {
+    earned = salary;
+  }
+  money.textContent = "今日已赚:¥ " + (earned > 0 ? earned.toFixed(1) : "0.0");
+
+  // 距离周末
+  var wk = document.getElementById("weekend");
+  var day = now.getDay(); // 0=周日 6=周六
+  var daysToSat = (6 - day + 7) % 7;
+  if (daysToSat === 0 && now.getHours() >= 0) daysToSat = 0;
+  wk.textContent = daysToSat === 0 ? "今天就是周六,快乐!" : "距离周末还有 " + daysToSat + " 天";
+}
+
+setInterval(tick, 1000);
+tick();
+
+function share() {
+  var base = location.origin + location.pathname.replace(/[^/]*$/, "");
+  var url = base + "xiaban-daojishi.html?time=" + encodeURIComponent(document.getElementById("outTime").value) + "&salary=" + encodeURIComponent(document.getElementById("salary").value);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).catch(function () { prompt("复制链接:", url); });
+  } else { prompt("复制链接:", url); }
+  alert("分享链接已复制!");
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>
