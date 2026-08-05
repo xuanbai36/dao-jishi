@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>倒计时工具 - 考研/国考/春节/高考倒计时</title>
-<meta name="description" content="免费在线倒计时工具:考研倒计时、国考倒计时、春节倒计时等,实时计算距离重要日期还有多少天。">
-<meta name="keywords" content="倒计时,考研倒计时,国考倒计时,春节倒计时,高考倒计时,倒计时工具">
+<title>倒计时工具大全 - 考研/高考/国考/四六级/春节倒计时</title>
+<meta name="description" content="免费在线倒计时工具:考研倒计时、高考倒计时、国考倒计时、四六级倒计时、春节倒计时、中考倒计时、预产期倒计时,实时计算距离重要日期还有多少天。">
+<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,四六级倒计时,春节倒计时,中考倒计时,预产期倒计时">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -69,9 +69,13 @@
 
 <script>
 var events = [
-  { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", note: "以官方公告为准" },
   { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", note: "以官方公告为准" },
-  { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", note: "2月6日 正月初一" }
+  { name: "四六级(12月)", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", note: "以官方公告为准" },
+  { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", note: "以官方公告为准" },
+  { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", note: "2月6日 正月初一" },
+  { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", css: "green", note: "以官方公告为准" },
+  { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", note: "以当地公告为准" },
+  { name: "预产期", date: "", url: "yuchanqi-daojishi.html", css: "pink", note: "输入日期自动计算", input: true }
 ];
 
 function daysLeft(dateStr) {
@@ -81,15 +85,22 @@ function daysLeft(dateStr) {
 
 var grid = document.getElementById("grid");
 events.forEach(function (e) {
-  var d = daysLeft(e.date);
-  var dateText = e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日";
   var card = document.createElement("a");
   card.className = "card " + e.css;
   card.href = e.url;
-  card.innerHTML =
-    '<div class="name">' + e.name + "</div>" +
-    '<div class="date">' + dateText + " · " + e.note + "</div>" +
-    '<div class="days">' + d + "<small>天</small></div>";
+  if (e.input) {
+    card.innerHTML =
+      '<div class="name">' + e.name + "</div>" +
+      '<div class="date">' + e.note + "</div>" +
+      '<div class="days">--<small>天</small></div>';
+  } else {
+    var d = daysLeft(e.date);
+    var dateText = e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日";
+    card.innerHTML =
+      '<div class="name">' + e.name + "</div>" +
+      '<div class="date">' + dateText + " · " + e.note + "</div>" +
+      '<div class="days">' + d + "<small>天</small></div>";
+  }
   grid.appendChild(card);
 });
 </script>

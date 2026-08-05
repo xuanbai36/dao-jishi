@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2027春节倒计时 - 距离2027年春节还有多少天</title>
-<meta name="description" content="距离2027年春节还有多少天?春节倒计时工具,实时计算距离春节还有几天几小时几分几秒,2027年春节是几月几号、春节倒计时。">
-<meta name="keywords" content="春节倒计时,2027春节,过年还有几天,春节是几月几号,除夕倒计时">
+<title>2027中考倒计时 - 距离2027年中考还有多少天</title>
+<meta name="description" content="距离2027年中考还有多少天?中考倒计时工具,实时计算距离中考还有几天几小时几分几秒,2027中考时间、中考倒计时。">
+<meta name="keywords" content="中考倒计时,2027中考,中考还有几天,中考时间,中考倒计时器">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-    background: linear-gradient(160deg, #831843 0%, #db2777 60%, #fbcfe8 100%);
+    background: linear-gradient(160deg, #155e75 0%, #06b6d4 60%, #a5f3fc 100%);
     min-height: 100vh;
     color: #fff;
     display: flex;
@@ -42,18 +42,18 @@
     background: #fff; color: #1f2937; border-radius: 16px;
     padding: 28px 24px; text-align: left; margin-top: 20px;
   }
-  .article h2 { font-size: 20px; color: #831843; margin-bottom: 16px; }
+  .article h2 { font-size: 20px; color: #155e75; margin-bottom: 16px; }
   .article p { font-size: 15px; line-height: 1.9; margin-bottom: 12px; }
   .footer { margin-top: 32px; font-size: 12px; opacity: 0.7; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>2027 春节倒计时</h1>
-  <div class="subtitle">有钱没钱,回家过年</div>
+  <h1>2027 中考倒计时</h1>
+  <div class="subtitle">九年磨一剑,六月试锋芒</div>
 
   <div class="days-box">
-    <div class="days-label">距离 2026 年春节(正月初一)</div>
+    <div class="days-label">距离 2027 年中考</div>
     <div class="days-number"><span id="days">--</span><span class="days-unit">天</span></div>
     <div class="time-row">
       <div class="time-item"><div class="num" id="hours">--</div><div class="txt">小时</div></div>
@@ -62,22 +62,25 @@
     </div>
   </div>
 
-  <div class="date-info">2027 年春节:2 月 6 日(农历正月初一)</div>
-  <div class="encourage" id="encourage">归家的日子,一天比一天近!</div>
+  <div class="date-info">目标日期:<span id="target-date">2027 年 6 月 18 日</span>(各地时间不同,以当地教育局公告为准)</div>
+  <div class="encourage" id="encourage">乾坤未定,你我皆是黑马!</div>
 
   <div class="article">
-    <h2>春节倒计时怎么用?</h2>
-    <p>2027 年春节是 2 月 6 日,农历丁未羊年正月初一。除夕是 2 月 5 日。这里实时显示距离春节还剩多少天、多少小时、多少分钟。</p>
-    <p>💡 春运抢票:2027 年春节是 2 月 6 日,除夕是 2 月 5 日。火车票预售期目前为 15 天左右,除夕前一周(1 月底~2 月初)是返乡最高峰,建议开售当天准点抢票,或提前规划飞机、拼车等备选方案。</p>
-    <p>📌 年货与安排:腊月廿三(小年)前后开始备年货,除夕前完成大扫除、贴春联;年夜饭建议提前 1~2 周预订餐厅或准备菜单;假期里走亲访友、发红包是重头戏,返程票也记得提前订。</p>
+    <h2>中考倒计时怎么用?</h2>
+    <p>中考时间各省市不同,一般集中在每年 6 月中下旬,具体日期以当地教育局(考试院)公告为准。这里实时显示距离中考还有多少天、多少小时、多少分钟。</p>
+    <p>💡 初三下学期(3~6 月)是总复习关键期,建议先梳理各科知识框架,再做套卷查漏补缺。体育中考、实验操作考试等一般在 4~5 月,别忽略这些"送分项"。</p>
+    <p>📌 中考志愿填报在考试后进行,不同城市规则差异很大(有的先填后考,有的出分后填),提前问清楚本校往年的录取流程。</p>
   </div>
 
-  <div class="footer">春节倒计时 · 每天更新 · 2027 年春节为 2 月 6 日</div>
+  <div class="footer">中考倒计时 · 每天更新 · 具体日期以当地教育局公告为准</div>
 </div>
 
 <script>
-// 2027年春节:农历正月初一 = 公历 2027年2月6日
-var targetDate = new Date("2027-02-06T00:00:00");
+// ⚠️ 各地中考日期不同,以当地公告为准,发布后改这一行即可
+var targetDate = new Date("2027-06-18T09:00:00");
+
+var targetEl = document.getElementById("target-date");
+targetEl.textContent = targetDate.getFullYear() + " 年 " + (targetDate.getMonth()+1) + " 月 " + targetDate.getDate() + " 日";
 
 function update() {
   var now = new Date();
@@ -87,7 +90,7 @@ function update() {
     document.getElementById("hours").textContent = "00";
     document.getElementById("minutes").textContent = "00";
     document.getElementById("seconds").textContent = "00";
-    document.getElementById("encourage").textContent = "春节快乐!恭喜发财!";
+    document.getElementById("encourage").textContent = "中考正在进行,加油!";
     return;
   }
   var days = Math.floor(diff / 86400000);
