@@ -91,6 +91,10 @@
         <input type="time" id="evTime" value="00:00">
       </div>
     </div>
+    <div class="field" style="margin-top:12px;">
+      <label>备注(可选)</label>
+      <input type="text" id="evNote" placeholder="比如:给 TA 的惊喜 / 期末冲刺">
+    </div>
     <button class="btn" onclick="addEvent()">添加倒计时</button>
   </div>
 
@@ -141,17 +145,19 @@ function addEvent() {
   var name = document.getElementById("evName").value.trim();
   var date = document.getElementById("evDate").value;
   var time = document.getElementById("evTime").value || "00:00";
+  var note = document.getElementById("evNote").value.trim();
   if (!name) { alert("请填写事件名称"); return; }
   if (!date) { alert("请选择日期"); return; }
   // 去重:同名同日期不重复添加
   var dup = events.some(function (e) { return e.name === name && e.date === date && e.time === time; });
   if (dup) { alert("这个倒计时已经存在了"); return; }
-  events.push({ name: name, date: date, time: time });
+  events.push({ name: name, date: date, time: time, note: note });
   save();
   renderList();
   showCountdown(events.length - 1);
   document.getElementById("evName").value = "";
   document.getElementById("evDate").value = "";
+  document.getElementById("evNote").value = "";
 }
 
 function renderList() {
@@ -168,6 +174,7 @@ function renderList() {
     div.innerHTML =
       '<div class="info" onclick="showCountdown(' + i + ')">' +
         '<div class="n">' + escapeHtml(e.name) + "</div>" +
+        (e.note ? '<div class="n" style="font-size:12px;color:#94a3b8;font-weight:400;">' + escapeHtml(e.note) + "</div>" : "") +
         '<div class="d">' + dateText + "</div>" +
       "</div>" +
       '<div class="item-actions">' +
@@ -249,7 +256,7 @@ function importData(input) {
       data.forEach(function (e) {
         if (e && e.name && e.date) {
           var dup = events.some(function (x) { return x.name === e.name && x.date === e.date && x.time === e.time; });
-          if (!dup) { events.push({ name: e.name, date: e.date, time: e.time || "00:00" }); added++; }
+          if (!dup) { events.push({ name: e.name, date: e.date, time: e.time || "00:00", note: e.note || "" }); added++; }
         }
       });
       save();

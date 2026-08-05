@@ -6,10 +6,11 @@
 <meta name="msvalidate.01" content="3F720A11A4FE574ED28562EB2E9ADA12" />
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
 <title>倒计时与工具箱 - 考研/高考/国考倒计时·在线工具·攻略大全</title>
-<meta name="description" content="免费在线工具站:考研倒计时、高考倒计时、国考倒计时、四六级倒计时、春节倒计时、自定义倒计时、睡眠计算器、文本工具箱、备考攻略与考试时间表。">
-<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,四六级倒计时,春节倒计时,中考倒计时,预产期倒计时,自定义倒计时,睡眠计算器,文本工具箱,考试时间表">
+<meta name="description" content="免费在线工具站:考研倒计时、高考倒计时、国考倒计时、教资省考、四六级、春节中秋等节日倒计时、睡眠计算器、文本工具箱、备考攻略与考试时间表。">
+<meta name="keywords" content="倒计时,考研倒计时,高考倒计时,国考倒计时,教资倒计时,省考倒计时,四六级倒计时,春节倒计时,中秋倒计时,睡眠计算器,文本工具箱,考试时间表">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
     min-height: 100vh;
@@ -18,7 +19,6 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  /* 流动光斑 */
   .orb { position: fixed; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none; }
   .orb-1 { width: 420px; height: 420px; background: rgba(129,140,248,0.35); top: -120px; left: -100px; animation: drift1 16s ease-in-out infinite; }
   .orb-2 { width: 360px; height: 360px; background: rgba(103,232,249,0.3); top: 30%; right: -120px; animation: drift2 20s ease-in-out infinite; }
@@ -27,23 +27,41 @@
   @keyframes drift2 { 50% { transform: translate(-60px, -40px) scale(1.15); } }
   @keyframes drift3 { 50% { transform: translate(50px, -60px) scale(1.05); } }
 
-  .header { position: relative; z-index: 1; text-align: center; padding: 68px 20px 44px; }
-  .header .badge {
-    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 2px;
-    color: #6366f1;
+  /* 顶部导航 */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    padding: 12px 22px;
     background: rgba(255,255,255,0.55);
-    border: 1px solid rgba(255,255,255,0.8);
-    border-radius: 999px; padding: 7px 20px; margin-bottom: 20px;
-    backdrop-filter: blur(10px); box-shadow: 0 4px 16px rgba(99,102,241,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.7);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
-  .header h1 { font-size: 38px; font-weight: 800; letter-spacing: 0.5px; color: #1e1b4b; margin-bottom: 12px; }
-  .header h1 em { font-style: normal; background: linear-gradient(120deg, #6366f1, #0ea5e9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .header p { font-size: 15px; color: #64748b; letter-spacing: 1px; }
+  .nav .logo { font-size: 17px; font-weight: 800; color: #1e1b4b; text-decoration: none; letter-spacing: 0.5px; }
+  .nav .logo em { font-style: normal; color: #6366f1; }
+  .nav .links { display: flex; gap: 16px; flex-wrap: wrap; flex: 1; }
+  .nav .links a { font-size: 14px; color: #475569; text-decoration: none; font-weight: 600; }
+  .nav .links a:hover { color: #6366f1; }
+  .nav .search { display: flex; gap: 6px; }
+  .nav .search input {
+    font-size: 14px; padding: 8px 14px; border: 1px solid rgba(99,102,241,0.25);
+    border-radius: 999px; background: rgba(255,255,255,0.8); color: #1e293b; width: 180px; outline: none;
+  }
+  .nav .search input:focus { border-color: #6366f1; }
+  .nav .search button {
+    border: none; background: #6366f1; color: #fff; border-radius: 999px;
+    padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
 
-  .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto 70px; padding: 0 20px; }
+  .header { position: relative; z-index: 1; text-align: center; padding: 56px 20px 36px; }
+  .header h1 { font-size: 36px; font-weight: 800; letter-spacing: 0.5px; color: #1e1b4b; margin-bottom: 10px; }
+  .header h1 em { font-style: normal; background: linear-gradient(120deg, #6366f1, #0ea5e9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { font-size: 14px; color: #64748b; letter-spacing: 1px; }
+
+  .container { position: relative; z-index: 1; max-width: 980px; margin: 0 auto 70px; padding: 0 20px; }
   .group-title {
     font-size: 13px; font-weight: 800; letter-spacing: 3px; color: #818cf8;
-    margin: 40px 0 18px; display: flex; align-items: center; gap: 14px;
+    margin: 40px 0 18px; display: flex; align-items: center; gap: 14px; scroll-margin-top: 70px;
   }
   .group-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(129,140,248,0.4), transparent); }
 
@@ -62,19 +80,17 @@
     display: block;
     position: relative;
   }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.95), inset 0 -14px 28px rgba(255,255,255,0.3), 0 24px 56px rgba(99,102,241,0.28);
-  }
+  .card:hover { transform: translateY(-5px); box-shadow: inset 0 1px 1px rgba(255,255,255,0.95), inset 0 -14px 28px rgba(255,255,255,0.3), 0 24px 56px rgba(99,102,241,0.28); }
   .card .tag {
     display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 1px;
     color: #6366f1; background: rgba(255,255,255,0.7); border-radius: 8px; padding: 3px 10px;
     margin-bottom: 14px;
   }
   .card .name { font-size: 18px; font-weight: 800; color: #1e1b4b; margin-bottom: 4px; }
-  .card .date { font-size: 13px; color: #64748b; margin-bottom: 16px; }
-  .card .days { font-size: 44px; font-weight: 800; line-height: 1; color: #6366f1; letter-spacing: -1px; }
+  .card .date { font-size: 13px; color: #64748b; margin-bottom: 14px; }
+  .card .days { font-size: 42px; font-weight: 800; line-height: 1; color: #6366f1; letter-spacing: -1px; }
   .card .days small { font-size: 15px; font-weight: 600; color: #94a3b8; margin-left: 6px; letter-spacing: 0; }
+  .card .hms { font-size: 14px; font-weight: 700; color: #94a3b8; margin-top: 10px; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
   .card .go { position: absolute; top: 26px; right: 22px; font-size: 15px; color: #c7d2fe; transition: color 0.2s, transform 0.2s; }
   .card:hover .go { color: #6366f1; transform: translateX(3px); }
   .card.orange .tag { color: #ea580c; background: rgba(255,237,213,0.85); }
@@ -101,6 +117,7 @@
   }
   .tip b { color: #6366f1; }
   .footer { position: relative; z-index: 1; text-align: center; font-size: 12px; color: #94a3b8; padding: 0 16px 44px; letter-spacing: 1px; }
+  .footer a { color: #818cf8; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -108,40 +125,71 @@
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 
+<nav class="nav">
+  <a class="logo" href="index.html">倒计时<em>工具箱</em></a>
+  <div class="links">
+    <a href="#exam">考试倒计时</a>
+    <a href="#life">节日生活</a>
+    <a href="#tools">在线工具</a>
+    <a href="#info">文章攻略</a>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="搜索:考研/高考/中秋…" onkeydown="if(event.key==='Enter')doSearch()">
+    <button onclick="doSearch()">搜索</button>
+  </div>
+</nav>
+
 <div class="header">
-  <div class="badge">免费在线工具</div>
   <h1>重要日子<em>倒计时</em> · 工具箱</h1>
-  <p>考研 · 高考 · 国考 | 在线工具 | 考试攻略大全</p>
+  <p>考研 · 高考 · 国考 | 节日生活 | 在线工具 | 考试攻略大全</p>
 </div>
 
 <div class="container" id="container"></div>
 
-<div class="footer">倒计时与工具箱 · 免费使用 · 内容持续更新</div>
+<div class="footer">
+  倒计时与工具箱 · 免费使用 · <a href="about.html">关于与隐私</a> · 内容持续更新
+</div>
 
 <script>
 var groups = [
   {
-    title: "倒计时",
+    id: "exam",
+    title: "📚 考试倒计时",
     items: [
-      { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", tag: "考试", note: "以官方公告为准", type: "count" },
-      { name: "四六级", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", tag: "考试", note: "以官方公告为准", type: "count" },
-      { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", tag: "考试", note: "以官方公告为准", type: "count" },
-      { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", tag: "节日", note: "2月6日 正月初一", type: "count" },
+      { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", tag: "公务员", note: "以官方公告为准", type: "count" },
+      { name: "四六级", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", tag: "英语", note: "以官方公告为准", type: "count" },
+      { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", tag: "研究生", note: "以官方公告为准", type: "count" },
+      { name: "2027 教资", date: "2027-03-13", url: "jiazi-daojishi.html", css: "purple", tag: "教师", note: "预计,以官方为准", type: "count" },
+      { name: "2027 省考", date: "2027-03-20", url: "shengkao-daojishi.html", css: "", tag: "公务员", note: "预计,以官方为准", type: "count" },
+      { name: "计算机二级", date: "2027-03-27", url: "erji-daojishi.html", css: "green", tag: "证书", note: "预计,以官方为准", type: "count" },
       { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", css: "green", tag: "考试", note: "以官方公告为准", type: "count" },
-      { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", tag: "考试", note: "以当地公告为准", type: "count" },
+      { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", tag: "考试", note: "以当地公告为准", type: "count" }
+    ]
+  },
+  {
+    id: "life",
+    title: "🎉 节日生活",
+    items: [
+      { name: "2027 元旦", date: "2027-01-01", url: "yuandan-daojishi.html", css: "pink", tag: "节日", note: "", type: "count" },
+      { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", tag: "节日", note: "正月初一", type: "count" },
+      { name: "2027 端午", date: "2027-06-09", url: "duanwu-daojishi.html", css: "green", tag: "节日", note: "五月初五", type: "count" },
+      { name: "2027 中秋", date: "2027-09-15", url: "zhongqiu-daojishi.html", css: "orange", tag: "节日", note: "八月十五", type: "count" },
+      { name: "2027 国庆", date: "2027-10-01", url: "guoqing-daojishi.html", css: "", tag: "节日", note: "", type: "count" },
       { name: "预产期", date: "", url: "yuchanqi-daojishi.html", css: "pink", tag: "生活", note: "输入日期自动计算", type: "input" },
       { name: "自定义倒计时", date: "", url: "zidingyi-daojishi.html", css: "", tag: "生活", note: "创建属于你的倒计时", type: "input" }
     ]
   },
   {
-    title: "在线工具",
+    id: "tools",
+    title: "🛠️ 在线工具",
     items: [
       { name: "睡眠计算器", date: "", url: "shuimian-jisuanqi.html", css: "purple", tag: "健康", note: "科学安排入睡与起床", type: "tool", icon: "🌙" },
       { name: "文本工具箱", date: "", url: "wenben-gongju.html", css: "green", tag: "文本处理", note: "字数统计 / 大小写 / 去重 / 反转", type: "tool", icon: "🧰" }
     ]
   },
   {
-    title: "文章攻略",
+    id: "info",
+    title: "📖 文章攻略",
     items: [
       { name: "考试时间表与攻略", date: "", url: "wenzhang.html", css: "", tag: "资讯", note: "考试安排 · 放假安排 · 备考指南", type: "content", icon: "📖" }
     ]
@@ -155,9 +203,12 @@ function daysLeft(dateStr) {
 }
 
 var container = document.getElementById("container");
+var countCards = []; // { el, ts }
+
 groups.forEach(function (g) {
   var title = document.createElement("div");
   title.className = "group-title";
+  title.id = g.id;
   title.textContent = g.title;
   container.appendChild(title);
 
@@ -175,12 +226,14 @@ groups.forEach(function (g) {
 
     var bodyHtml;
     if (e.type === "count") {
-      var d = daysLeft(e.date);
+      var ts = new Date(e.date + "T00:00:00").getTime();
       bodyHtml =
         '<div class="tag">' + e.tag + "</div>" +
         '<div class="name">' + e.name + "</div>" +
         '<div class="date">' + dateText + "</div>" +
-        '<div class="days">' + d + "<small>天</small></div>";
+        '<div class="days"><span class="dnum">' + daysLeft(e.date) + "</span><small>天</small></div>" +
+        '<div class="hms">--:--:--</div>';
+      countCards.push({ card: card, ts: ts });
     } else if (e.type === "input") {
       bodyHtml =
         '<div class="tag">' + e.tag + "</div>" +
@@ -202,6 +255,36 @@ groups.forEach(function (g) {
 
   container.appendChild(grid);
 });
+
+// 时分秒实时更新
+function tickAll() {
+  var now = Date.now();
+  countCards.forEach(function (c) {
+    var diff = c.ts - now;
+    if (diff <= 0) diff = 0;
+    var days = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    var dnum = c.card.querySelector(".dnum");
+    if (dnum && dnum.textContent != days) dnum.textContent = days;
+    var hms = c.card.querySelector(".hms");
+    if (hms) hms.textContent = (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  });
+}
+tickAll();
+setInterval(tickAll, 1000);
+
+// 搜索
+function doSearch() {
+  var kw = document.getElementById("searchInput").value.trim();
+  if (!kw) return;
+  var all = [];
+  groups.forEach(function (g) { g.items.forEach(function (e) { all.push(e); }); });
+  var hit = all.find(function (e) { return (e.name + e.tag + (e.note || "")).indexOf(kw) !== -1; });
+  if (hit) { window.location.href = hit.url; }
+  else { alert("没找到与「" + kw + "」相关的内容,试试搜:考研 / 高考 / 春节 / 睡眠"); }
+}
 </script>
 </body>
 </html>

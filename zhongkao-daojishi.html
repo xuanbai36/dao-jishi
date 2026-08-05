@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'>
+function toggleFull() {
+  if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
+  else { document.exitFullscreen(); document.body.classList.remove("fs"); }
+}
+</script><!-- End Cloudflare Web Analytics -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2027中考倒计时 - 距离2027年中考还有多少天</title>
@@ -46,6 +51,14 @@
   .article h2 { font-size: 20px; color: #155e75; margin-bottom: 16px; }
   .article p { font-size: 15px; line-height: 1.9; margin-bottom: 12px; }
   .footer { margin-top: 32px; font-size: 12px; opacity: 0.7; }
+
+  .btn-bar { margin-bottom: 20px; }
+  .btn-bar button {
+    background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px; padding: 8px 20px; font-size: 14px; cursor: pointer;
+  }
+  body.fs .days-number { font-size: 18vh; }
+  body.fs .time-item .num { font-size: 6vh; }
 </style>
 </head>
 <body>
@@ -64,7 +77,8 @@
   </div>
 
   <div class="date-info">目标日期:<span id="target-date">2027 年 6 月 18 日</span>(各地时间不同,以当地教育局公告为准)</div>
-  <div class="encourage" id="encourage">乾坤未定,你我皆是黑马!</div>
+    <div class="btn-bar"><button onclick="toggleFull()">⛶ 全屏模式</button></div>
+<div class="encourage" id="encourage">乾坤未定,你我皆是黑马!</div>
 
   <div class="article">
     <h2>中考倒计时怎么用?</h2>
