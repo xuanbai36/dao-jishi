@@ -67,6 +67,12 @@
   .tip { font-size: 13px; color: #6b7280; line-height: 1.8; }
   .footer { text-align: center; font-size: 12px; color: #9ca3af; padding: 0 16px 40px; }
 </style>
+<link rel="canonical" href="https://daojishicn.top/zidingyi-daojishi.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="自定义倒计时 - 创建属于你的倒计时">
+<meta property="og:description" content="自定义倒计时工具:输入任意事件名称和日期,创建属于你的倒计时(生日、纪念日、考试、旅行……),自动保存列表,下次打开还在。">
+<meta property="og:url" content="https://daojishicn.top/zidingyi-daojishi.html">
+<meta name="twitter:card" content="summary">
 </head>
 <body>
 <div class="header">
@@ -94,6 +100,16 @@
     <div class="field" style="margin-top:12px;">
       <label>备注(可选)</label>
       <input type="text" id="evNote" placeholder="比如:给 TA 的惊喜 / 期末冲刺">
+    </div>
+    <div style="margin-top:12px;">
+      <span style="font-size:13px;color:#6b7280;">快捷模板:</span>
+      <button class="btn ghost" onclick="useTpl('🎂 距离生日')">生日</button>
+      <button class="btn ghost" onclick="useTpl('🎓 距离毕业')">毕业</button>
+      <button class="btn ghost" onclick="useTpl('✈️ 距离旅行')">旅行</button>
+      <button class="btn ghost" onclick="useTpl('💰 距离发工资')">发工资</button>
+      <button class="btn ghost" onclick="useTpl('📋 距离项目截止')">项目截止</button>
+      <button class="btn ghost" onclick="useTpl('💼 距离面试')">面试</button>
+      <button class="btn ghost" onclick="useTpl('📝 距离考试')">考试</button>
     </div>
     <button class="btn" onclick="addEvent()">添加倒计时</button>
   </div>
@@ -139,6 +155,12 @@ function load() {
 
 function save() {
   try { localStorage.setItem("customCountdowns", JSON.stringify(events)); } catch (e) {}
+}
+
+function useTpl(name) {
+  document.getElementById("evName").value = name;
+  document.getElementById("evDate").focus();
+  alert("已填入「" + name + "」,请选择日期后点击添加");
 }
 
 function addEvent() {

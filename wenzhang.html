@@ -3,110 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="msvalidate.01" content="3F720A11A4FE574ED28562EB2E9ADA12" />
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
-<title>文章与攻略 - 考试时间表/放假安排/备考指南</title>
-<meta name="description" content="考试攻略与资讯大全:2027年主要考试时间表、节假日放假安排、考研/高考/国考/四六级/中考备考指南。">
-<meta name="keywords" content="考试时间表,2027考试,放假安排,考研攻略,高考攻略,备考指南">
+<title>文章与攻略 - 考试时间表/考证大全/备考月历/放假安排</title>
+<meta name="description" content="考试攻略与资讯大全:2027年主要考试时间表、全年考证时间表、备考月历、节假日放假安排、考研/高考/国考/教资/省考备考指南。">
+<meta name="keywords" content="考试时间表,2027考试,考证时间表,备考月历,放假安排,考研攻略,高考攻略,备考指南">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-    background: #f3f4f6;
-    min-height: 100vh;
-    color: #1f2937;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    min-height: 100vh; color: #1e293b;
+    background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 35%, #e0f2fe 70%, #fce7f3 100%);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  .header {
-    background: linear-gradient(160deg, #6b21a8 0%, #9333ea 100%);
-    color: #fff; text-align: center; padding: 40px 16px 48px;
+  .orb { position: fixed; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none; }
+  .orb-1 { width: 400px; height: 400px; background: rgba(129,140,248,0.3); top: -120px; left: -100px; }
+  .orb-2 { width: 340px; height: 340px; background: rgba(103,232,249,0.25); bottom: -120px; right: -100px; }
+  .header { position: relative; z-index: 1; text-align: center; padding: 56px 20px 36px; }
+  .header h1 { font-size: 34px; font-weight: 800; color: #1e1b4b; margin-bottom: 10px; }
+  .header h1 em { font-style: normal; background: linear-gradient(120deg, #6366f1, #0ea5e9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { font-size: 14px; color: #64748b; letter-spacing: 1px; }
+  .back { display: inline-block; margin-top: 18px; color: #6366f1; text-decoration: none; font-size: 14px; font-weight: 600; }
+  .container { position: relative; z-index: 1; max-width: 760px; margin: 0 auto 60px; padding: 0 20px; }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18));
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 24px; padding: 28px 26px; margin-bottom: 18px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 10px 36px rgba(99,102,241,0.14);
   }
-  .header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-  .header p { font-size: 15px; opacity: 0.85; }
-  .container { max-width: 720px; margin: -24px auto 60px; padding: 0 16px; }
-  .card {
-    background: #fff; border-radius: 16px; padding: 24px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 16px;
-  }
-  .card h2 { font-size: 19px; color: #6b21a8; margin-bottom: 14px; }
-  .card h3 { font-size: 16px; color: #374151; margin: 18px 0 8px; }
-  .card p { font-size: 14.5px; line-height: 1.9; margin-bottom: 10px; }
-  .card li { font-size: 14px; line-height: 2; margin-left: 20px; }
-  .links { list-style: none; }
+  h2 { font-size: 19px; font-weight: 800; color: #4338ca; margin-bottom: 14px; }
+  p, li { font-size: 14.5px; line-height: 2; color: #475569; }
+  ul { padding-left: 20px; }
+  .links { list-style: none; padding: 0; }
   .links li {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 4px; border-bottom: 1px solid #f3f4f6;
+    padding: 12px 4px; border-bottom: 1px solid rgba(255,255,255,0.6);
   }
   .links li:last-child { border-bottom: none; }
-  .links a { color: #6b21a8; font-weight: 600; text-decoration: none; font-size: 15px; }
+  .links a { color: #4f46e5; font-weight: 700; text-decoration: none; font-size: 15px; }
   .links a:hover { text-decoration: underline; }
-  .links .tag { font-size: 12px; color: #fff; background: #9333ea; border-radius: 6px; padding: 2px 8px; }
+  .links .tag { font-size: 12px; color: #6366f1; background: rgba(255,255,255,0.7); border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
   .warn {
-    background: #fef3c7; border-radius: 10px; padding: 10px 14px;
-    font-size: 13px; color: #92400e; line-height: 1.7; margin-top: 10px;
+    background: rgba(254,243,199,0.7); border-radius: 12px; padding: 10px 14px;
+    font-size: 13px; color: #92400e; line-height: 1.8; margin-top: 10px; border: 1px solid rgba(253,230,138,0.9);
   }
-  .footer { text-align: center; font-size: 12px; color: #9ca3af; padding: 0 16px 40px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.6); line-height: 1.6; }
+  th { color: #4338ca; font-weight: 700; }
+  td { color: #475569; }
+  .footer { position: relative; z-index: 1; text-align: center; font-size: 12px; color: #94a3b8; padding: 0 16px 40px; }
+  .footer a { color: #818cf8; text-decoration: none; }
+  @media (max-width: 640px) {
+    .header h1 { font-size: 28px; }
+    .glass { padding: 22px 18px; }
+    .links li { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
 </style>
+<link rel="canonical" href="https://daojishicn.top/wenzhang.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="文章与攻略 - 考试时间表/考证大全/备考月历/放假安排">
+<meta property="og:description" content="考试攻略与资讯大全:2027年主要考试时间表、全年考证时间表、备考月历、节假日放假安排、考研/高考/国考/教资/省考备考指南。">
+<meta property="og:url" content="https://daojishicn.top/wenzhang.html">
+<meta name="twitter:card" content="summary">
 </head>
 <body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
 <div class="header">
-  <h1>文章与攻略</h1>
-  <p>考试时间表、放假安排、备考指南——收藏这份,重要日子不错过</p>
+  <h1>文章与<em>攻略</em></h1>
+  <p>考试时间表 · 考证大全 · 备考月历 · 放假安排</p>
+  <a class="back" href="index.html">← 返回首页</a>
 </div>
 
 <div class="container">
 
-  <div class="card">
+  <div class="glass">
     <h2>📚 备考攻略(配合倒计时使用)</h2>
     <ul class="links">
-      <li><a href="kaoyan-daojishi.html">考研备考攻略(含报名时间节点)</a><span class="tag">12月考试</span></li>
-      <li><a href="guokao-daojishi.html">国考备考攻略(行测申论方法)</a><span class="tag">11月考试</span></li>
-      <li><a href="gaokao-daojishi.html">高考备考攻略(三轮复习法)</a><span class="tag">6月考试</span></li>
-      <li><a href="zhongkao-daojishi.html">中考备考攻略(复习节奏与心态)</a><span class="tag">6月考试</span></li>
-      <li><a href="siliuji-daojishi.html">四六级备考攻略(分数构成与真题)</a><span class="tag">12月考试</span></li>
-      <li><a href="chunjie-daojishi.html">春节攻略(春运抢票与年货)</a><span class="tag">2月</span></li>
-      <li><a href="yuchanqi-daojishi.html">孕期攻略(产检表与待产包)</a><span class="tag">健康</span></li>
+      <li><a href="guokao-daojishi.html">国考备考攻略</a><span class="tag">11月考试</span></li>
+      <li><a href="kaoyan-daojishi.html">考研备考攻略</a><span class="tag">12月考试</span></li>
+      <li><a href="siliuji-daojishi.html">四六级备考攻略</a><span class="tag">12月考试</span></li>
+      <li><a href="jiazi-daojishi.html">教资笔试备考攻略</a><span class="tag">3月考试</span></li>
+      <li><a href="shengkao-daojishi.html">省考备考攻略</a><span class="tag">3月考试</span></li>
+      <li><a href="erji-daojishi.html">计算机二级备考攻略</a><span class="tag">3月考试</span></li>
+      <li><a href="gaokao-daojishi.html">高考备考攻略</a><span class="tag">6月考试</span></li>
+      <li><a href="zhongkao-daojishi.html">中考备考攻略</a><span class="tag">6月考试</span></li>
+      <li><a href="chunjie-daojishi.html">春节攻略(春运/年货)</a><span class="tag">2月</span></li>
+      <li><a href="yuchanqi-daojishi.html">孕期攻略(产检/待产)</a><span class="tag">生活</span></li>
     </ul>
   </div>
 
-  <div class="card">
-    <h2>🗓️ 2027 年主要考试时间表(预计)</h2>
-    <p>以下日期为<b>往年规律推算的预计时间</b>,具体以教育部、各考试院官方公告为准。点击考试名称可直达对应倒计时。</p>
-    <ul>
-      <li><b>2027 国考笔试</b>:预计 2026 年 11 月 29 日(以官方公告为准)</li>
-      <li><b>2027 考研初试</b>:预计 2026 年 12 月 19~20 日(以官方公告为准)</li>
-      <li><b>2026 年 12 月四六级</b>:预计 12 月 19 日(以官方公告为准)</li>
-      <li><b>2027 春节</b>:2027 年 2 月 6 日(农历正月初一)</li>
-      <li><b>2027 高考</b>:预计 6 月 7~9 日(以各省公告为准)</li>
-      <li><b>2027 中考</b>:6 月中下旬(各地不同,以当地公告为准)</li>
-    </ul>
+  <div class="glass">
+    <h2>🗓️ 2027 年主要考试时间表</h2>
+    <p>以下为<b>按往年规律预估</b>的时间,具体以官方公告为准,点击可直达对应倒计时。</p>
+    <table>
+      <tr><th>考试</th><th>预计时间</th></tr>
+      <tr><td><a href="guokao-daojishi.html" style="color:#4f46e5;">国考笔试</a></td><td>2026 年 11 月 29 日</td></tr>
+      <tr><td><a href="kaoyan-daojishi.html" style="color:#4f46e5;">考研初试</a></td><td>2026 年 12 月 19~20 日</td></tr>
+      <tr><td><a href="siliuji-daojishi.html" style="color:#4f46e5;">四六级</a></td><td>2026 年 12 月 19 日</td></tr>
+      <tr><td><a href="jiazi-daojishi.html" style="color:#4f46e5;">教资笔试(上)</a></td><td>2027 年 3 月 13 日</td></tr>
+      <tr><td><a href="shengkao-daojishi.html" style="color:#4f46e5;">省考联考</a></td><td>2027 年 3 月 20 日</td></tr>
+      <tr><td><a href="erji-daojishi.html" style="color:#4f46e5;">计算机二级</a></td><td>2027 年 3 月 27 日</td></tr>
+      <tr><td>会计初级</td><td>2027 年 5 月中旬</td></tr>
+      <tr><td><a href="gaokao-daojishi.html" style="color:#4f46e5;">高考</a></td><td>2027 年 6 月 7~9 日</td></tr>
+      <tr><td><a href="zhongkao-daojishi.html" style="color:#4f46e5;">中考</a></td><td>2027 年 6 月中下旬(各地不同)</td></tr>
+      <tr><td>计算机二级(下)</td><td>2027 年 9 月下旬</td></tr>
+      <tr><td>教资笔试(下)</td><td>2027 年 9 月中旬</td></tr>
+    </table>
     <div class="warn">⚠️ 以上均为预计时间,每年可能微调,请务必以官方发布的公告为准。</div>
   </div>
 
-  <div class="card">
-    <h2>🎊 2027 年节假日放假安排(预计)</h2>
-    <p>国家节假日放假安排一般在<b>上一年 11 月</b>由国务院办公厅公布,以下是<b>按往年规律推算</b>的预测:</p>
-    <ul>
-      <li><b>元旦</b>:2027 年 1 月 1 日(预计放假 1~3 天)</li>
-      <li><b>春节</b>:除夕 2 月 5 日,正月初一 2 月 6 日(预计放假 7~8 天,含调休)</li>
-      <li><b>清明节</b>:4 月 5 日前后(预计放假 3 天)</li>
-      <li><b>劳动节</b>:5 月 1 日前后(预计放假 5 天,含调休)</li>
-      <li><b>端午节</b>:农历五月初五,预计 6 月 9 日前后</li>
-      <li><b>中秋节</b>:农历八月十五,预计 9 月 15 日前后</li>
-      <li><b>国庆节</b>:10 月 1~7 日(预计放假 7~8 天,含调休)</li>
-    </ul>
-    <div class="warn">⚠️ 放假安排预测仅供参考,实际以国务院办公厅公布的官方通知为准。</div>
+  <div class="glass">
+    <h2>📅 2027 备考月历(全年节奏)</h2>
+    <table>
+      <tr><th>月份</th><th>该做的事</th></tr>
+      <tr><td>1 月</td><td>教资笔试报名;寒假开始,制定全年计划</td></tr>
+      <tr><td>2 月</td><td>省考报名;春节(2/6)假期别完全放下学习</td></tr>
+      <tr><td>3 月</td><td>教资笔试(3/13)、省考(3/20)、计算机二级(3/27)</td></tr>
+      <tr><td>4 月</td><td>教资面试报名;中考体育测试;复盘调整</td></tr>
+      <tr><td>5 月</td><td>会计初级考试;高考/中考最后冲刺;四六级强化</td></tr>
+      <tr><td>6 月</td><td>高考(6/7)、中考(6/18)、四六级(6 月中旬);端午(6/9)</td></tr>
+      <tr><td>7~8 月</td><td>暑期复习黄金期;考研基础强化;国考/考研备考启动</td></tr>
+      <tr><td>9 月</td><td>计算机二级(下)、教资笔试(下);中秋(9/15)</td></tr>
+      <tr><td>10 月</td><td>考研报名、国考报名公告;国庆(10/1)假期冲刺</td></tr>
+      <tr><td>11 月</td><td>国考笔试(11 月底);考研模拟冲刺</td></tr>
+      <tr><td>12 月</td><td>考研初试、四六级(12 月中旬);复盘全年</td></tr>
+    </table>
   </div>
 
-  <div class="card">
+  <div class="glass">
+    <h2>🎊 2027 年节假日放假安排(预计)</h2>
+    <ul>
+      <li><b>元旦</b>:1 月 1 日(预计放假 1~3 天)</li>
+      <li><b>春节</b>:除夕 2 月 5 日,正月初一 2 月 6 日(预计放假 7~8 天)</li>
+      <li><b>清明节</b>:4 月 5 日前后(预计 3 天)</li>
+      <li><b>劳动节</b>:5 月 1 日前后(预计 5 天,含调休)</li>
+      <li><b>端午节</b>:6 月 9 日(预计 3 天)</li>
+      <li><b>中秋节</b>:9 月 15 日(预计与周末连休)</li>
+      <li><b>国庆节</b>:10 月 1~7 日(预计 7~8 天)</li>
+    </ul>
+    <div class="warn">⚠️ 放假安排以国务院办公厅公布的官方通知为准。</div>
+  </div>
+
+  <div class="glass">
     <h2>💡 备考通用建议</h2>
     <ul>
       <li><b>倒计时不只是焦虑</b>:把剩余天数换算成"周计划",每周一个目标,比每天盯着天数有用</li>
       <li><b>真题优先</b>:任何考试,近 3~5 年真题的价值都大于模拟题</li>
       <li><b>作息优先</b>:考试前一个月把生物钟调到考试时间,比熬夜刷题更值</li>
       <li><b>信息别错过</b>:报名、确认、打印准考证的时间节点,设好手机日历提醒</li>
+      <li><b>组合备考</b>:用本站"睡眠计算器"搭配作息规划,保证备考期间的睡眠质量</li>
     </ul>
   </div>
 </div>
 
-<div class="footer">文章与攻略 · 内容持续更新</div>
+<div class="footer">文章与攻略 · 内容持续更新 · <a href="about.html">关于与隐私</a></div>
 </body>
 </html>
