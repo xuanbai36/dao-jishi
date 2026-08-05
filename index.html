@@ -11,93 +11,110 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
-    background: #070b14;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: #f8fafc;
     min-height: 100vh;
-    color: #e5e7eb;
-    overflow-x: hidden;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
   }
-  /* 背景光斑 */
-  .glow { position: fixed; border-radius: 50%; filter: blur(120px); z-index: 0; pointer-events: none; }
-  .glow-1 { width: 520px; height: 520px; background: rgba(59,130,246,0.16); top: -160px; left: -120px; }
-  .glow-2 { width: 420px; height: 420px; background: rgba(168,85,247,0.14); top: 120px; right: -140px; }
-  .glow-3 { width: 480px; height: 480px; background: rgba(16,185,129,0.08); bottom: -200px; left: 30%; }
-
-  .header { position: relative; z-index: 1; text-align: center; padding: 72px 20px 56px; }
+  .header {
+    background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+    text-align: center;
+    padding: 72px 20px 48px;
+    border-bottom: 1px solid #eef2f7;
+  }
   .header .badge {
-    display: inline-block; font-size: 12px; letter-spacing: 3px; color: #93c5fd;
-    border: 1px solid rgba(147,197,253,0.3); border-radius: 999px;
-    padding: 6px 16px; margin-bottom: 20px; background: rgba(59,130,246,0.08);
+    display: inline-block;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    color: #4f46e5;
+    background: #eef2ff;
+    border: 1px solid #e0e7ff;
+    border-radius: 999px;
+    padding: 6px 18px;
+    margin-bottom: 20px;
   }
   .header h1 {
-    font-size: 40px; font-weight: 800; letter-spacing: 1px; line-height: 1.25;
-    background: linear-gradient(120deg, #ffffff 20%, #93c5fd 50%, #c4b5fd 80%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    margin-bottom: 14px;
+    font-size: 38px; font-weight: 800; letter-spacing: 0.5px;
+    color: #0f172a;
+    margin-bottom: 12px;
   }
-  .header p { font-size: 15px; color: #8b93a7; letter-spacing: 2px; }
+  .header h1 em { font-style: normal; color: #4f46e5; }
+  .header p { font-size: 15px; color: #64748b; letter-spacing: 1px; }
 
-  .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto 70px; padding: 0 20px; }
+  .container { max-width: 960px; margin: 0 auto 70px; padding: 0 20px; }
   .group-title {
-    font-size: 13px; font-weight: 600; letter-spacing: 4px; color: #8b93a7;
-    margin: 36px 0 16px; display: flex; align-items: center; gap: 12px;
+    font-size: 13px; font-weight: 700; letter-spacing: 3px; color: #94a3b8;
+    margin: 44px 0 18px; display: flex; align-items: center; gap: 14px;
   }
-  .group-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent); }
+  .group-title::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
   .card {
-    background: rgba(255,255,255,0.045);
-    border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 18px;
-    padding: 24px 22px;
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+    border-radius: 20px;
+    padding: 26px 24px;
     text-decoration: none;
     color: inherit;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.05);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     display: block;
+    position: relative;
   }
   .card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(147,197,253,0.45);
-    background: rgba(255,255,255,0.07);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(59,130,246,0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(15,23,42,0.04), 0 20px 40px rgba(15,23,42,0.1);
+    border-color: #e0e7ff;
   }
-  .card .name { font-size: 17px; font-weight: 700; color: #f3f4f6; margin-bottom: 6px; }
-  .card .date { font-size: 12.5px; color: #8b93a7; margin-bottom: 16px; letter-spacing: 0.5px; }
+  .card .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    color: #4f46e5; background: #eef2ff; border-radius: 6px; padding: 3px 10px;
+    margin-bottom: 14px;
+  }
+  .card .name { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .card .date { font-size: 13px; color: #94a3b8; margin-bottom: 18px; }
   .card .days {
-    font-size: 40px; font-weight: 800; line-height: 1; color: #60a5fa;
-    text-shadow: 0 0 24px rgba(96,165,250,0.35);
+    font-size: 44px; font-weight: 800; line-height: 1; color: #4f46e5;
+    letter-spacing: -1px;
   }
-  .card .days small { font-size: 14px; font-weight: 600; color: #8b93a7; margin-left: 5px; text-shadow: none; }
-  .card.orange .days { color: #fb923c; text-shadow: 0 0 24px rgba(251,146,60,0.35); }
-  .card.pink .days { color: #f472b6; text-shadow: 0 0 24px rgba(244,114,182,0.35); }
-  .card.green .days { color: #34d399; text-shadow: 0 0 24px rgba(52,211,153,0.35); }
+  .card .days small { font-size: 15px; font-weight: 600; color: #94a3b8; margin-left: 6px; letter-spacing: 0; }
+  .card .go {
+    position: absolute; top: 26px; right: 22px;
+    font-size: 14px; color: #cbd5e1; transition: color 0.2s, transform 0.2s;
+  }
+  .card:hover .go { color: #4f46e5; transform: translateX(3px); }
+  .card.orange .tag { color: #ea580c; background: #fff7ed; }
+  .card.orange .days { color: #ea580c; }
+  .card.orange:hover { border-color: #ffedd5; }
+  .card.pink .tag { color: #db2777; background: #fdf2f8; }
+  .card.pink .days { color: #db2777; }
+  .card.pink:hover { border-color: #fce7f3; }
+  .card.green .tag { color: #059669; background: #ecfdf5; }
+  .card.green .days { color: #059669; }
+  .card.green:hover { border-color: #d1fae5; }
+  .card.tool-card { display: flex; flex-direction: column; justify-content: space-between; }
+  .card .tool-icon { font-size: 30px; margin-bottom: 14px; }
   .pill {
-    display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 1px;
-    color: #d1d5db; background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.14); border-radius: 999px;
-    padding: 8px 16px;
+    display: inline-block; font-size: 13px; font-weight: 600; color: #4f46e5;
+    background: #eef2ff; border-radius: 999px; padding: 8px 18px; margin-top: 6px;
   }
 
   .tip {
-    margin-top: 36px; border: 1px solid rgba(255,255,255,0.08); border-radius: 18px;
-    padding: 22px 26px; font-size: 13.5px; line-height: 2; color: #8b93a7;
-    background: rgba(255,255,255,0.03);
+    margin-top: 48px; background: #ffffff; border: 1px solid #eef2f7;
+    border-radius: 20px; padding: 24px 28px;
+    font-size: 13.5px; line-height: 2; color: #64748b;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04);
   }
-  .tip b { color: #93c5fd; }
-  .footer { position: relative; z-index: 1; text-align: center; font-size: 12px; color: #4b5563; padding: 0 16px 40px; letter-spacing: 1px; }
+  .tip b { color: #4f46e5; }
+  .footer { text-align: center; font-size: 12px; color: #cbd5e1; padding: 0 16px 44px; letter-spacing: 1px; }
 </style>
 </head>
 <body>
-<div class="glow glow-1"></div>
-<div class="glow glow-2"></div>
-<div class="glow glow-3"></div>
 
 <div class="header">
-  <div class="badge">FREE ONLINE TOOLS</div>
-  <h1>重要日子倒计时 · 工具箱</h1>
-  <p>考研 · 高考 · 国考倒计时 | 在线工具 | 考试攻略大全</p>
+  <div class="badge">免费在线工具</div>
+  <h1>重要日子<em>倒计时</em> · 工具箱</h1>
+  <p>考研 · 高考 · 国考 | 在线工具 | 考试攻略大全</p>
 </div>
 
 <div class="container" id="container"></div>
@@ -107,28 +124,28 @@
 <script>
 var groups = [
   {
-    title: "⏰ 倒计时",
+    title: "倒计时",
     items: [
-      { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", note: "以官方公告为准", type: "count" },
-      { name: "四六级(12月)", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", note: "以官方公告为准", type: "count" },
-      { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", note: "以官方公告为准", type: "count" },
-      { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", note: "2月6日 正月初一", type: "count" },
-      { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", css: "green", note: "以官方公告为准", type: "count" },
-      { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", note: "以当地公告为准", type: "count" },
-      { name: "自定义倒计时", date: "", url: "zidingyi-daojishi.html", css: "", note: "创建属于你的倒计时", type: "input" }
+      { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", css: "orange", tag: "考试", note: "以官方公告为准", type: "count" },
+      { name: "四六级", date: "2026-12-19", url: "siliuji-daojishi.html", css: "", tag: "考试", note: "以官方公告为准", type: "count" },
+      { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", css: "", tag: "考试", note: "以官方公告为准", type: "count" },
+      { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", css: "pink", tag: "节日", note: "2月6日 正月初一", type: "count" },
+      { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", css: "green", tag: "考试", note: "以官方公告为准", type: "count" },
+      { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", css: "orange", tag: "考试", note: "以当地公告为准", type: "count" },
+      { name: "预产期", date: "", url: "yuchanqi-daojishi.html", css: "pink", tag: "生活", note: "输入日期自动计算", type: "input" },
+      { name: "自定义倒计时", date: "", url: "zidingyi-daojishi.html", css: "", tag: "生活", note: "创建属于你的倒计时", type: "input" }
     ]
   },
   {
-    title: "🛠️ 在线工具",
+    title: "在线工具",
     items: [
-      { name: "预产期倒计时", date: "", url: "yuchanqi-daojishi.html", css: "pink", note: "输入日期自动计算", type: "input" },
-      { name: "文本工具箱", date: "", url: "wenben-gongju.html", css: "green", note: "字数统计/大小写/去重/反转", type: "tool" }
+      { name: "文本工具箱", date: "", url: "wenben-gongju.html", css: "green", tag: "文本处理", note: "字数统计 / 大小写 / 去重 / 反转", type: "tool", icon: "🧰" }
     ]
   },
   {
-    title: "📖 文章攻略",
+    title: "文章攻略",
     items: [
-      { name: "考试时间表与攻略", date: "", url: "wenzhang.html", css: "", note: "考试安排/放假安排/备考指南", type: "content" }
+      { name: "考试时间表与攻略", date: "", url: "wenzhang.html", css: "", tag: "资讯", note: "考试安排 · 放假安排 · 备考指南", type: "content", icon: "📖" }
     ]
   }
 ];
@@ -158,22 +175,30 @@ groups.forEach(function (g) {
       ? e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日"
       : e.note;
 
-    var daysHtml;
+    var bodyHtml;
     if (e.type === "count") {
       var d = daysLeft(e.date);
-      daysHtml = '<div class="days">' + d + "<small>天</small></div>";
+      bodyHtml =
+        '<div class="tag">' + e.tag + "</div>" +
+        '<div class="name">' + e.name + "</div>" +
+        '<div class="date">' + dateText + "</div>" +
+        '<div class="days">' + d + "<small>天</small></div>";
     } else if (e.type === "input") {
-      daysHtml = '<div class="days">--<small>天</small></div>';
-    } else if (e.type === "tool") {
-      daysHtml = '<div class="pill">🧰 在线使用</div>';
+      bodyHtml =
+        '<div class="tag">' + e.tag + "</div>" +
+        '<div class="name">' + e.name + "</div>" +
+        '<div class="date">' + dateText + "</div>" +
+        '<div class="days">--<small>天</small></div>';
     } else {
-      daysHtml = '<div class="pill">📖 阅读</div>';
+      bodyHtml =
+        '<div class="tag">' + e.tag + "</div>" +
+        '<div class="tool-icon">' + e.icon + "</div>" +
+        '<div class="name">' + e.name + "</div>" +
+        '<div class="date">' + dateText + "</div>" +
+        '<div class="pill">立即使用</div>';
     }
 
-    card.innerHTML =
-      '<div class="name">' + e.name + "</div>" +
-      '<div class="date">' + dateText + "</div>" +
-      daysHtml;
+    card.innerHTML = bodyHtml + '<span class="go">→</span>';
     grid.appendChild(card);
   });
 
