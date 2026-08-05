@@ -91,6 +91,8 @@
 <meta property="og:description" content="睡眠周期计算器:输入起床时间或入睡时间,按 90 分钟睡眠周期科学计算最佳入睡/起床时间,在周期结束时醒来精神更好。">
 <meta property="og:url" content="https://daojishicn.top/shuimian-jisuanqi.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="stars" id="stars"></div>
@@ -198,6 +200,9 @@ function calcFromSleep() {
   box.innerHTML = html;
   box.style.display = "block";
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

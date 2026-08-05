@@ -54,6 +54,8 @@
 <meta property="og:description" content="免费在线文本工具箱:字数统计(汉字/字符/单词)、大小写转换、文本去重排序、文本反转,即输即用,无需注册。">
 <meta property="og:url" content="https://daojishicn.top/wenben-gongju.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="header">
@@ -155,6 +157,9 @@ function rev(mode) {
   }
   document.getElementById("revOutput").value = out;
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

@@ -82,6 +82,8 @@
 <meta property="og:description" content="距离2027年国家公务员考试还有多少天?国考倒计时工具,实时计算距离国考笔试还有几天几小时几分几秒,2027国考时间、国考倒计时。">
 <meta property="og:url" content="https://daojishicn.top/guokao-daojishi.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="glow glow-1"></div>
@@ -159,6 +161,9 @@ function toggleFull() {
   if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
   else { document.exitFullscreen(); document.body.classList.remove("fs"); }
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

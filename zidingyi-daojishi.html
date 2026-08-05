@@ -73,6 +73,8 @@
 <meta property="og:description" content="自定义倒计时工具:输入任意事件名称和日期,创建属于你的倒计时(生日、纪念日、考试、旅行……),自动保存列表,下次打开还在。">
 <meta property="og:url" content="https://daojishicn.top/zidingyi-daojishi.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="header">
@@ -123,6 +125,10 @@
       <div class="time-item"><div class="num" id="cdMinutes">--</div><div class="txt">分钟</div></div>
       <div class="time-item"><div class="num" id="cdSeconds">--</div><div class="txt">秒</div></div>
     </div>
+    <div style="margin-top:16px;">
+      <button class="btn ghost" onclick="shareCurrent()">🔗 复制分享链接</button>
+      <button class="btn ghost" onclick="makePoster()">🖼️ 生成海报</button>
+    </div>
   </div>
 
   <div class="card">
@@ -146,6 +152,31 @@
 <script>
 var events = [];
 var timer = null;
+var curIndex = -1;
+
+function shareCurrent() {
+  if (curIndex < 0 || !events[curIndex]) { alert("请先选择一个倒计时"); return; }
+  var e = events[curIndex];
+  var base = location.origin + location.pathname.replace(/[^/]*$/, "");
+  var url = base + "share.html?title=" + encodeURIComponent(e.name) + "&date=" + e.date;
+  copyText(url);
+  alert("分享链接已复制:\n" + url + "\n发给好友,对方打开就能看到这个倒计时。");
+}
+
+function makePoster() {
+  if (curIndex < 0 || !events[curIndex]) { alert("请先选择一个倒计时"); return; }
+  var e = events[curIndex];
+  var base = location.origin + location.pathname.replace(/[^/]*$/, "");
+  window.open(base + "fenxiang-haibao.html?title=" + encodeURIComponent(e.name) + "&date=" + e.date, "_blank");
+}
+
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(function () { prompt("复制链接:", text); });
+  } else {
+    prompt("复制链接:", text);
+  }
+}
 
 function load() {
   try { events = JSON.parse(localStorage.getItem("customCountdowns") || "[]"); } catch (e) { events = []; }
@@ -221,6 +252,7 @@ function deleteEvent(i) {
 
 function showCountdown(i) {
   if (timer) clearInterval(timer);
+  curIndex = i;
   var e = events[i];
   var box = document.getElementById("countdownBox");
   box.style.display = "block";
@@ -294,6 +326,9 @@ function importData(input) {
 }
 
 load();
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

@@ -82,6 +82,8 @@
 <meta property="og:description" content="距离全国计算机等级考试二级还有多少天?计算机二级倒计时工具,实时计算距离考试还有几天几小时几分几秒。">
 <meta property="og:url" content="https://daojishicn.top/erji-daojishi.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="glow glow-1"></div>
@@ -147,6 +149,9 @@ function toggleFull() {
   if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
   else { document.exitFullscreen(); document.body.classList.remove("fs"); }
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

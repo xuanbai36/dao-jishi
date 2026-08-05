@@ -82,6 +82,8 @@
 <meta property="og:description" content="距离2027年教师资格证笔试还有多少天?教资倒计时工具,实时计算距离教资笔试还有几天几小时几分几秒。">
 <meta property="og:url" content="https://daojishicn.top/jiazi-daojishi.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="glow glow-1"></div>
@@ -159,6 +161,9 @@ function toggleFull() {
   if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
   else { document.exitFullscreen(); document.body.classList.remove("fs"); }
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

@@ -163,6 +163,8 @@
 <meta property="og:description" content="免费在线工具站:考研倒计时、高考倒计时、国考倒计时、教资省考、四六级、春节中秋等节日倒计时、睡眠计算器、文本工具箱、备考攻略与考试时间表。">
 <meta property="og:url" content="https://daojishicn.top/">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="orb orb-1"></div>
@@ -244,6 +246,9 @@ var groups = [
     title: "🛠️ 在线工具",
     items: [
       { name: "睡眠计算器", date: "", url: "shuimian-jisuanqi.html", css: "purple", tag: "健康", note: "科学安排入睡与起床", type: "tool", icon: "🌙" },
+      { name: "番茄钟", date: "", url: "fanqiezhong.html", css: "", tag: "专注", note: "25 分钟专注 + 5 分钟休息", type: "tool", icon: "🍅" },
+      { name: "日期计算器", date: "", url: "riqi-jisuanqi.html", css: "green", tag: "日期", note: "相差天数 / N 天后 / 年龄", type: "tool", icon: "📅" },
+      { name: "倒计时海报", date: "", url: "fenxiang-haibao.html", css: "purple", tag: "分享", note: "生成倒计时图片分享", type: "tool", icon: "🖼️" },
       { name: "文本工具箱", date: "", url: "wenben-gongju.html", css: "green", tag: "文本处理", note: "字数统计 / 大小写 / 去重 / 反转", type: "tool", icon: "🧰" }
     ]
   },
@@ -345,6 +350,9 @@ function doSearch() {
   if (hit) { window.location.href = hit.url; }
   else { alert("没找到与「" + kw + "」相关的内容,试试搜:考研 / 高考 / 春节 / 睡眠"); }
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

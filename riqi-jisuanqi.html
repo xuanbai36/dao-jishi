@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>日期计算器 - 两个日期相差多少天/N天后是哪天/年龄计算</title>
+<meta name="description" content="免费在线日期计算器:计算两个日期相差多少天、N天后(前)是哪一天、年龄计算,即输即用,无需注册。">
+<meta name="keywords" content="日期计算器,日期差,相差多少天,年龄计算,N天后是哪天">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    min-height: 100vh; color: #1e293b;
+    background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 35%, #e0f2fe 70%, #fce7f3 100%);
+    -webkit-font-smoothing: antialiased;
+  }
+  .header { text-align: center; padding: 52px 20px 32px; }
+  .header h1 { font-size: 32px; font-weight: 800; color: #1e1b4b; margin-bottom: 8px; }
+  .header h1 em { font-style: normal; background: linear-gradient(120deg, #6366f1, #0ea5e9); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { font-size: 14px; color: #64748b; }
+  .back { display: inline-block; margin-top: 14px; color: #6366f1; text-decoration: none; font-size: 14px; font-weight: 600; }
+  .container { max-width: 720px; margin: 0 auto 60px; padding: 0 20px; }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.18));
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 24px; padding: 26px; margin-bottom: 16px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 10px 36px rgba(99,102,241,0.14);
+  }
+  h2 { font-size: 17px; font-weight: 800; color: #4338ca; margin-bottom: 6px; }
+  .desc { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+  .row .f { display: flex; flex-direction: column; gap: 6px; }
+  .row label { font-size: 12px; color: #64748b; }
+  .row input {
+    font-size: 15px; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 12px;
+    background: rgba(255,255,255,0.85); color: #1e293b; min-height: 44px;
+  }
+  .btn {
+    background: #4f46e5; color: #fff; border: none; border-radius: 12px;
+    font-size: 15px; font-weight: 600; padding: 11px 24px; cursor: pointer; min-height: 44px;
+    box-shadow: 0 6px 20px rgba(79,70,229,0.3);
+  }
+  .btn:active { transform: scale(0.97); }
+  .result {
+    margin-top: 16px; padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,0.7);
+    font-size: 16px; font-weight: 700; color: #4338ca; border: 1px solid rgba(255,255,255,0.9); display: none; line-height: 1.8;
+  }
+  .result .sub { font-size: 13px; font-weight: 400; color: #64748b; }
+  .footer { text-align: center; font-size: 12px; color: #94a3b8; padding: 0 16px 40px; }
+  @media (max-width: 640px) {
+    .header h1 { font-size: 26px; }
+    .row { flex-direction: column; align-items: stretch; }
+    .row .f { width: 100%; }
+  }
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
+</head>
+<body>
+<div class="header">
+  <h1>日期<em>计算器</em></h1>
+  <p>相差天数 · N 天后是哪天 · 年龄计算</p>
+  <a class="back" href="index.html">← 返回首页</a>
+</div>
+
+<div class="container">
+
+  <div class="glass">
+    <h2>📆 两个日期相差多少天</h2>
+    <div class="desc">选择两个日期,计算中间隔了多少天</div>
+    <div class="row">
+      <div class="f"><label>开始日期</label><input type="date" id="d1"></div>
+      <div class="f"><label>结束日期</label><input type="date" id="d2"></div>
+      <button class="btn" onclick="calcDiff()">计算</button>
+    </div>
+    <div class="result" id="rDiff"></div>
+  </div>
+
+  <div class="glass">
+    <h2>📅 N 天后(前)是哪一天</h2>
+    <div class="desc">在指定日期上加或减 N 天,得到结果日期</div>
+    <div class="row">
+      <div class="f"><label>基准日期</label><input type="date" id="d3"></div>
+      <div class="f"><label>加/减天数(负数表示往前)</label><input type="number" id="n" placeholder="如:100 或 -30"></div>
+      <button class="btn" onclick="calcAdd()">计算</button>
+    </div>
+    <div class="result" id="rAdd"></div>
+  </div>
+
+  <div class="glass">
+    <h2>🎂 年龄计算</h2>
+    <div class="desc">输入出生日期,计算当前年龄(年/月/天)</div>
+    <div class="row">
+      <div class="f"><label>出生日期</label><input type="date" id="birth"></div>
+      <button class="btn" onclick="calcAge()">计算</button>
+    </div>
+    <div class="result" id="rAge"></div>
+  </div>
+
+  <div class="glass" style="font-size:13px;color:#64748b;line-height:2;">
+    💡 提示:日期计算按自然日计算(不含当天算 0 天)。年龄按当前日期计算。
+  </div>
+</div>
+
+<div class="footer">日期计算器 · 免费使用</div>
+
+<script>
+function fmt(d) {
+  return d.getFullYear() + " 年 " + (d.getMonth() + 1) + " 月 " + d.getDate() + " 日";
+}
+
+function calcDiff() {
+  var a = document.getElementById("d1").value;
+  var b = document.getElementById("d2").value;
+  var box = document.getElementById("rDiff");
+  if (!a || !b) { box.textContent = "请选择两个日期"; box.style.display = "block"; return; }
+  var diff = Math.round((new Date(b) - new Date(a)) / 86400000);
+  var txt = diff === 0 ? "两个日期是同一天"
+    : diff > 0 ? "相差 <b>" + diff + "</b> 天"
+    : "相差 <b>" + (-diff) + "</b> 天(结束日期在前)";
+  box.innerHTML = txt + '<div class="sub">' + fmt(new Date(a)) + " → " + fmt(new Date(b)) + "</div>";
+  box.style.display = "block";
+}
+
+function calcAdd() {
+  var a = document.getElementById("d3").value;
+  var n = parseInt(document.getElementById("n").value);
+  var box = document.getElementById("rAdd");
+  if (!a || isNaN(n)) { box.textContent = "请填写日期和天数"; box.style.display = "block"; return; }
+  var d = new Date(a);
+  d.setDate(d.getDate() + n);
+  box.innerHTML = (n >= 0 ? "加 " : "减 ") + Math.abs(n) + " 天后是 <b>" + fmt(d) + "</b><div class='sub'>" + (d.getDay() === 0 ? "星期日" : "星期" + "一二三四五六"[d.getDay() - 1]) + "</div>";
+  box.style.display = "block";
+}
+
+function calcAge() {
+  var b = document.getElementById("birth").value;
+  var box = document.getElementById("rAge");
+  if (!b) { box.textContent = "请选择出生日期"; box.style.display = "block"; return; }
+  var birth = new Date(b), now = new Date();
+  var years = now.getFullYear() - birth.getFullYear();
+  var months = now.getMonth() - birth.getMonth();
+  var days = now.getDate() - birth.getDate();
+  if (days < 0) { months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
+  if (months < 0) { years--; months += 12; }
+  box.innerHTML = "年龄 <b>" + years + "</b> 岁 <b>" + months + "</b> 个月 <b>" + days + "</b> 天<div class='sub'>出生日期:" + fmt(birth) + "</div>";
+  box.style.display = "block";
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>

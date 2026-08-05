@@ -59,6 +59,8 @@
 <meta property="og:description" content="预产期倒计时工具:输入预产期或末次月经日期,自动计算距离预产期还有多少天,孕期倒计时、产检提醒。">
 <meta property="og:url" content="https://daojishicn.top/yuchanqi-daojishi.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="container">
@@ -133,6 +135,9 @@ function update(target) {
   document.getElementById("seconds").textContent = String(seconds < 0 ? 0 : seconds).padStart(2, "0");
   document.getElementById("encourage").textContent = days > 0 ? "妈妈辛苦了,宝宝在来的路上!" : "宝宝已经出生啦,恭喜!";
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

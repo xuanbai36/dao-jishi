@@ -40,6 +40,8 @@
 <meta property="og:description" content="关于本站与隐私说明:所有数据在浏览器本地处理,不上传服务器,不收集任何个人信息。">
 <meta property="og:url" content="https://daojishicn.top/about.html">
 <meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
 </head>
 <body>
 <div class="container">
@@ -101,5 +103,8 @@
 
   <div class="footer">© 2026 倒计时与工具箱 · <a href="index.html" style="color:#818cf8;text-decoration:none;">返回首页</a></div>
 </div>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
 </body>
 </html>
