@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自定义倒计时 - 创建属于你的倒计时</title>
+<meta name="description" content="自定义倒计时工具:输入任意事件名称和日期,创建属于你的倒计时(生日、纪念日、考试、旅行……),自动保存列表,下次打开还在。">
+<meta name="keywords" content="自定义倒计时,倒计时制作,纪念日倒计时,生日倒计时,倒计时工具">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #f3f4f6;
+    min-height: 100vh;
+    color: #1f2937;
+  }
+  .header {
+    background: linear-gradient(160deg, #0f766e 0%, #14b8a6 100%);
+    color: #fff;
+    text-align: center;
+    padding: 40px 16px 48px;
+  }
+  .header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .header p { font-size: 15px; opacity: 0.85; }
+  .container { max-width: 720px; margin: -24px auto 60px; padding: 0 16px; }
+  .card {
+    background: #fff; border-radius: 16px; padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 16px;
+  }
+  .card h2 { font-size: 17px; color: #0f766e; margin-bottom: 16px; }
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .form-row label { font-size: 13px; color: #6b7280; display: block; margin-bottom: 6px; }
+  .form-row .field { flex: 1; min-width: 140px; }
+  .form-row input {
+    width: 100%; font-size: 15px; padding: 10px 12px;
+    border: 1px solid #d1d5db; border-radius: 10px; color: #1f2937;
+  }
+  .btn {
+    background: #0f766e; color: #fff; border: none; border-radius: 10px;
+    font-size: 16px; font-weight: 600; padding: 12px 28px; cursor: pointer;
+    margin-top: 16px;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn.ghost { background: #e5e7eb; color: #374151; padding: 8px 16px; font-size: 13px; margin-top: 0; }
+  .btn.del { background: #fee2e2; color: #b91c1c; padding: 6px 12px; font-size: 13px; margin-top: 0; }
+  .countdown-box { text-align: center; padding: 28px 16px; }
+  .countdown-box .name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .countdown-box .date { font-size: 13px; color: #6b7280; margin-bottom: 14px; }
+  .days-number { font-size: 84px; font-weight: 800; color: #0f766e; line-height: 1.1; }
+  .days-number small { font-size: 22px; font-weight: 600; color: #6b7280; margin-left: 6px; }
+  .time-row { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+  .time-item { background: #f3f4f6; border-radius: 10px; padding: 8px 14px; min-width: 76px; }
+  .time-item .num { font-size: 22px; font-weight: 700; }
+  .time-item .txt { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .empty { text-align: center; color: #9ca3af; font-size: 14px; padding: 20px 0; }
+  .item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 4px; border-bottom: 1px solid #f3f4f6; cursor: pointer;
+  }
+  .item:last-child { border-bottom: none; }
+  .item .info .n { font-size: 15px; font-weight: 600; }
+  .item .info .d { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .item .days { font-size: 20px; font-weight: 700; color: #0f766e; }
+  .item .days small { font-size: 12px; color: #6b7280; font-weight: 400; }
+  .item-actions { display: flex; gap: 8px; align-items: center; }
+  .tip { font-size: 13px; color: #6b7280; line-height: 1.8; }
+  .footer { text-align: center; font-size: 12px; color: #9ca3af; padding: 0 16px 40px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>自定义倒计时</h1>
+  <p>生日、纪念日、考试、旅行……创建属于你的倒计时</p>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h2>创建新的倒计时</h2>
+    <div class="form-row">
+      <div class="field" style="flex:1.4;">
+        <label>事件名称</label>
+        <input type="text" id="evName" placeholder="比如:我的生日 / 期末考试">
+      </div>
+      <div class="field">
+        <label>日期</label>
+        <input type="date" id="evDate">
+      </div>
+      <div class="field">
+        <label>时间(可选)</label>
+        <input type="time" id="evTime" value="00:00">
+      </div>
+    </div>
+    <button class="btn" onclick="addEvent()">添加倒计时</button>
+  </div>
+
+  <div class="card countdown-box" id="countdownBox" style="display:none;">
+    <div class="name" id="cdName">—</div>
+    <div class="date" id="cdDate">—</div>
+    <div class="days-number"><span id="cdDays">--</span><small>天</small></div>
+    <div class="time-row">
+      <div class="time-item"><div class="num" id="cdHours">--</div><div class="txt">小时</div></div>
+      <div class="time-item"><div class="num" id="cdMinutes">--</div><div class="txt">分钟</div></div>
+      <div class="time-item"><div class="num" id="cdSeconds">--</div><div class="txt">秒</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>我的倒计时列表<span style="font-size:12px;color:#9ca3af;font-weight:400;">(自动保存在本浏览器)</span></h2>
+    <div id="list"></div>
+    <div class="empty" id="empty">还没有倒计时,先在上面创建一个吧</div>
+  </div>
+
+  <div class="card tip">
+    💡 小提示:列表保存在<b>你当前浏览器</b>里(不会上传到服务器)。换个浏览器或清理缓存会清空,重要日子建议记在手机日历里。
+  </div>
+</div>
+
+<div class="footer">自定义倒计时 · 免费使用</div>
+
+<script>
+var events = [];
+var timer = null;
+
+function load() {
+  try { events = JSON.parse(localStorage.getItem("customCountdowns") || "[]"); } catch (e) { events = []; }
+  renderList();
+  if (events.length > 0) showCountdown(0);
+}
+
+function save() {
+  try { localStorage.setItem("customCountdowns", JSON.stringify(events)); } catch (e) {}
+}
+
+function addEvent() {
+  var name = document.getElementById("evName").value.trim();
+  var date = document.getElementById("evDate").value;
+  var time = document.getElementById("evTime").value || "00:00";
+  if (!name) { alert("请填写事件名称"); return; }
+  if (!date) { alert("请选择日期"); return; }
+  // 去重:同名同日期不重复添加
+  var dup = events.some(function (e) { return e.name === name && e.date === date && e.time === time; });
+  if (dup) { alert("这个倒计时已经存在了"); return; }
+  events.push({ name: name, date: date, time: time });
+  save();
+  renderList();
+  showCountdown(events.length - 1);
+  document.getElementById("evName").value = "";
+  document.getElementById("evDate").value = "";
+}
+
+function renderList() {
+  var list = document.getElementById("list");
+  var empty = document.getElementById("empty");
+  list.innerHTML = "";
+  if (events.length === 0) { empty.style.display = "block"; return; }
+  empty.style.display = "none";
+  events.forEach(function (e, i) {
+    var d = daysLeft(e.date + "T" + (e.time || "00:00") + ":00");
+    var div = document.createElement("div");
+    div.className = "item";
+    var dateText = e.date.split("-")[0] + "年" + parseInt(e.date.split("-")[1]) + "月" + parseInt(e.date.split("-")[2]) + "日";
+    div.innerHTML =
+      '<div class="info" onclick="showCountdown(' + i + ')">' +
+        '<div class="n">' + escapeHtml(e.name) + "</div>" +
+        '<div class="d">' + dateText + "</div>" +
+      "</div>" +
+      '<div class="item-actions">' +
+        '<div class="days">' + d + "<small>天</small></div>" +
+        '<button class="btn del" onclick="deleteEvent(' + i + ')">删除</button>' +
+      "</div>";
+    list.appendChild(div);
+  });
+}
+
+function deleteEvent(i) {
+  events.splice(i, 1);
+  save();
+  renderList();
+  if (events.length === 0) {
+    document.getElementById("countdownBox").style.display = "none";
+    if (timer) clearInterval(timer);
+  } else {
+    showCountdown(Math.min(i, events.length - 1));
+  }
+}
+
+function showCountdown(i) {
+  if (timer) clearInterval(timer);
+  var e = events[i];
+  var box = document.getElementById("countdownBox");
+  box.style.display = "block";
+  document.getElementById("cdName").textContent = e.name;
+  document.getElementById("cdDate").textContent = e.date + " " + e.time;
+  timer = setInterval(function () { tick(e); }, 1000);
+  tick(e);
+}
+
+function tick(e) {
+  var target = new Date(e.date + "T" + (e.time || "00:00") + ":00");
+  var diff = target - new Date();
+  var days = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var minutes = Math.floor((diff % 3600000) / 60000);
+  var seconds = Math.floor((diff % 60000) / 1000);
+  document.getElementById("cdDays").textContent = days >= 0 ? days : 0;
+  document.getElementById("cdHours").textContent = String(hours < 0 ? 0 : hours).padStart(2, "0");
+  document.getElementById("cdMinutes").textContent = String(minutes < 0 ? 0 : minutes).padStart(2, "0");
+  document.getElementById("cdSeconds").textContent = String(seconds < 0 ? 0 : seconds).padStart(2, "0");
+}
+
+function daysLeft(dateStr) {
+  var diff = new Date(dateStr) - new Date();
+  return diff > 0 ? Math.floor(diff / 86400000) : 0;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+load();
+</script>
+</body>
+</html>
