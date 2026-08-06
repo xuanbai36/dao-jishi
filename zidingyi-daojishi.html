@@ -75,6 +75,10 @@
 <meta name="twitter:card" content="summary">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4f46e5">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
 </head>
 <body>
 <div class="header">
@@ -88,24 +92,24 @@
     <h2>创建新的倒计时</h2>
     <div class="form-row">
       <div class="field" style="flex:1.4;">
-        <label>事件名称</label>
+        <label for="evName">事件名称</label>
         <input type="text" id="evName" placeholder="比如:我的生日 / 期末考试">
       </div>
       <div class="field">
-        <label>日期</label>
+        <label for="evDate">日期</label>
         <input type="date" id="evDate">
       </div>
       <div class="field">
-        <label>时间(可选)</label>
+        <label for="evTime">时间(可选)</label>
         <input type="time" id="evTime" value="00:00">
       </div>
     </div>
     <div class="field" style="margin-top:12px;">
-      <label>备注(可选)</label>
+      <label for="evNote">备注(可选)</label>
       <input type="text" id="evNote" placeholder="比如:给 TA 的惊喜 / 期末冲刺">
     </div>
     <div class="field" style="margin-top:12px;">
-      <label>开始日期(可选,用于显示备考进度)</label>
+      <label for="evStart">开始日期(可选,用于显示备考进度)</label>
       <input type="date" id="evStart">
     </div>
     <div style="margin-top:12px;">

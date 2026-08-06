@@ -179,6 +179,10 @@
     .footer { padding-bottom: 90px; }
   }
 </style>
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
 </head>
 <body>
 <div class="orb orb-1"></div>
@@ -202,12 +206,15 @@
   </div>
 </nav>
 
+<main>
 <div class="hero">
   <div class="tag">TODAY · 距离目标还有</div>
   <h1>把重要考试,变成每天<span>看得见的进度</span></h1>
   <div class="sub">每天打开一次,清楚知道自己的备考进度 · 按 F 进入沉浸模式</div>
   <div class="target-select">
-    <select id="targetSel" onchange="setTarget(this.value)">
+    <div class="target-label" style="font-size:12px;color:#64748b;margin-bottom:6px;letter-spacing:2px;">选择主目标</div>
+    <label for="targetSel" class="target-label">— 选择主目标 —</label>
+    <select id="targetSel" onchange="setTarget(this.value)" aria-label="选择主目标">
       <option value="">— 选择主目标 —</option>
     </select>
   </div>
@@ -227,17 +234,17 @@
 </div>
 
 <div class="section" id="exam">
-  <div class="section-title">热门考试与节日</div>
+  <h2 class="section-title">热门考试与节日</h2>
   <div class="grid" id="examGrid"></div>
 </div>
 
 <div class="section" id="mine">
-  <div class="section-title">我的目标(本设备保存)</div>
+  <h2 class="section-title">我的目标(本设备保存)</h2>
   <div class="mine-area" id="mineBox"></div>
 </div>
 
 <div class="section" id="tools">
-  <div class="section-title">在线工具</div>
+  <h2 class="section-title">在线工具</h2>
   <div class="tools-area">
     <a class="tool-chip" href="xiaban-daojishi.html">⏰ 下班倒计时</a>
     <a class="tool-chip" href="shijie-shizhong.html">🌍 世界时钟</a>
@@ -251,7 +258,12 @@
 
 <div class="tip">💡 数据默认只保存在本设备,不上传服务器。自定义目标可导出备份,也可通过分享链接在其他设备打开。<a href="about.html">关于与隐私</a></div>
 
-<div class="footer">上岸日历 · 免费使用 · <a href="about.html">关于</a> · <a href="privacy.html">隐私政策</a> · <a href="terms.html">用户协议</a> · 按 F 进入沉浸模式</div>
+</div>
+</div>
+
+</main>
+
+<footer class="footer">上岸日历 · 免费使用 · <a href="about.html">关于</a> · <a href="privacy.html">隐私政策</a> · <a href="terms.html">用户协议</a> · 按 F 进入沉浸模式</footer>
 
 <div class="bottom-add"><a href="zidingyi-daojishi.html">＋ 添加目标</a></div>
 
