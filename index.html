@@ -62,10 +62,18 @@
   .nav .links a { font-size: 14px; color: #94a3b8; text-decoration: none; font-weight: 600; }
   .nav .links a:hover { color: #38bdf8; }
   .nav .right { display: flex; gap: 10px; align-items: center; }
+  .theme-label { font-size: 12px; color: #64748b; letter-spacing: 1px; }
   .theme-dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); cursor: pointer; }
   .theme-dot.navy { background: #131a35; }
   .theme-dot.cyan { background: #134e4a; }
   .theme-dot.sunset { background: #4c1d3d; }
+  .burger { display: none; background: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #e2e8f0; font-size: 18px; width: 38px; height: 38px; cursor: pointer; }
+  @media (max-width: 640px) {
+    .burger { display: block; }
+    .nav .links { display: none; order: 3; width: 100%; flex-direction: column; gap: 12px; padding: 10px 0 4px; }
+    .nav .links.open { display: flex; }
+    .nav .links a { font-size: 14px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  }
   .nav .add {
     background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; border: none; border-radius: 999px;
     padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
@@ -97,7 +105,7 @@
     color: #38bdf8; letter-spacing: -2px; font-variant-numeric: tabular-nums;
     text-shadow: 0 0 40px rgba(56,189,248,0.35);
   }
-  .big-card .t-days small { font-family: inherit; font-size: 26px; color: #94a3b8; letter-spacing: 0; text-shadow: none; }
+  .big-card .t-days small { font-family: inherit; font-size: 40px; color: #94a3b8; letter-spacing: 0; text-shadow: none; margin-left: 4px; vertical-align: baseline; }
   .big-card .t-hms {
     font-family: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
     font-size: 24px; color: #e2e8f0; font-variant-numeric: tabular-nums; margin: 12px 0 8px; letter-spacing: 2px;
@@ -121,6 +129,17 @@
   .section { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 38px 20px 8px; }
   .section-title { font-size: 15px; font-weight: 800; color: #e2e8f0; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
   .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent); }
+
+  .search-box { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 4px 20px 0; }
+  .search-box input {
+    width: 100%; padding: 12px 18px 12px 42px; border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.06);
+    color: #e2e8f0; font-size: 14px; outline: none; backdrop-filter: blur(8px);
+  }
+  .search-box input::placeholder { color: #64748b; }
+  .search-box input:focus { border-color: rgba(56,189,248,0.5); }
+  .search-ico { position: absolute; left: 34px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 14px; pointer-events: none; }
+  .search-empty { text-align: center; padding: 30px 0; color: #64748b; font-size: 14px; }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
   .card {
@@ -148,14 +167,17 @@
   .mine-empty { text-align: center; padding: 24px 0; color: #64748b; font-size: 14px; line-height: 2; }
   .mine-empty a { color: #38bdf8; font-weight: 700; text-decoration: none; }
 
-  .tools-area { display: flex; gap: 12px; flex-wrap: wrap; }
+  .tools-area { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   .tool-chip {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; justify-content: center;
     background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 999px;
-    padding: 10px 20px; text-decoration: none; color: #e2e8f0; font-size: 14px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 14px;
+    padding: 14px 10px; text-decoration: none; color: #e2e8f0; font-size: 14px; font-weight: 600;
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
-  .tool-chip:hover { border-color: #38bdf8; color: #38bdf8; }
+  .tool-chip:hover { border-color: #38bdf8; color: #38bdf8; transform: translateY(-2px); }
+  .tool-chip .ti { display: block; font-size: 22px; margin-bottom: 6px; color: #38bdf8; }
+  @media (max-width: 640px) { .tools-area { grid-template-columns: repeat(2, 1fr); } }
 
   .tip { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 6px 20px; font-size: 13px; color: #64748b; line-height: 2; }
   .tip a { color: #38bdf8; }
@@ -172,8 +194,6 @@
   }
   @media (max-width: 640px) {
     .nav { padding: 12px 14px; gap: 12px; }
-    .nav .links { order: 3; width: 100%; justify-content: space-between; }
-    .nav .links a { font-size: 13px; }
     .hero { padding: 32px 14px 12px; }
     .hero h1 { font-size: 24px; }
     .big-card { padding: 28px 16px; }
@@ -194,7 +214,7 @@
 
 <nav class="nav">
   <a class="brand" href="index.html">上岸<span>日历</span></a>
-  <div class="links">
+  <div class="links" id="navLinks">
     <a href="#exam">热门考试</a>
     <a href="#mine">我的目标</a>
     <a href="#tools">在线工具</a>
@@ -202,10 +222,12 @@
     <a href="wenzhang.html">备考攻略</a>
   </div>
   <div class="right">
+    <span class="theme-label">主题</span>
     <span class="theme-dot navy" onclick="setTheme('navy')" title="深空蓝"></span>
     <span class="theme-dot cyan" onclick="setTheme('cyan')" title="深海青"></span>
     <span class="theme-dot sunset" onclick="setTheme('sunset')" title="晚霞紫"></span>
     <a class="add" href="zidingyi-daojishi.html">＋ 添加目标</a>
+    <button class="burger" onclick="toggleMenu()" aria-label="菜单">☰</button>
   </div>
 </nav>
 
@@ -230,15 +252,25 @@
     <div><span class="t-status" id="tStatus">—</span></div>
   </div>
   <div class="hero-actions">
-    <a class="primary" id="focusBtn" href="#">进入专注模式</a>
+    <a class="primary" id="focusBtn" href="#">开始备考</a>
     <a class="ghost" href="zidingyi-daojishi.html">创建我的目标</a>
-    <a class="ghost" href="xiaban-daojishi.html">⏰ 下班倒计时</a>
   </div>
 </div>
 
+<div class="search-box">
+  <span class="search-ico">🔍</span>
+  <input type="text" id="searchInput" placeholder="搜索考试或节日,如:考研、四六级、中秋..." oninput="filterCards(this.value)">
+</div>
+<div class="search-empty" id="searchEmpty" style="display:none;text-align:center;padding:30px 0;color:#64748b;font-size:14px;">没有找到匹配的考试,试试其他关键词</div>
+
 <div class="section" id="exam">
-  <h2 class="section-title">热门考试与节日</h2>
+  <h2 class="section-title">热门考试</h2>
   <div class="grid" id="examGrid"></div>
+</div>
+
+<div class="section" id="festival">
+  <h2 class="section-title">重要节日</h2>
+  <div class="grid" id="festivalGrid"></div>
 </div>
 
 <div class="section" id="mine">
@@ -249,13 +281,13 @@
 <div class="section" id="tools">
   <h2 class="section-title">在线工具</h2>
   <div class="tools-area">
-    <a class="tool-chip" href="xiaban-daojishi.html">⏰ 下班倒计时</a>
-    <a class="tool-chip" href="shijie-shizhong.html">🌍 世界时钟</a>
-    <a class="tool-chip" href="fanqiezhong.html">🍅 番茄钟</a>
-    <a class="tool-chip" href="riqi-jisuanqi.html">📅 日期计算器</a>
-    <a class="tool-chip" href="shuimian-jisuanqi.html">🌙 睡眠计算器</a>
-    <a class="tool-chip" href="wenben-gongju.html">🧰 文本工具箱</a>
-    <a class="tool-chip" href="fenxiang-haibao.html">🖼️ 倒计时海报</a>
+    <a class="tool-chip" href="fanqiezhong.html"><span class="ti">🍅</span>番茄钟</a>
+    <a class="tool-chip" href="shuimian-jisuanqi.html"><span class="ti">🌙</span>睡眠计算器</a>
+    <a class="tool-chip" href="riqi-jisuanqi.html"><span class="ti">📅</span>日期计算器</a>
+    <a class="tool-chip" href="shijie-shizhong.html"><span class="ti">🌍</span>世界时钟</a>
+    <a class="tool-chip" href="fenxiang-haibao.html"><span class="ti">🖼️</span>倒计时海报</a>
+    <a class="tool-chip" href="wenben-gongju.html"><span class="ti">🧰</span>文本工具箱</a>
+    <a class="tool-chip" href="xiaban-daojishi.html"><span class="ti">⏰</span>下班倒计时</a>
   </div>
 </div>
 
@@ -266,28 +298,31 @@
 
 </main>
 
-<footer class="footer">上岸日历 · 免费使用 · <a href="about.html">关于</a> · <a href="privacy.html">隐私政策</a> · <a href="terms.html">用户协议</a> · 按 F 进入沉浸模式<br><span id="busuanzi_container_site_uv" style="font-size:11px;opacity:0.7;">👥 <span id="busuanzi_value_site_uv"></span> 位访客来过</span></footer>
+<footer class="footer">
+  上岸日历 · 免费使用 · <a href="about.html">关于我们</a> · <a href="privacy.html">隐私政策</a> · <a href="terms.html">用户协议</a> · <a href="kaoshi-yueli.html">考试月历</a> · <a href="wenzhang.html">备考攻略</a><br>
+  <span style="opacity:0.6;">把重要考试,变成每天看得见的进度 · 按 F 进入沉浸模式</span>
+</footer>
 
 <div class="bottom-add"><a href="zidingyi-daojishi.html">＋ 添加目标</a></div>
 
 <script>
 var events = [
-  { name: "七夕", date: "2026-08-19", url: "qixi-daojishi.html", full: "农历七月初七" },
-  { name: "中秋", date: "2026-09-25", url: "zhongqiu-daojishi.html", full: "农历八月十五" },
-  { name: "国庆", date: "2026-10-01", url: "guoqing-daojishi.html", full: "国庆节" },
-  { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", full: "国家公务员考试笔试" },
-  { name: "四六级", date: "2026-12-19", url: "siliuji-daojishi.html", full: "大学英语四六级考试" },
-  { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", full: "全国硕士研究生招生考试" },
-  { name: "圣诞", date: "2026-12-25", url: "shengdan-daojishi.html", full: "圣诞节·平安夜" },
-  { name: "2027 元旦", date: "2027-01-01", url: "yuandan-daojishi.html", full: "新年第一天" },
-  { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", full: "农历正月初一" },
-  { name: "2027 教资", date: "2027-03-13", url: "jiazi-daojishi.html", full: "教师资格证笔试" },
-  { name: "2027 省考", date: "2027-03-20", url: "shengkao-daojishi.html", full: "公务员省考联考" },
-  { name: "计算机二级", date: "2026-09-19", url: "erji-daojishi.html", full: "全国计算机等级考试" },
-  { name: "2027 专升本", date: "2027-04-17", url: "zhuan-shengben-daojishi.html", full: "统招专升本考试" },
-  { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", full: "全国统一高考" },
-  { name: "2027 端午", date: "2027-06-09", url: "duanwu-daojishi.html", full: "农历五月初五" },
-  { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", full: "初中毕业生学业考试" }
+  { name: "2027 国考", date: "2026-11-29", url: "guokao-daojishi.html", full: "国家公务员考试笔试", cat: "exam" },
+  { name: "四六级", date: "2026-12-19", url: "siliuji-daojishi.html", full: "大学英语四六级考试", cat: "exam" },
+  { name: "2027 考研", date: "2026-12-19", url: "kaoyan-daojishi.html", full: "全国硕士研究生招生考试", cat: "exam" },
+  { name: "计算机二级", date: "2026-09-19", url: "erji-daojishi.html", full: "全国计算机等级考试", cat: "exam" },
+  { name: "2027 教资", date: "2027-03-13", url: "jiazi-daojishi.html", full: "教师资格证笔试", cat: "exam" },
+  { name: "2027 省考", date: "2027-03-20", url: "shengkao-daojishi.html", full: "公务员省考联考", cat: "exam" },
+  { name: "2027 专升本", date: "2027-04-17", url: "zhuan-shengben-daojishi.html", full: "统招专升本考试", cat: "exam" },
+  { name: "2027 高考", date: "2027-06-07", url: "gaokao-daojishi.html", full: "全国统一高考", cat: "exam" },
+  { name: "2027 中考", date: "2027-06-18", url: "zhongkao-daojishi.html", full: "初中毕业生学业考试", cat: "exam" },
+  { name: "2027 元旦", date: "2027-01-01", url: "yuandan-daojishi.html", full: "新年第一天", cat: "festival" },
+  { name: "2027 春节", date: "2027-02-06", url: "chunjie-daojishi.html", full: "农历正月初一", cat: "festival" },
+  { name: "七夕", date: "2026-08-19", url: "qixi-daojishi.html", full: "农历七月初七", cat: "festival" },
+  { name: "中秋", date: "2026-09-25", url: "zhongqiu-daojishi.html", full: "农历八月十五", cat: "festival" },
+  { name: "国庆", date: "2026-10-01", url: "guoqing-daojishi.html", full: "国庆节", cat: "festival" },
+  { name: "圣诞", date: "2026-12-25", url: "shengdan-daojishi.html", full: "圣诞节·平安夜", cat: "festival" },
+  { name: "2027 端午", date: "2027-06-09", url: "duanwu-daojishi.html", full: "农历五月初五", cat: "festival" }
 ];
 
 function daysLeft(dateStr) {
@@ -296,17 +331,33 @@ function daysLeft(dateStr) {
 }
 
 var grid = document.getElementById("examGrid");
-events.forEach(function (e) {
-  var d = daysLeft(e.date);
-  var card = document.createElement("a");
-  card.className = "card";
-  card.href = e.url;
-  card.innerHTML =
-    '<div class="name">' + e.name + "</div>" +
-    '<div class="date">' + e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日</div>" +
-    '<div class="days' + (d <= 30 ? " hot" : "") + '">' + d + "<small>天</small></div>";
-  grid.appendChild(card);
-});
+var festivalGrid = document.getElementById("festivalGrid");
+function renderCards(list, box) {
+  box.innerHTML = "";
+  list.forEach(function (e) {
+    var d = daysLeft(e.date);
+    var card = document.createElement("a");
+    card.className = "card";
+    card.href = e.url;
+    card.innerHTML =
+      '<div class="name">' + e.name + "</div>" +
+      '<div class="date">' + e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日</div>" +
+      '<div class="days' + (d <= 30 ? " hot" : "") + '">' + d + "<small>天</small></div>";
+    box.appendChild(card);
+  });
+}
+renderCards(events.filter(function (e) { return e.cat === "exam"; }), grid);
+renderCards(events.filter(function (e) { return e.cat === "festival"; }), festivalGrid);
+
+// 搜索过滤
+function filterCards(q) {
+  q = (q || "").trim().toLowerCase();
+  var examList = events.filter(function (e) { return e.cat === "exam" && (!q || e.name.toLowerCase().indexOf(q) >= 0 || e.full.indexOf(q) >= 0); });
+  var festList = events.filter(function (e) { return e.cat === "festival" && (!q || e.name.toLowerCase().indexOf(q) >= 0 || e.full.indexOf(q) >= 0); });
+  renderCards(examList, grid);
+  renderCards(festList, festivalGrid);
+  document.getElementById("searchEmpty").style.display = (examList.length + festList.length) === 0 ? "block" : "none";
+}
 
 var cur = null;
 var sel = document.getElementById("targetSel");
@@ -327,7 +378,8 @@ function loadTarget() {
   var saved = null;
   try { saved = localStorage.getItem("homeTarget"); } catch (e) {}
   var t = events.find(function (e) { return e.name === saved; });
-  if (t) { cur = t; sel.value = t.name; } else { cur = events[2]; sel.value = events[2].name; }
+  if (t) { cur = t; sel.value = t.name; }
+  else { cur = events[0]; sel.value = events[0].name; } // 默认选中第一个考试(国考)
 }
 
 function renderHero() {
@@ -359,10 +411,15 @@ function tick() {
   }
   var st = document.getElementById("tStatus");
   if (days > 90) { st.textContent = "保持节奏,稳步推进"; st.className = "t-status"; }
-  else if (days > 30) { st.textContent = "进入冲刺阶段,加油!"; st.className = "t-status"; }
+  else if (days > 30) { st.textContent = "冲刺阶段,全力以赴"; st.className = "t-status"; }
   else if (days > 7) { st.textContent = "重点检查与模拟冲刺"; st.className = "t-status warn"; }
   else if (days > 1) { st.textContent = "最终准备,稳住心态"; st.className = "t-status warn"; }
   else { st.textContent = "目标时刻就要到了!"; st.className = "t-status warn"; }
+}
+
+// 移动端菜单
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("open");
 }
 
 function renderMine() {
@@ -442,6 +499,5 @@ renderMine();
 <script>
 if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
