@@ -11,6 +11,16 @@
 <meta name="description" content="考研、高考、国考、教资、四六级考试倒计时,备考进度与状态提醒,番茄钟、睡眠计算器、日期计算器等工具,免费使用,无需注册。">
 <meta name="keywords" content="考试倒计时,考研倒计时,高考倒计时,国考倒计时,备考进度,上岸日历,倒计时工具">
 <link rel="canonical" href="https://daojishicn.top/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "上岸日历",
+  "url": "https://daojishicn.top/",
+  "description": "考研、高考、国考、教资、四六级考试倒计时与备考工具",
+  "inLanguage": "zh-CN"
+}
+</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="上岸日历 - 把重要考试,变成每天看得见的进度">
 <meta property="og:description" content="考研、高考、国考、教资、四六级考试倒计时与备考工具,免费使用。">
@@ -145,6 +155,8 @@
   }
   .big-card .t-hms.flip { animation: fadeNum 0.25s ease; }
   @keyframes fadeNum { from { opacity: 0.3; transform: translateY(2px); } to { opacity: 1; transform: translateY(0); } }
+  .big-card .t-days span.flip { animation: dayPop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  @keyframes dayPop { from { opacity: 0.15; transform: translateY(10px) scale(0.97); filter: blur(2px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
   .big-card .t-date { font-size: 13.5px; color: var(--text-2); }
   .big-card .t-status {
     display: inline-block; margin-top: 18px; font-size: 13.5px; font-weight: 600;
@@ -281,9 +293,8 @@
   <h1>把重要考试,变成每天<span>看得见的进度</span></h1>
   <div class="sub">每天打开一次,清楚知道自己的备考进度 · 按 F 进入沉浸模式</div>
   <div class="target-select">
-    <div class="target-label" style="font-size:12px;color:var(--text-3);margin-bottom:6px;letter-spacing:2px;">选择主目标</div>
-    <label for="targetSel" class="target-label">— 选择主目标 —</label>
-    <select id="targetSel" onchange="setTarget(this.value)" aria-label="选择主目标">
+    <label for="targetSel" class="target-label" style="font-size:12px;color:var(--text-3);margin-bottom:6px;letter-spacing:2px;">选择主目标</label>
+    <select id="targetSel" onchange="setTarget(this.value)">
       <option value="">— 选择主目标 —</option>
     </select>
   </div>
@@ -443,7 +454,13 @@ function tick() {
   var h = Math.floor((diff % 86400000) / 3600000);
   var m = Math.floor((diff % 3600000) / 60000);
   var s = Math.floor((diff % 60000) / 1000);
-  document.getElementById("tDays").textContent = days;
+  var daysEl = document.getElementById("tDays");
+  if (daysEl.textContent !== String(days)) {
+    daysEl.textContent = days;
+    daysEl.classList.remove("flip");
+    void daysEl.offsetWidth;
+    daysEl.classList.add("flip");
+  }
   var hmsEl = document.getElementById("tHms");
   var hms = (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
   if (hmsEl.textContent !== hms) {

@@ -33,6 +33,8 @@
   .days small { font-size: 26px; color: #cbd5e1; margin-left: 8px; }
   .hms { font-size: 20px; color: #93c5fd; font-variant-numeric: tabular-nums; margin-top: 14px; letter-spacing: 2px; }
   .note { margin-top: 24px; font-size: 13px; color: #94a3b8; }
+  .add-btn { display:inline-block; margin-top:22px; padding:11px 26px; border-radius:12px; background:linear-gradient(135deg,#3B82F6,#8B5CF6); color:#fff; font-size:14px; font-weight:600; border:none; cursor:pointer; }
+  .add-btn:active { transform:scale(0.97); }
   .tip { margin-top: 20px; font-size: 13px; color: #94a3b8; line-height: 2; }
   .footer { position: relative; z-index: 1; margin-top: 26px; font-size: 12px; color: #64748b; }
 </style>
@@ -59,6 +61,7 @@
       <div class="date" id="sDate">—</div>
       <div class="days"><span id="sDays">--</span><small>天</small></div>
       <div class="hms" id="sHms">--:--:--</div>
+      <button class="add-btn" id="addBtn">➕ 添加到我的倒计时</button>
     </div>
     <div id="empty">⚠️ 链接缺少参数,无法显示倒计时。<br>请使用自定义倒计时里的「复制分享链接」重新分享。</div>
     <div class="tip" id="tip" style="display:none;">💡 这个倒计时由好友通过链接分享,数据只来自链接本身,不会上传任何个人信息。</div>
@@ -93,6 +96,17 @@
   document.getElementById("sDate").textContent = "目标日期:" + p[0] + " 年 " + parseInt(p[1]) + " 月 " + parseInt(p[2]) + " 日";
 
   var ts = new Date(date + "T00:00:00").getTime();
+  // 一键添加到本机「我的倒计时」
+  document.getElementById("addBtn").addEventListener("click", function () {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem("customCountdowns") || "[]"); } catch (e) {}
+    if (!Array.isArray(list)) list = [];
+    var exists = list.some(function (e) { return e.name === title && e.date === date; });
+    if (exists) { alert("已经在你的倒计时列表里啦!"); return; }
+    list.push({ name: title, date: date });
+    try { localStorage.setItem("customCountdowns", JSON.stringify(list)); } catch (e) {}
+    alert("已添加到「我的倒计时」!可到首页或「自定义倒计时」页面查看管理。");
+  });
   setInterval(function () {
     var diff = ts - Date.now();
     if (diff <= 0) diff = 0;

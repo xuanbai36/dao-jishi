@@ -75,6 +75,9 @@
     .time-item { min-width: 74px; padding: 9px 12px; }
     .btn-bar button { padding: 12px 24px; }
   }
+
+  .days-number span.flip { animation: dayPop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  @keyframes dayPop { from { opacity: 0.15; transform: translateY(10px) scale(0.97); filter: blur(2px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
 </style>
 <link rel="canonical" href="https://daojishicn.top/guoqing-daojishi.html">
 <meta property="og:type" content="website">
@@ -88,6 +91,30 @@
 <link rel="apple-touch-icon" href="/icon.svg">
 <meta property="og:image" content="https://daojishicn.top/icon.svg">
 <meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2026国庆还有多少天?",
+      "acceptedAnswer": { "@type": "Answer", "text": "距离2026国庆还有约 48 天,本页实时显示剩余的天、小时、分钟、秒。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2026国庆是什么时候?",
+      "acceptedAnswer": { "@type": "Answer", "text": "2026国庆时间是 2026 年 10 月 1 日(具体以官方公告为准)。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2026国庆倒计时在哪里看?",
+      "acceptedAnswer": { "@type": "Answer", "text": "打开本页即可看到2026国庆倒计时,支持全屏模式(F 键或全屏按钮),适合放在桌面当备考提醒。" }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="glow glow-1"></div>
@@ -156,7 +183,13 @@ function update() {
     m = Math.floor((diff % 3600000) / 60000);
     s = Math.floor((diff % 60000) / 1000);
   }
-  document.getElementById("days").textContent = days;
+  var daysEl = document.getElementById("days");
+  if (daysEl.textContent !== String(days)) {
+    daysEl.textContent = days;
+    daysEl.classList.remove("flip");
+    void daysEl.offsetWidth;
+    daysEl.classList.add("flip");
+  }
   document.getElementById("hours").textContent = String(h).padStart(2, "0");
   document.getElementById("minutes").textContent = String(m).padStart(2, "0");
   document.getElementById("seconds").textContent = String(s).padStart(2, "0");
