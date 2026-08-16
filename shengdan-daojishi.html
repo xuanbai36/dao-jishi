@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>圣诞倒计时 - 距离圣诞节还有多少天</title>
+<meta name="description" content="距离圣诞节还有多少天?圣诞倒计时工具,实时计算圣诞节还剩几天几小时几分几秒,平安夜倒计时。">
+<meta name="keywords" content="圣诞倒计时,圣诞节,平安夜,圣诞还有几天,2026圣诞">
+<meta property="og:title" content="圣诞倒计时 - 距离圣诞节还有多少天">
+<meta property="og:description" content="距离圣诞节还有多少天?圣诞倒计时工具,实时计算圣诞节还剩几天几小时几分几秒。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta property="twitter:image" content="https://daojishicn.top/icon.svg">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Plus Jakarta Sans","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background: linear-gradient(160deg, #0A120E 0%, #12221C 62%, #1A2E27 100%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px}
+.container{max-width:720px;width:100%;text-align:center}
+.back-row{display:flex;align-items:center;margin-bottom:16px;opacity:0.85}
+.back-row a{color:#fff;text-decoration:none;font-size:14px;display:inline-flex;align-items:center;gap:4px}
+.back-row a:hover{text-decoration:underline}
+h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
+.subtitle{font-size:15px;opacity:0.85;margin-bottom:28px}
+.btn-bar{margin-bottom:20px}
+.btn-bar button{background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.35);border-radius:999px;padding:8px 20px;font-size:14px;cursor:pointer}
+.days-box{background:rgba(255,255,255,0.12);border: 1px solid rgba(16,185,129,0.32);border-radius:20px;padding:36px 24px;backdrop-filter:blur(12px);margin-bottom:24px}
+.days-label{font-size:15px;opacity:0.9;margin-bottom:6px}
+.days-number{font-size:96px;font-weight:800;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.25)color:#6EE7B7;}
+.days-unit{font-size:24px;font-weight:600;margin-left:8px}
+.time-row{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.time-item{background:rgba(255,255,255,0.15);border-radius:12px;padding:10px 16px;min-width:88px}
+.time-item .num{font-size:26px;font-weight:700}
+.time-item .txt{font-size:12px;opacity:0.8;margin-top:2px}
+.date-info{font-size:14px;opacity:0.9;margin-bottom:24px}
+.encourage{font-size:17px;font-weight:600;margin-bottom:28px;letter-spacing:2px}
+.article{background:#fff;color:#1f2937;border-radius:16px;padding:28px 24px;text-align:left;margin-top:20px}
+.article h2{font-size:20px;color:#7f1d1d;margin-bottom:16px}
+.article p{font-size:15px;line-height:1.9;margin-bottom:12px}
+.footer{margin-top:32px;font-size:12px;opacity:0.7;text-align:center}
+body.fs .days-number{font-size:18vhcolor:#6EE7B7;}
+.days-number span.flip{animation:dayPop .6s cubic-bezier(.2,.8,.3,1)}
+@keyframes dayPop{from{opacity:.15;transform:translateY(10px) scale(.97);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+body.fs .time-item .num{font-size:6vh}
+@media(max-width:640px){body{padding:24px 12px 40px}h1{font-size:22px}.days-number{font-size:64pxcolor:#6EE7B7;}.time-item{padding:8px 12px;min-width:70px}.time-item .num{font-size:20px}.article{padding:20px 16px}}
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "圣诞还有多少天?",
+      "acceptedAnswer": { "@type": "Answer", "text": "距离圣诞还有约 133 天,本页实时显示剩余的天、小时、分钟、秒。" }
+    },
+    {
+      "@type": "Question",
+      "name": "圣诞是什么时候?",
+      "acceptedAnswer": { "@type": "Answer", "text": "圣诞时间是 2026 年 12 月 25 日(具体以官方公告为准)。" }
+    },
+    {
+      "@type": "Question",
+      "name": "圣诞倒计时在哪里看?",
+      "acceptedAnswer": { "@type": "Answer", "text": "打开本页即可看到圣诞倒计时,支持全屏模式(F 键或全屏按钮),适合放在桌面当备考提醒。" }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<div class="back-row"><a href="/">← 返回首页</a></div>
+<h1>🎄 圣诞倒计时</h1>
+<div class="subtitle">Merry Christmas! 祝你圣诞快乐 🎁</div>
+<div class="btn-bar"><button onclick="toggleFull()">⛶ 全屏模式</button></div>
+<div class="days-box">
+  <div class="days-label">距离 2026 年圣诞节</div>
+  <div class="days-number"><span id="days">--</span><span class="days-unit">天</span></div>
+  <div class="time-row">
+    <div class="time-item"><div class="num" id="hours">--</div><div class="txt">小时</div></div>
+    <div class="time-item"><div class="num" id="minutes">--</div><div class="txt">分钟</div></div>
+    <div class="time-item"><div class="num" id="seconds">--</div><div class="txt">秒</div></div>
+  </div>
+</div>
+<div class="date-info">目标日期:<span id="target-date">2026 年 12 月 25 日</span>(平安夜 12 月 24 日)</div>
+<div class="encourage" id="encourage">准备好圣诞袜了吗? 🧦</div>
+<div class="article">
+  <h2>圣诞怎么过?</h2>
+  <p>2026 年圣诞节是 12 月 25 日,平安夜是 12 月 24 日。虽然不是中国法定假日,但年轻人和商家很重视,商场有促销、朋友间会交换礼物。</p>
+  <p>🎁 礼物指南:热门圣诞礼物有围巾手套、香薰蜡烛、暖手宝、圣诞限定彩妆、蓝牙音箱等;给朋友的礼物重在心意,亲手写贺卡很加分;情侣互送可以提前约定预算,避免压力。圣诞限定款越临近越缺货,提前 1 周下单。</p>
+  <p>🎄 活动安排:平安夜(12 月 24 日)商圈都有圣诞树和亮灯仪式,适合拍照打卡;教堂平安夜有圣诞颂歌活动(需提前到);在家办圣诞 party 也很棒——准备烤鸡、热红酒(未成年人用热果汁代替)、交换礼物环节,朋友聚会氛围拉满。</p>
+  <p>🎅 圣诞与跨年连过:圣诞过完马上就是元旦跨年,可以把两个节日一起规划:圣诞和朋友聚会,跨年陪家人。注意平安夜、圣诞夜打车难,地铁延长运营,提前查好交通。圣诞期间商场折扣大,正好把新年礼物一起买齐。</p>
+</div>
+<div class="footer">圣诞倒计时 · 每天更新</div>
+</div>
+<script>
+var targetDate=new Date("2026-12-25T00:00:00");
+var BASE_TITLE="圣诞倒计时";
+var targetEl=document.getElementById("target-date");
+targetEl.textContent=targetDate.getFullYear()+" 年 "+(targetDate.getMonth()+1)+" 月 "+targetDate.getDate()+" 日";
+function update(){var now=new Date();var diff=targetDate-now;if(diff<=0){document.getElementById("days").textContent="0";document.getElementById("hours").textContent="00";document.getElementById("minutes").textContent="00";document.getElementById("seconds").textContent="00";document.getElementById("encourage").textContent="时间到!圣诞快乐!";return}var de=document.getElementById("days");var dv=Math.floor(diff/86400000);if(de.textContent!=String(dv)){de.textContent=dv;de.classList.remove("flip");void de.offsetWidth;de.classList.add("flip")}document.getElementById("hours").textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,"0");document.getElementById("minutes").textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,"0");document.getElementById("seconds").textContent=String(Math.floor((diff%60000)/1000)).padStart(2,"0");var d=Math.floor(diff/86400000);if(d<=0){document.title="🎄 圣诞快乐!"}else{document.title="🎄 "+d+"天 · 圣诞倒计时"}}
+update();setInterval(update,1000);
+function toggleFull(){if(!document.fullscreenElement){document.documentElement.requestFullscreen();document.body.classList.add("fs")}else{document.exitFullscreen();document.body.classList.remove("fs")}}
+</script>
+</body>
+</html>

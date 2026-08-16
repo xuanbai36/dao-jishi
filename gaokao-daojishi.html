@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>2027高考倒计时 - 距离2027年高考还有多少天</title>
+<meta name="description" content="距离2027年高考还有多少天?高考倒计时工具,实时计算距离2027年高考还有几天几小时几分几秒,2027高考时间、高考倒计时。">
+<meta name="keywords" content="高考倒计时,2027高考,高考还有几天,高考时间,高考倒计时器">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Plus Jakarta Sans", -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    min-height: 100vh; color: #e2e8f0;
+    background: linear-gradient(160deg, #0A120E 0%, #12221C 62%, #1A2E27 100%);
+    overflow-x: hidden;
+    display: flex; flex-direction: column; align-items: center; padding: 40px 16px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .glow { position: fixed; border-radius: 50%; filter: blur(110px); z-index: 0; pointer-events: none; }
+  .glow-1 { width: 420px; height: 420px; background: rgba(251,191,36,0.4); top: -120px; left: -100px; animation: drift1 18s ease-in-out infinite; }
+  .glow-2 { width: 340px; height: 340px; background: rgba(249,115,22,0.3); bottom: -100px; right: -80px; animation: drift2 22s ease-in-out infinite; }
+  @keyframes drift1 { 50% { transform: translate(60px, 40px) scale(1.1); } }
+  @keyframes drift2 { 50% { transform: translate(-50px, -40px) scale(1.12); } }
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .stars span { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+  .moon {
+    position: fixed; top: 44px; right: 8%; width: 76px; height: 76px; z-index: 0; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fef9c3, #fde68a 60%, #fbbf24);
+    box-shadow: 0 0 50px rgba(253,230,138,0.45);
+  }
+
+  .container { position: relative; z-index: 1; max-width: 720px; width: 100%; text-align: center; }
+  .icon-top { font-size: 52px; margin-bottom: 10px; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; text-shadow: 0 2px 18px rgba(0,0,0,0.3); }
+  .subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 26px; letter-spacing: 1px; }
+  .btn-bar { margin-bottom: 20px; }
+  .btn-bar button {
+    background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px; padding: 10px 22px; font-size: 14px; cursor: pointer; min-height: 44px;
+    backdrop-filter: blur(8px);
+  }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+    border: 1px solid rgba(16,185,129,0.32);
+    border-radius: 26px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 16px 48px rgba(0,0,0,0.3);
+    padding: 34px 24px; margin-bottom: 20px;
+  }
+  .days-label { font-size: 15px; opacity: 0.9; margin-bottom: 8px; letter-spacing: 1px; }
+  .days-number{ font-size: clamp(72px, 18vw, 110px); font-weight: 800; line-height: 1.05; text-shadow: 0 4px 24px rgba(0,0,0,0.35); color:#6EE7B7;}
+  .days-unit { font-size: 26px; font-weight: 600; margin-left: 8px; }
+  .time-row { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+  .time-item { background: rgba(255,255,255,0.13); border-radius: 14px; padding: 10px 18px; min-width: 86px; border: 1px solid rgba(255,255,255,0.14); }
+  .time-item .num { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .time-item .txt { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+  .date-info { font-size: 14px; opacity: 0.88; margin-bottom: 26px; }
+  .encourage { font-size: 17px; font-weight: 600; margin-bottom: 28px; letter-spacing: 2px; opacity: 0.95; }
+  .article { text-align: left; padding: 28px 26px; }
+  .article h2 { font-size: 20px; color: #f8fafc; margin-bottom: 16px; }
+  .article p { font-size: 15px; line-height: 2; margin-bottom: 12px; color: #e2e8f0; opacity: 0.92; }
+  .footer { margin-top: 28px; font-size: 12px; opacity: 0.65; }
+
+  body.fs .days-number{ font-size: 20vh; color:#6EE7B7;}
+  body.fs .time-item .num { font-size: 7vh; }
+
+  @media (max-width: 640px) {
+    body { padding: 28px 12px 48px; }
+    h1 { font-size: 25px; }
+    .icon-top { font-size: 44px; }
+    .glass { padding: 28px 18px; }
+    .time-item { min-width: 74px; padding: 9px 12px; }
+    .btn-bar button { padding: 12px 24px; }
+  }
+
+  .days-number span.flip { animation: dayPop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  @keyframes dayPop { from { opacity: 0.15; transform: translateY(10px) scale(0.97); filter: blur(2px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+</style>
+<link rel="canonical" href="https://daojishicn.top/gaokao-daojishi.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2027高考倒计时 - 距离2027年高考还有多少天">
+<meta property="og:description" content="距离2027年高考还有多少天?高考倒计时工具,实时计算距离2027年高考还有几天几小时几分几秒,2027高考时间、高考倒计时。">
+<meta property="og:url" content="https://daojishicn.top/gaokao-daojishi.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2027高考还有多少天?",
+      "acceptedAnswer": { "@type": "Answer", "text": "距离2027高考还有约 297 天,本页实时显示剩余的天、小时、分钟、秒。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2027高考是什么时候?",
+      "acceptedAnswer": { "@type": "Answer", "text": "2027高考时间是 2027 年 6 月 7 日(具体以官方公告为准)。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2027高考倒计时在哪里看?",
+      "acceptedAnswer": { "@type": "Answer", "text": "打开本页即可看到2027高考倒计时,支持全屏模式(F 键或全屏按钮),适合放在桌面当备考提醒。" }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<div class="container">
+  <a class="back" href="index.html" style="display:inline-block;margin-bottom:14px;padding:8px 20px;border-radius:999px;background:rgba(255,255,255,0.12);border: 1px solid rgba(16,185,129,0.32);color:#e2e8f0;text-decoration:none;font-size:14px;font-weight:600;">← 返回首页</a>
+<div class="icon-top">📚</div>
+  <h1>2027 高考倒计时</h1>
+  <div class="subtitle">寒窗苦读十余载,只为今朝一试锋芒</div>
+  <div class="btn-bar"><button onclick="toggleFull()">⛶ 全屏模式</button></div>
+  <div class="glass days-box">
+    <div class="days-label">距离 2027 年高考</div>
+    <div class="days-number"><span id="days">--</span><span class="days-unit">天</span></div>
+    <div class="time-row">
+      <div class="time-item"><div class="num" id="hours">--</div><div class="txt">小时</div></div>
+      <div class="time-item"><div class="num" id="minutes">--</div><div class="txt">分钟</div></div>
+      <div class="time-item"><div class="num" id="seconds">--</div><div class="txt">秒</div></div>
+    </div>
+  </div>
+  <div class="date-info">目标日期:<span id="target-date">2027 年 6 月 7 日</span>(部分省份 6 月 8~9 日结束)</div>
+  <div class="date-status" style="margin-bottom:26px;padding:12px 18px;background:rgba(255,255,255,0.1);border: 1px solid rgba(16,185,129,0.32);border-radius:14px;font-size:13px;color:#cbd5e1;line-height:1.9;text-align:left;">📊 数据状态:<b style="color:#fde68a;">预计日期</b>(以官方公告为准,公布后更新)<br>数据来源:教育部 / 研招网 / 各省考试院 / 国务院办公厅<br>最后更新:2026-08-05</div>
+<div class="encourage" id="encourage">稳住心态,你比想象中更强大!</div>
+  <div class="glass article">
+    <h2>高考倒计时怎么用?</h2>
+    <p>2027 年全国高考一般安排在 6 月 7 日开始,多数省份考 2~3 天(6 月 7~9 日),具体科目安排以各省教育考试院通知为准。</p>
+    <p>🗓️ 三轮复习:第一轮(现在至次年 2 月)地毯式过知识点;第二轮(3~4 月)专题突破 + 刷真题;第三轮(5 月至考前)每周 1~2 次全真模拟,回归课本查漏补缺。</p>
+    <p>⏰ 考前一个月:把作息调整到与高考同步,提前准备准考证、身份证、2B 铅笔、黑色签字笔等考试用品。</p>
+    <p>📚 各科建议:语文积累作文素材;数学吃透错题本;英语坚持每天背单词、保持阅读手感。</p>
+  
+    <p>📚 三轮复习节奏:一轮(高三上学期)打基础,回归课本把每个知识点吃透;二轮(下学期 3~4 月)专题突破,按题型刷题,建立错题本;三轮(5 月~考前)全真模拟,掐表做题,训练考场时间分配。高考前一周不再做新题,只看错题本和核心公式。</p>
+    <p>👨‍👩‍👧 家长该做什么:后勤保障优先——饮食清淡营养,别突然大补;作息稳定,别逼孩子熬夜;情绪管理最关键,少问「复习得怎么样」,多给正向鼓励。考前一天陪孩子看考场,算好路上时间,备好文具、准考证、身份证。</p>
+    <p>🎯 各科抢分技巧:语文作文留足 50 分钟,开头结尾亮观点;数学大题写步骤分,不会的也要写公式;英语作文背模板,书写工整占便宜;理综/文综先做优势科目。高考出分后(一般 6 月下旬)紧接着就是志愿填报,提前研究院校专业组规则,别等出分再手忙脚乱。</p></div>
+  <div class="footer">高考倒计时 · 每天更新 · 具体日期以各省教育考试院公告为准</div>
+</div>
+<script>
+
+// ⚠️ 官方公告发布后,只改这一行日期即可
+var targetDate = new Date("2027-06-07T09:00:00");
+var BASE_TITLE = "2027高考倒计时";
+var lastTitleDays = -1;
+var targetEl = document.getElementById("target-date");
+targetEl.textContent = targetDate.getFullYear() + " 年 " + (targetDate.getMonth()+1) + " 月 " + targetDate.getDate() + " 日";
+function update() {
+  var now = new Date(); var diff = targetDate - now;
+  var days, h, m, s;
+  if (diff <= 0) {
+    days = 0; h = m = s = 0;
+    document.getElementById("encourage").textContent = "时间到!祝一切顺利!";
+  } else {
+    days = Math.floor(diff / 86400000);
+    h = Math.floor((diff % 86400000) / 3600000);
+    m = Math.floor((diff % 3600000) / 60000);
+    s = Math.floor((diff % 60000) / 1000);
+  }
+  var daysEl = document.getElementById("days");
+  if (daysEl.textContent !== String(days)) {
+    daysEl.textContent = days;
+    daysEl.classList.remove("flip");
+    void daysEl.offsetWidth;
+    daysEl.classList.add("flip");
+  }
+  document.getElementById("hours").textContent = String(h).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(m).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(s).padStart(2, "0");
+  // SEO:标题实时显示剩余天数(天级变化才更新)
+  if (days !== lastTitleDays) {
+    lastTitleDays = days;
+    document.title = BASE_TITLE + " - 还有 " + days + " 天 | 免费倒计时工具";
+  }
+}
+update(); setInterval(update, 1000);
+function toggleFull() {
+  if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
+  else { document.exitFullscreen(); document.body.classList.remove("fs"); }
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>

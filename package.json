@@ -1,0 +1,7 @@
+{
+  "name": "daojishi",
+  "private": true,
+  "scripts": {
+    "test": "node --check sw.js && node --check ../gen/add_fullscreen.js && node --check ../gen/gen_add_back.js && node --check ../gen/gen_icons.js && node --check ../gen/gen_liquid.js && node --check ../gen/gen_pages.js && node --check ../gen/gen_pwa.js && node --check ../gen/gen_seo.js && node --check ../gen/gen_days_anim.js && node --check ../gen/gen_faq.js && node --check ../gen/gen_check_inline.js && node --check ../gen/gen_check_jsonld.js && node ../gen/gen_check_inline.js && node ../gen/gen_check_jsonld.js"
+  }
+}

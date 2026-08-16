@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>世界时钟 - 多城市时间实时显示</title>
+<meta name="description" content="世界时钟:北京、东京、伦敦、纽约、悉尼等全球多城市时间实时显示,免费使用。">
+<meta name="keywords" content="世界时钟,多城市时间,时差查询,北京时间,纽约时间,伦敦时间">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    min-height: 100vh; color: #e2e8f0; overflow-x: hidden;
+    background: linear-gradient(160deg, #0b1020 0%, #1e1b4b 55%, #312e81 100%);
+    display: flex; flex-direction: column; align-items: center; padding: 40px 16px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .glow { position: fixed; border-radius: 50%; filter: blur(110px); z-index: 0; pointer-events: none; }
+  .glow-1 { width: 400px; height: 400px; background: rgba(56,189,248,0.14); top: -140px; left: -100px; }
+  .glow-2 { width: 360px; height: 360px; background: rgba(129,140,248,0.15); bottom: -120px; right: -100px; }
+  .container { position: relative; z-index: 1; max-width: 900px; width: 100%; text-align: center; }
+  .back { display: inline-block; margin-bottom: 16px; padding: 8px 20px; border-radius: 999px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28); color: #e2e8f0; text-decoration: none; font-size: 14px; font-weight: 600; }
+  h1 { font-size: 32px; font-weight: 800; margin: 8px 0 4px; }
+  h1 span { background: linear-gradient(120deg, #38bdf8, #a78bfa); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { font-size: 14px; color: #94a3b8; margin-bottom: 30px; }
+  .local {
+    display: inline-block; margin-bottom: 26px; padding: 14px 30px; border-radius: 20px;
+    background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(99,102,241,0.14));
+    border: 1px solid rgba(56,189,248,0.35);
+  }
+  .local .l-name { font-size: 13px; color: #94a3b8; }
+  .local .l-time { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 34px; font-weight: 800; color: #38bdf8; font-variant-numeric: tabular-nums; margin: 4px 0 2px; text-shadow: 0 0 24px rgba(56,189,248,0.3); }
+  .local .l-date { font-size: 12px; color: #94a3b8; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .city {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 18px;
+    backdrop-filter: blur(12px); transition: border-color 0.2s;
+  }
+  .city:hover { border-color: rgba(56,189,248,0.45); }
+  .city .c-name { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+  .city .c-time { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 22px; font-weight: 800; color: #e2e8f0; font-variant-numeric: tabular-nums; margin: 8px 0 2px; }
+  .city .c-date { font-size: 12px; color: #64748b; }
+  .city.night .c-time { color: #a78bfa; }
+  .note { margin-top: 26px; font-size: 12px; color: #475569; }
+  .footer { position: relative; z-index: 1; margin-top: 20px; font-size: 12px; color: #475569; }
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+</style>
+<link rel="canonical" href="https://daojishicn.top/shijie-shizhong.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="世界时钟 - 多城市时间实时显示">
+<meta property="og:description" content="世界时钟:北京、东京、伦敦、纽约、悉尼等全球多城市时间实时显示,免费使用。">
+<meta property="og:url" content="https://daojishicn.top/shijie-shizhong.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="container">
+  <a class="back" href="index.html">← 返回首页</a>
+  <h1>世界<span>时钟</span></h1>
+  <div class="subtitle">全球多城市时间,实时显示</div>
+
+  <div class="local">
+    <div class="l-name">📍 你的位置</div>
+    <div class="l-time" id="localTime">--:--:--</div>
+    <div class="l-date" id="localDate">—</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="note">💡 时间随浏览器自动更新 · 城市时间基于 IANA 时区(自动处理夏令时)</div>
+</div>
+<div class="footer">世界时钟 · 免费使用</div>
+
+<script>
+var cities = [
+  { name: "北京", tz: "Asia/Shanghai" },
+  { name: "东京", tz: "Asia/Tokyo" },
+  { name: "新加坡", tz: "Asia/Singapore" },
+  { name: "悉尼", tz: "Australia/Sydney" },
+  { name: "迪拜", tz: "Asia/Dubai" },
+  { name: "莫斯科", tz: "Europe/Moscow" },
+  { name: "伦敦", tz: "Europe/London" },
+  { name: "巴黎", tz: "Europe/Paris" },
+  { name: "纽约", tz: "America/New_York" },
+  { name: "洛杉矶", tz: "America/Los_Angeles" }
+];
+
+var fmt = new Intl.DateTimeFormat("zh-CN", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+var fmtDate = new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "long", day: "numeric", weekday: "long" });
+
+function cityFmt(tz) {
+  return new Intl.DateTimeFormat("zh-CN", { timeZone: tz, hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+}
+var cityFormats = {};
+cities.forEach(function (c) { cityFormats[c.tz] = cityFmt(c.tz); });
+
+// 渲染城市卡片
+var grid = document.getElementById("grid");
+cities.forEach(function (c, i) {
+  var div = document.createElement("div");
+  div.className = "city";
+  div.id = "city" + i;
+  div.innerHTML =
+    '<div class="c-name">' + c.name + "</div>" +
+    '<div class="c-time" id="t' + i + '">--:--:--</div>' +
+    '<div class="c-date" id="d' + i + '"></div>';
+  grid.appendChild(div);
+});
+
+function tick() {
+  var now = new Date();
+  document.getElementById("localTime").textContent = fmt.format(now);
+  document.getElementById("localDate").textContent = fmtDate.format(now);
+  cities.forEach(function (c, i) {
+    var parts = cityFormats[c.tz].formatToParts(now);
+    var hm = parts.filter(function (p) { return p.type === "hour" || p.type === "minute" || p.type === "second"; }).map(function (p) { return p.value; }).join(":");
+    document.getElementById("t" + i).textContent = hm;
+    var h = parts.find(function (p) { return p.type === "hour"; });
+    var hour = parseInt(h ? h.value : 0);
+    document.getElementById("city" + i).className = "city" + (hour < 6 || hour >= 19 ? " night" : "");
+    var dp = new Intl.DateTimeFormat("zh-CN", { timeZone: c.tz, month: "numeric", day: "numeric", weekday: "short" }).format(now);
+    document.getElementById("d" + i).textContent = dp;
+  });
+}
+tick();
+setInterval(tick, 1000);
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>
