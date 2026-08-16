@@ -7,6 +7,9 @@
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0A0E1A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <title>上岸日历 - 把重要考试,变成每天看得见的进度</title>
 <meta name="description" content="考研、高考、国考、教资、四六级考试倒计时,备考进度与状态提醒,番茄钟、睡眠计算器、日期计算器等工具,免费使用,无需注册。">
 <meta name="keywords" content="考试倒计时,考研倒计时,高考倒计时,国考倒计时,备考进度,上岸日历,倒计时工具">
@@ -43,7 +46,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    font-family: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     min-height: 100vh; color: var(--text); overflow-x: hidden;
     background: radial-gradient(1200px 600px at 50% -10%, rgba(59,130,246,0.12), transparent 60%),
                 radial-gradient(1000px 500px at 90% 110%, rgba(139,92,246,0.1), transparent 60%),
@@ -129,16 +132,22 @@
   /* 倒计时主卡片 */
   .big-card {
     position: relative; z-index: 1;
-    background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
     border: 1px solid var(--card-border); border-radius: 24px;
     padding: 48px 28px 40px;
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
     box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    overflow: hidden;
   }
   .big-card::before {
     content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: 60%; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(59,130,246,0.5), rgba(139,92,246,0.5), transparent);
+  }
+  .big-card::after {
+    content: ""; position: absolute; top: -70px; left: -70px; width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(139,92,246,0.16), transparent 70%);
+    border-radius: 50%; pointer-events: none;
   }
   .big-card .t-name { font-size: 20px; font-weight: 600; }
   .big-card .t-full { font-size: 13px; color: var(--text-2); margin: 6px 0 20px; }
@@ -197,8 +206,13 @@
   .card {
     background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px 18px;
     text-decoration: none; color: inherit; display: block;
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    position: relative; overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+  }
+  .card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
   }
   .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); box-shadow: 0 16px 44px rgba(59,130,246,0.18), 0 12px 36px rgba(0,0,0,0.3); }
   .card .name { font-size: 14.5px; font-weight: 600; margin-bottom: 5px; }
@@ -255,6 +269,14 @@
     .big-card .t-days small { font-size: 18px; }
     .bottom-add { display: block; }
     .footer { padding-bottom: 90px; }
+  }
+  /* 无障碍与交互规范(ui-ux-pro-max checklist) */
+  button, select, .theme-dot, .mine-del { cursor: pointer; }
+  a, button, select, input { outline: none; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
+    html { scroll-behavior: auto; }
   }
 </style>
 <link rel="icon" type="image/svg+xml" href="/icon.svg">

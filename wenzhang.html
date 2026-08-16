@@ -23,7 +23,7 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    font-family: "Plus Jakarta Sans", Inter, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     min-height: 100vh; color: var(--text);
     background: radial-gradient(1200px 600px at 50% -10%, rgba(59,130,246,0.12), transparent 60%),
                 radial-gradient(1000px 500px at 90% 110%, rgba(139,92,246,0.1), transparent 60%),
@@ -90,6 +90,11 @@
     .glass { padding: 20px 16px; }
     .links li { flex-direction: column; align-items: flex-start; gap: 4px; }
   }
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
 </style>
 <link rel="canonical" href="https://daojishicn.top/wenzhang.html">
 <script type="application/ld+json">
@@ -113,6 +118,9 @@
 <link rel="apple-touch-icon" href="/icon.svg">
 <meta property="og:image" content="https://daojishicn.top/icon.svg">
 <meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="orb orb-1"></div>

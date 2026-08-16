@@ -10,7 +10,7 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    font-family: "Plus Jakarta Sans", -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
     min-height: 100vh; color: #1e293b;
     background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 35%, #e0f2fe 70%, #fce7f3 100%);
     -webkit-font-smoothing: antialiased;
@@ -46,6 +46,11 @@
   .tip { font-size: 13px; color: #64748b; line-height: 2; margin-top: 14px; }
   .footer { text-align: center; font-size: 12px; color: #94a3b8; padding: 0 16px 40px; }
   @media (max-width: 640px) { .header h1 { font-size: 26px; } }
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
 </style>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4f46e5">
@@ -59,6 +64,9 @@
 <link rel="apple-touch-icon" href="/icon.svg">
 <meta property="og:image" content="https://daojishicn.top/icon.svg">
 <meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="header">

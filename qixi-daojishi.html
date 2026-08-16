@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" href="/icon.svg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:linear-gradient(160deg,#831843 0%,#db2777 60%,#fbcfe8 100%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px}
+body{font-family:"Plus Jakarta Sans","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:linear-gradient(160deg,#831843 0%,#db2777 60%,#fbcfe8 100%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px}
 .container{max-width:720px;width:100%;text-align:center}
 .back-row{display:flex;align-items:center;margin-bottom:16px;opacity:0.85}
 .back-row a{color:#fff;text-decoration:none;font-size:14px;display:inline-flex;align-items:center;gap:4px}
@@ -25,7 +25,7 @@ h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
 .subtitle{font-size:15px;opacity:0.85;margin-bottom:28px}
 .btn-bar{margin-bottom:20px}
 .btn-bar button{background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.35);border-radius:999px;padding:8px 20px;font-size:14px;cursor:pointer}
-.days-box{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:36px 24px;backdrop-filter:blur(6px);margin-bottom:24px}
+.days-box{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:36px 24px;backdrop-filter:blur(12px);margin-bottom:24px}
 .days-label{font-size:15px;opacity:0.9;margin-bottom:6px}
 .days-number{font-size:96px;font-weight:800;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.25)}
 .days-unit{font-size:24px;font-weight:600;margin-left:8px}
@@ -44,6 +44,11 @@ body.fs .days-number{font-size:18vh}
 @keyframes dayPop{from{opacity:.15;transform:translateY(10px) scale(.97);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
 body.fs .time-item .num{font-size:6vh}
 @media(max-width:640px){body{padding:24px 12px 40px}h1{font-size:22px}.days-number{font-size:64px}.time-item{padding:8px 12px;min-width:70px}.time-item .num{font-size:20px}.article{padding:20px 16px}}
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
 </style>
 
 <script type="application/ld+json">
@@ -69,6 +74,9 @@ body.fs .time-item .num{font-size:6vh}
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="container">
