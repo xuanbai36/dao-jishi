@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>2027元旦倒计时 - 距离2027年元旦还有多少天</title>
+<meta name="description" content="距离2027年元旦还有多少天?元旦倒计时工具,实时计算距离元旦还有几天几小时几分几秒,跨年倒计时。">
+<meta name="keywords" content="元旦倒计时,2027元旦,跨年倒计时,元旦还有几天">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Plus Jakarta Sans", -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    min-height: 100vh; color: #e2e8f0;
+    background: linear-gradient(160deg, #0C0A09 0%, #1C1917 62%, #292524 100%);
+    overflow-x: hidden;
+    display: flex; flex-direction: column; align-items: center; padding: 40px 16px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .glow { position: fixed; border-radius: 50%; filter: blur(110px); z-index: 0; pointer-events: none; }
+  .glow-1 { width: 420px; height: 420px; background: rgba(244,114,182,0.4); top: -120px; left: -100px; animation: drift1 18s ease-in-out infinite; }
+  .glow-2 { width: 340px; height: 340px; background: rgba(251,191,36,0.3); bottom: -100px; right: -80px; animation: drift2 22s ease-in-out infinite; }
+  @keyframes drift1 { 50% { transform: translate(60px, 40px) scale(1.1); } }
+  @keyframes drift2 { 50% { transform: translate(-50px, -40px) scale(1.12); } }
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .stars span { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+  .moon {
+    position: fixed; top: 44px; right: 8%; width: 76px; height: 76px; z-index: 0; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fef9c3, #fde68a 60%, #fbbf24);
+    box-shadow: 0 0 50px rgba(253,230,138,0.45);
+  }
+
+  .container { position: relative; z-index: 1; max-width: 720px; width: 100%; text-align: center; }
+  .icon-top { font-size: 52px; margin-bottom: 10px; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; text-shadow: 0 2px 18px rgba(0,0,0,0.3); }
+  .subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 26px; letter-spacing: 1px; }
+  .btn-bar { margin-bottom: 20px; }
+  .btn-bar button {
+    background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px; padding: 10px 22px; font-size: 14px; cursor: pointer; min-height: 44px;
+    backdrop-filter: blur(8px);
+  }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+    border: 1px solid rgba(202,138,4,0.32);
+    border-radius: 26px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 16px 48px rgba(0,0,0,0.3);
+    padding: 34px 24px; margin-bottom: 20px;
+  }
+  .days-label { font-size: 15px; opacity: 0.9; margin-bottom: 8px; letter-spacing: 1px; }
+  .days-number{ font-size: clamp(72px, 18vw, 110px); font-weight: 800; line-height: 1.05; text-shadow: 0 4px 24px rgba(0,0,0,0.35); color:#FDE68A;}
+  .days-unit { font-size: 26px; font-weight: 600; margin-left: 8px; }
+  .time-row { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+  .time-item { background: rgba(255,255,255,0.13); border-radius: 14px; padding: 10px 18px; min-width: 86px; border: 1px solid rgba(255,255,255,0.14); }
+  .time-item .num { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .time-item .txt { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+  .date-info { font-size: 14px; opacity: 0.88; margin-bottom: 26px; }
+  .encourage { font-size: 17px; font-weight: 600; margin-bottom: 28px; letter-spacing: 2px; opacity: 0.95; }
+  .article { text-align: left; padding: 28px 26px; }
+  .article h2 { font-size: 20px; color: #f8fafc; margin-bottom: 16px; }
+  .article p { font-size: 15px; line-height: 2; margin-bottom: 12px; color: #e2e8f0; opacity: 0.92; }
+  .footer { margin-top: 28px; font-size: 12px; opacity: 0.65; }
+
+  body.fs .days-number{ font-size: 20vh; color:#FDE68A;}
+  body.fs .time-item .num { font-size: 7vh; }
+
+  @media (max-width: 640px) {
+    body { padding: 28px 12px 48px; }
+    h1 { font-size: 25px; }
+    .icon-top { font-size: 44px; }
+    .glass { padding: 28px 18px; }
+    .time-item { min-width: 74px; padding: 9px 12px; }
+    .btn-bar button { padding: 12px 24px; }
+  }
+
+  .days-number span.flip { animation: dayPop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  @keyframes dayPop { from { opacity: 0.15; transform: translateY(10px) scale(0.97); filter: blur(2px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+</style>
+<link rel="canonical" href="https://daojishicn.top/yuandan-daojishi.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2027元旦倒计时 - 距离2027年元旦还有多少天">
+<meta property="og:description" content="距离2027年元旦还有多少天?元旦倒计时工具,实时计算距离元旦还有几天几小时几分几秒,跨年倒计时。">
+<meta property="og:url" content="https://daojishicn.top/yuandan-daojishi.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2027元旦还有多少天?",
+      "acceptedAnswer": { "@type": "Answer", "text": "距离2027元旦还有约 140 天,本页实时显示剩余的天、小时、分钟、秒。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2027元旦是什么时候?",
+      "acceptedAnswer": { "@type": "Answer", "text": "2027元旦时间是 2027 年 1 月 1 日(具体以官方公告为准)。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2027元旦倒计时在哪里看?",
+      "acceptedAnswer": { "@type": "Answer", "text": "打开本页即可看到2027元旦倒计时,支持全屏模式(F 键或全屏按钮),适合放在桌面当备考提醒。" }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="stars" id="stars"></div>
+<div class="container">
+  <a class="back" href="index.html" style="display:inline-block;margin-bottom:14px;padding:8px 20px;border-radius:999px;background:rgba(255,255,255,0.12);border: 1px solid rgba(202,138,4,0.32);color:#e2e8f0;text-decoration:none;font-size:14px;font-weight:600;">← 返回首页</a>
+<div class="icon-top">🎆</div>
+  <h1>2027 元旦倒计时</h1>
+  <div class="subtitle">新年新气象,辞旧迎新</div>
+  <div class="btn-bar"><button onclick="toggleFull()">⛶ 全屏模式</button></div>
+  <div class="glass days-box">
+    <div class="days-label">距离 2027 年元旦</div>
+    <div class="days-number"><span id="days">--</span><span class="days-unit">天</span></div>
+    <div class="time-row">
+      <div class="time-item"><div class="num" id="hours">--</div><div class="txt">小时</div></div>
+      <div class="time-item"><div class="num" id="minutes">--</div><div class="txt">分钟</div></div>
+      <div class="time-item"><div class="num" id="seconds">--</div><div class="txt">秒</div></div>
+    </div>
+  </div>
+  <div class="date-info">目标日期:<span id="target-date">2027 年 1 月 1 日</span></div>
+  <div class="date-status" style="margin-bottom:26px;padding:12px 18px;background:rgba(255,255,255,0.1);border: 1px solid rgba(202,138,4,0.32);border-radius:14px;font-size:13px;color:#cbd5e1;line-height:1.9;text-align:left;">📊 数据状态:<b style="color:#fde68a;">预计日期</b>(以官方公告为准,公布后更新)<br>数据来源:教育部 / 研招网 / 各省考试院 / 国务院办公厅<br>最后更新:2026-08-05</div>
+<div class="encourage" id="encourage">新的一年,新的开始!</div>
+  <div class="glass article">
+    <h2>元旦怎么过?</h2>
+    <p>2027 年元旦是 1 月 1 日。元旦假期通常为 1 月 1~3 日(以官方放假通知为准),是跨年后第一个小长假。</p>
+    <p>💡 元旦前后是订票和聚餐高峰,返乡/出游记得提前安排车票和住宿。</p>
+    <p>📌 新年计划:元旦是立 Flag 的好时机,把年度目标写下来,配合本站倒计时工具,把大目标拆成每月、每周的小目标。</p>
+  
+    <p>🎆 跨年怎么过:热门跨年地点(商圈、江边、地标广场)人流量巨大,建议提前 2 小时到场占位;想安静跨年可以约朋友在家看跨年晚会、吃火锅,或者组织一场桌游局。跨年夜打车难,地铁一般延长运营,提前查好末班车时间,或者干脆安排住宿。</p>
+    <p>📝 新年目标制定:用 SMART 原则写新年目标——具体、可衡量、有时限。比如「一年读 24 本书」比「多读书」有效得多。把年度目标拆成季度、月度计划,配合本站倒计时工具,给每个目标设一个截止日期,进度可视化更容易坚持。</p>
+    <p>💡 假期安排:元旦假期一般 1~3 天,适合短途周边游或回家探亲;假期前一天是出行高峰,车票机票提前 2 周订。元旦也是商场促销季,大件消费可以趁机入手,但注意核对价格历史,别被「先涨后降」套路。</p>
+    <p>🎉 新年许愿仪式感:在 12 月 31 日 23:59 写下今年的三个愿望,零点后发一条朋友圈,把愿望截图存进相册,年底翻出来看实现了几个。给家人朋友准备小礼物,跨年时一起拆开,比群发祝福更有温度。</p>
+    <p>📋 新年规划模板:事业/学业(考一个证、换一份工作)、健康(每周运动 3 次、早睡)、财务(存下工资的 20%)、关系(每月见一次朋友)、爱好(学会一项新技能),五个维度各写一条具体目标,配上截止日期,放进本站倒计时,年底验收。</p></div>
+  <div class="footer">元旦倒计时 · 每天更新</div>
+</div>
+<script>
+
+(function () {
+  var box = document.getElementById("stars");
+  for (var i = 0; i < 60; i++) {
+    var s = document.createElement("span");
+    var size = Math.random() * 2 + 1;
+    s.style.width = s.style.height = size + "px";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.animationDelay = Math.random() * 3 + "s";
+    box.appendChild(s);
+  }
+})();
+// ⚠️ 官方公告发布后,只改这一行日期即可
+var targetDate = new Date("2027-01-01T00:00:00");
+var BASE_TITLE = "2027元旦倒计时";
+var lastTitleDays = -1;
+var targetEl = document.getElementById("target-date");
+targetEl.textContent = targetDate.getFullYear() + " 年 " + (targetDate.getMonth()+1) + " 月 " + targetDate.getDate() + " 日";
+function update() {
+  var now = new Date(); var diff = targetDate - now;
+  var days, h, m, s;
+  if (diff <= 0) {
+    days = 0; h = m = s = 0;
+    document.getElementById("encourage").textContent = "时间到!祝一切顺利!";
+  } else {
+    days = Math.floor(diff / 86400000);
+    h = Math.floor((diff % 86400000) / 3600000);
+    m = Math.floor((diff % 3600000) / 60000);
+    s = Math.floor((diff % 60000) / 1000);
+  }
+  var daysEl = document.getElementById("days");
+  if (daysEl.textContent !== String(days)) {
+    daysEl.textContent = days;
+    daysEl.classList.remove("flip");
+    void daysEl.offsetWidth;
+    daysEl.classList.add("flip");
+  }
+  document.getElementById("hours").textContent = String(h).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(m).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(s).padStart(2, "0");
+  // SEO:标题实时显示剩余天数(天级变化才更新)
+  if (days !== lastTitleDays) {
+    lastTitleDays = days;
+    document.title = BASE_TITLE + " - 还有 " + days + " 天 | 免费倒计时工具";
+  }
+}
+update(); setInterval(update, 1000);
+function toggleFull() {
+  if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
+  else { document.exitFullscreen(); document.body.classList.remove("fs"); }
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>

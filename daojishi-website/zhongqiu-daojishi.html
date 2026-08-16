@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
+<title>2026中秋倒计时 - 距离2026年中秋节还有多少天</title>
+<meta name="description" content="距离2026年中秋节还有多少天?中秋倒计时工具,实时计算距离中秋还有几天几小时几分几秒,中秋节倒计时。">
+<meta name="keywords" content="中秋倒计时,2026中秋节,中秋还有几天,月饼节倒计时">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Plus Jakarta Sans", -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    min-height: 100vh; color: #e2e8f0;
+    background: linear-gradient(160deg, #0C0A09 0%, #1C1917 62%, #292524 100%);
+    overflow-x: hidden;
+    display: flex; flex-direction: column; align-items: center; padding: 40px 16px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .glow { position: fixed; border-radius: 50%; filter: blur(110px); z-index: 0; pointer-events: none; }
+  .glow-1 { width: 420px; height: 420px; background: rgba(251,191,36,0.3); top: -120px; left: -100px; animation: drift1 18s ease-in-out infinite; }
+  .glow-2 { width: 340px; height: 340px; background: rgba(168,85,247,0.3); bottom: -100px; right: -80px; animation: drift2 22s ease-in-out infinite; }
+  @keyframes drift1 { 50% { transform: translate(60px, 40px) scale(1.1); } }
+  @keyframes drift2 { 50% { transform: translate(-50px, -40px) scale(1.12); } }
+  .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .stars span { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+  @keyframes twinkle { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+  .moon {
+    position: fixed; top: 44px; right: 8%; width: 76px; height: 76px; z-index: 0; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fef9c3, #fde68a 60%, #fbbf24);
+    box-shadow: 0 0 50px rgba(253,230,138,0.45);
+  }
+
+  .container { position: relative; z-index: 1; max-width: 720px; width: 100%; text-align: center; }
+  .icon-top { font-size: 52px; margin-bottom: 10px; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; text-shadow: 0 2px 18px rgba(0,0,0,0.3); }
+  .subtitle { font-size: 15px; opacity: 0.85; margin-bottom: 26px; letter-spacing: 1px; }
+  .btn-bar { margin-bottom: 20px; }
+  .btn-bar button {
+    background: rgba(255,255,255,0.14); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px; padding: 10px 22px; font-size: 14px; cursor: pointer; min-height: 44px;
+    backdrop-filter: blur(8px);
+  }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+    border: 1px solid rgba(202,138,4,0.32);
+    border-radius: 26px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 16px 48px rgba(0,0,0,0.3);
+    padding: 34px 24px; margin-bottom: 20px;
+  }
+  .days-label { font-size: 15px; opacity: 0.9; margin-bottom: 8px; letter-spacing: 1px; }
+  .days-number{ font-size: clamp(72px, 18vw, 110px); font-weight: 800; line-height: 1.05; text-shadow: 0 4px 24px rgba(0,0,0,0.35); color:#FDE68A;}
+  .days-unit { font-size: 26px; font-weight: 600; margin-left: 8px; }
+  .time-row { display: flex; justify-content: center; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+  .time-item { background: rgba(255,255,255,0.13); border-radius: 14px; padding: 10px 18px; min-width: 86px; border: 1px solid rgba(255,255,255,0.14); }
+  .time-item .num { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .time-item .txt { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+  .date-info { font-size: 14px; opacity: 0.88; margin-bottom: 26px; }
+  .encourage { font-size: 17px; font-weight: 600; margin-bottom: 28px; letter-spacing: 2px; opacity: 0.95; }
+  .article { text-align: left; padding: 28px 26px; }
+  .article h2 { font-size: 20px; color: #f8fafc; margin-bottom: 16px; }
+  .article p { font-size: 15px; line-height: 2; margin-bottom: 12px; color: #e2e8f0; opacity: 0.92; }
+  .footer { margin-top: 28px; font-size: 12px; opacity: 0.65; }
+
+  body.fs .days-number{ font-size: 20vh; color:#FDE68A;}
+  body.fs .time-item .num { font-size: 7vh; }
+
+  @media (max-width: 640px) {
+    body { padding: 28px 12px 48px; }
+    h1 { font-size: 25px; }
+    .icon-top { font-size: 44px; }
+    .glass { padding: 28px 18px; }
+    .time-item { min-width: 74px; padding: 9px 12px; }
+    .btn-bar button { padding: 12px 24px; }
+  }
+
+  .days-number span.flip { animation: dayPop 0.6s cubic-bezier(0.2, 0.8, 0.3, 1); }
+  @keyframes dayPop { from { opacity: 0.15; transform: translateY(10px) scale(0.97); filter: blur(2px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+
+  /* 无障碍(ui-ux-pro-max) */
+  button,select{cursor:pointer}
+  :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+</style>
+<link rel="canonical" href="https://daojishicn.top/zhongqiu-daojishi.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026中秋倒计时 - 距离2026年中秋节还有多少天">
+<meta property="og:description" content="距离2026年中秋节还有多少天?中秋倒计时工具,实时计算距离中秋还有几天几小时几分几秒,中秋节倒计时。">
+<meta property="og:url" content="https://daojishicn.top/zhongqiu-daojishi.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" type="image/svg+xml" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/icon.svg">
+<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "2026中秋还有多少天?",
+      "acceptedAnswer": { "@type": "Answer", "text": "距离2026中秋还有约 42 天,本页实时显示剩余的天、小时、分钟、秒。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2026中秋是什么时候?",
+      "acceptedAnswer": { "@type": "Answer", "text": "2026中秋时间是 2026 年 9 月 25 日(具体以官方公告为准)。" }
+    },
+    {
+      "@type": "Question",
+      "name": "2026中秋倒计时在哪里看?",
+      "acceptedAnswer": { "@type": "Answer", "text": "打开本页即可看到2026中秋倒计时,支持全屏模式(F 键或全屏按钮),适合放在桌面当备考提醒。" }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="stars" id="stars"></div><div class="moon"></div>
+<div class="container">
+  <a class="back" href="index.html" style="display:inline-block;margin-bottom:14px;padding:8px 20px;border-radius:999px;background:rgba(255,255,255,0.12);border: 1px solid rgba(202,138,4,0.32);color:#e2e8f0;text-decoration:none;font-size:14px;font-weight:600;">← 返回首页</a>
+<div class="icon-top">🌕</div>
+  <h1>2026 中秋倒计时</h1>
+  <div class="subtitle">月圆人团圆</div>
+  <div class="btn-bar"><button onclick="toggleFull()">⛶ 全屏模式</button></div>
+  <div class="glass days-box">
+    <div class="days-label">距离 2026 年中秋节(八月十五)</div>
+    <div class="days-number"><span id="days">--</span><span class="days-unit">天</span></div>
+    <div class="time-row">
+      <div class="time-item"><div class="num" id="hours">--</div><div class="txt">小时</div></div>
+      <div class="time-item"><div class="num" id="minutes">--</div><div class="txt">分钟</div></div>
+      <div class="time-item"><div class="num" id="seconds">--</div><div class="txt">秒</div></div>
+    </div>
+  </div>
+  <div class="date-info">目标日期:<span id="target-date">2026 年 9 月 15 日</span>(农历八月十五)</div>
+  <div class="date-status" style="margin-bottom:26px;padding:12px 18px;background:rgba(255,255,255,0.1);border: 1px solid rgba(202,138,4,0.32);border-radius:14px;font-size:13px;color:#cbd5e1;line-height:1.9;text-align:left;">📊 数据状态:<b style="color:#fde68a;">预计日期</b>(以官方公告为准,公布后更新)<br>数据来源:教育部 / 研招网 / 各省考试院 / 国务院办公厅<br>最后更新:2026-08-05</div>
+<div class="encourage" id="encourage">但愿人长久,千里共婵娟!</div>
+  <div class="glass article">
+    <h2>中秋怎么过?</h2>
+    <p>2026 年中秋节是 9 月 15 日(农历八月十五),预计与周末连休(以官方通知为准),赏月、吃月饼、家庭团聚是传统。</p>
+    <p>💡 中秋前后是出行高峰,高铁票/机票提前 2 周订;月饼礼盒建议提前 1 周采购,越临近越贵。</p>
+    <p>📌 中秋过后临近国庆(10 月 1 日),两节连休的安排可提前规划,返程票记得一并订好。</p>
+  
+    <p>🥮 月饼怎么选:传统广式(莲蓉、五仁、蛋黄)、苏式(酥皮鲜肉)、冰皮、流心等各有拥趸;送礼选礼盒装提前 1 周买,越临近越贵还可能断货;自吃可以等节后清仓,价格腰斩。注意保质期,冰皮和鲜肉月饼保质期短,要放冰箱尽快吃。</p>
+    <p>🌕 赏月攻略:中秋赏月最佳时间是月亮升起后 1~2 小时;城市里找高层天台、江边、公园湖边视野最好;想拍月亮用手机长焦或专业模式,配合地景(建筑、树影)更有意境。中秋夜天气转凉,户外赏月记得带件薄外套。</p>
+    <p>👨‍👩‍👧 团圆安排:中秋是仅次于春节的家庭团圆日,能回家的尽量回家;回不去的记得视频通话,给父母寄盒月饼。中秋假期(一般与周末连休)适合短途游或家庭聚餐,餐厅中秋当晚爆满,提前 3~5 天订位。中秋后就是国庆,两节连休可以一起规划。</p>
+    <p>🏮 中秋传统:除了吃月饼,中秋还有赏月、猜灯谜、放孔明灯(注意当地禁放规定)、舞火龙等习俗;闽南地区有博饼,广东有树中秋,各地习俗不同,感受家乡的味道最有意义。</p>
+    <p>🎁 送礼建议:送长辈选无糖或低糖月饼、茶叶、保健品;送朋友选冰皮、流心等新式月饼搭配果篮;送客户选品牌礼盒。提前 1 周采购,中秋前两天物流容易拥堵,快递要留足时间。</p></div>
+  <div class="footer">中秋倒计时 · 每天更新</div>
+</div>
+<script>
+
+(function () {
+  var box = document.getElementById("stars");
+  for (var i = 0; i < 60; i++) {
+    var s = document.createElement("span");
+    var size = Math.random() * 2 + 1;
+    s.style.width = s.style.height = size + "px";
+    s.style.left = Math.random() * 100 + "%";
+    s.style.top = Math.random() * 100 + "%";
+    s.style.animationDelay = Math.random() * 3 + "s";
+    box.appendChild(s);
+  }
+})();
+// ⚠️ 官方公告发布后,只改这一行日期即可
+var targetDate = new Date("2026-09-25T00:00:00");
+var BASE_TITLE = "2026中秋倒计时";
+var lastTitleDays = -1;
+var targetEl = document.getElementById("target-date");
+targetEl.textContent = targetDate.getFullYear() + " 年 " + (targetDate.getMonth()+1) + " 月 " + targetDate.getDate() + " 日";
+function update() {
+  var now = new Date(); var diff = targetDate - now;
+  var days, h, m, s;
+  if (diff <= 0) {
+    days = 0; h = m = s = 0;
+    document.getElementById("encourage").textContent = "时间到!祝一切顺利!";
+  } else {
+    days = Math.floor(diff / 86400000);
+    h = Math.floor((diff % 86400000) / 3600000);
+    m = Math.floor((diff % 3600000) / 60000);
+    s = Math.floor((diff % 60000) / 1000);
+  }
+  var daysEl = document.getElementById("days");
+  if (daysEl.textContent !== String(days)) {
+    daysEl.textContent = days;
+    daysEl.classList.remove("flip");
+    void daysEl.offsetWidth;
+    daysEl.classList.add("flip");
+  }
+  document.getElementById("hours").textContent = String(h).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(m).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(s).padStart(2, "0");
+  // SEO:标题实时显示剩余天数(天级变化才更新)
+  if (days !== lastTitleDays) {
+    lastTitleDays = days;
+    document.title = BASE_TITLE + " - 还有 " + days + " 天 | 免费倒计时工具";
+  }
+}
+update(); setInterval(update, 1000);
+function toggleFull() {
+  if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); document.body.classList.add("fs"); }
+  else { document.exitFullscreen(); document.body.classList.remove("fs"); }
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+</script>
+</body>
+</html>
