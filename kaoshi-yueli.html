@@ -21,9 +21,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Plus Jakarta Sans","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background:linear-gradient(160deg,#0f172a 0%,#1e293b 60%,#334155 100%);min-height:100vh;color:#f1f5f9;display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px}
 .container{max-width:760px;width:100%}
-.back-row{display:flex;align-items:center;margin-bottom:16px;opacity:0.85}
-.back-row a{color:#e2e8f0;text-decoration:none;font-size:14px}
-.back-row a:hover{text-decoration:underline}
+
+
+
 h1{font-size:28px;font-weight:700;margin-bottom:8px;text-align:center}
 .subtitle{font-size:15px;opacity:0.85;margin-bottom:28px;text-align:center}
 .month{margin-bottom:28px}
@@ -50,6 +50,22 @@ h1{font-size:28px;font-weight:700;margin-bottom:8px;text-align:center}
   button,select{cursor:pointer}
   :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+
+  /* 返回首页按钮(统一组件) */
+  .back-home {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-bottom: 18px; padding: 9px 18px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; color: #e2e8f0; text-decoration: none;
+    background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .back-home svg { flex-shrink: 0; transition: transform 0.2s; }
+  .back-home:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.42); transform: translateX(-2px); }
+  .back-home:hover svg { transform: translateX(-2px); }
+  .back-home:active { transform: scale(0.96); }
+  .back-home--light { color: #1f2937; background: rgba(255,255,255,0.85); border-color: rgba(148,163,184,0.55); }
+  .back-home--light:hover { background: #ffffff; border-color: #94a3b8; }
 </style>
 
 
@@ -65,7 +81,7 @@ h1{font-size:28px;font-weight:700;margin-bottom:8px;text-align:center}
 </head>
 <body>
 <div class="container">
-  <div class="back-row"><a href="/">← 返回首页</a></div>
+  <a class="back-home" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回首页</a>
   <h1>📅 2026 下半年考试月历</h1>
   <div class="subtitle">9 月 ~ 12 月,重要考试与报名节点一网打尽</div>
 

@@ -18,9 +18,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Plus Jakarta Sans","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background: linear-gradient(160deg, #0A120E 0%, #12221C 62%, #1A2E27 100%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px}
 .container{max-width:720px;width:100%;text-align:center}
-.back-row{display:flex;align-items:center;margin-bottom:16px;opacity:0.85}
-.back-row a{color:#fff;text-decoration:none;font-size:14px;display:inline-flex;align-items:center;gap:4px}
-.back-row a:hover{text-decoration:underline}
+
+
+
 h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
 .subtitle{font-size:15px;opacity:0.85;margin-bottom:28px}
 .btn-bar{margin-bottom:20px}
@@ -49,6 +49,22 @@ body.fs .time-item .num{font-size:6vh}
   button,select{cursor:pointer}
   :focus-visible{outline:2px solid #60a5fa;outline-offset:2px;border-radius:4px}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+
+  /* 返回首页按钮(统一组件) */
+  .back-home {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-bottom: 18px; padding: 9px 18px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; color: #e2e8f0; text-decoration: none;
+    background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .back-home svg { flex-shrink: 0; transition: transform 0.2s; }
+  .back-home:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.42); transform: translateX(-2px); }
+  .back-home:hover svg { transform: translateX(-2px); }
+  .back-home:active { transform: scale(0.96); }
+  .back-home--light { color: #1f2937; background: rgba(255,255,255,0.85); border-color: rgba(148,163,184,0.55); }
+  .back-home--light:hover { background: #ffffff; border-color: #94a3b8; }
 </style>
 
 <script type="application/ld+json">
@@ -91,7 +107,7 @@ body.fs .time-item .num{font-size:6vh}
 </head>
 <body>
 <div class="container">
-<div class="back-row"><a href="/">← 返回首页</a></div>
+<a class="back-home" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>返回首页</a>
 <h1>🎄 圣诞倒计时</h1>
 <div class="subtitle">Merry Christmas! 祝你圣诞快乐 🎁</div>
 <div class="btn-bar"><button onclick="toggleFull()">⛶ 全屏模式</button></div>
