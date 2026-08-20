@@ -1,22 +1,47 @@
-// Service Worker:网络优先策略(页面始终拿最新版,离线时才用缓存)
-var CACHE = "daojishi-v2";
+// Service Worker v3:网络优先(页面拿最新版)+ 缓存优先(静态资源)+ 全站预缓存(离线可用)
+// 更新版本号后部署,浏览器会自动替换旧缓存(activate 阶段清理旧版本)
+var CACHE = "daojishi-v3";
 var CORE = [
   "./",
   "./index.html",
+  "./404.html",
   "./manifest.json",
   "./icon.svg",
+  "./icon-180.png",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./og-image.png",
   "./kaoyan-daojishi.html",
   "./guokao-daojishi.html",
   "./gaokao-daojishi.html",
   "./siliuji-daojishi.html",
+  "./zhongkao-daojishi.html",
   "./chunjie-daojishi.html",
+  "./yuandan-daojishi.html",
+  "./jiazi-daojishi.html",
+  "./shengkao-daojishi.html",
+  "./erji-daojishi.html",
+  "./duanwu-daojishi.html",
+  "./zhongqiu-daojishi.html",
+  "./guoqing-daojishi.html",
+  "./qixi-daojishi.html",
+  "./shengdan-daojishi.html",
+  "./zhuan-shengben-daojishi.html",
+  "./yuchanqi-daojishi.html",
   "./zidingyi-daojishi.html",
-  "./riqi-jisuanqi.html",
-  "./fanqiezhong.html",
   "./xiaban-daojishi.html",
+  "./fanqiezhong.html",
   "./shuimian-jisuanqi.html",
+  "./riqi-jisuanqi.html",
+  "./shijie-shizhong.html",
+  "./fenxiang-haibao.html",
   "./wenben-gongju.html",
-  "./wenzhang.html"
+  "./kaoshi-yueli.html",
+  "./wenzhang.html",
+  "./about.html",
+  "./privacy.html",
+  "./terms.html",
+  "./share.html"
 ];
 
 self.addEventListener("install", function (e) {
@@ -57,7 +82,7 @@ self.addEventListener("fetch", function (e) {
     return;
   }
 
-  // 其他资源:缓存优先,未命中再请求
+  // 其他资源:缓存优先,未命中再请求并写入缓存
   e.respondWith(
     caches.match(e.request).then(function (hit) {
       if (hit) return hit;

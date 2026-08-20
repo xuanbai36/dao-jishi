@@ -10,10 +10,10 @@
 <meta property="og:title" content="七夕倒计时 - 距离七夕节还有多少天">
 <meta property="og:description" content="距离七夕节还有多少天?七夕倒计时工具,实时计算七夕还剩几天几小时几分几秒。">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://daojishicn.top/icon.svg">
-<meta property="twitter:image" content="https://daojishicn.top/icon.svg">
+<meta property="og:image" content="https://daojishicn.top/og-image.png">
+<meta property="twitter:image" content="https://daojishicn.top/og-image.png">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/icon.svg">
+<link rel="apple-touch-icon" href="/icon-180.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Plus Jakarta Sans","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;background: linear-gradient(160deg, #0A120E 0%, #12221C 62%, #1A2E27 100%);min-height:100vh;color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px 16px 60px}
@@ -27,7 +27,7 @@ h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
 .btn-bar button{background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.35);border-radius:999px;padding:8px 20px;font-size:14px;cursor:pointer}
 .days-box{background:rgba(255,255,255,0.12);border: 1px solid rgba(16,185,129,0.32);border-radius:20px;padding:36px 24px;backdrop-filter:blur(12px);margin-bottom:24px}
 .days-label{font-size:15px;opacity:0.9;margin-bottom:6px}
-.days-number{font-size:96px;font-weight:800;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.25)color:#6EE7B7;}
+.days-number{font-size:96px;font-weight:800;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.25); color:#6EE7B7;}
 .days-unit{font-size:24px;font-weight:600;margin-left:8px}
 .time-row{display:flex;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
 .time-item{background:rgba(255,255,255,0.15);border-radius:12px;padding:10px 16px;min-width:88px}
@@ -39,11 +39,11 @@ h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:1px}
 .article h2{font-size:20px;color:#831843;margin-bottom:16px}
 .article p{font-size:15px;line-height:1.9;margin-bottom:12px}
 .footer{margin-top:32px;font-size:12px;opacity:0.7;text-align:center}
-body.fs .days-number{font-size:18vhcolor:#6EE7B7;}
+body.fs .days-number{font-size:18vh; color:#6EE7B7;}
 .days-number span.flip{animation:dayPop .6s cubic-bezier(.2,.8,.3,1)}
 @keyframes dayPop{from{opacity:.15;transform:translateY(10px) scale(.97);filter:blur(2px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
 body.fs .time-item .num{font-size:6vh}
-@media(max-width:640px){body{padding:24px 12px 40px}h1{font-size:22px}.days-number{font-size:64pxcolor:#6EE7B7;}.time-item{padding:8px 12px;min-width:70px}.time-item .num{font-size:20px}.article{padding:20px 16px}}
+@media(max-width:640px){body{padding:24px 12px 40px}h1{font-size:22px}.days-number{font-size:64px; color:#6EE7B7;}.time-item{padding:8px 12px;min-width:70px}.time-item .num{font-size:20px}.article{padding:20px 16px}}
 
   /* 无障碍(ui-ux-pro-max) */
   button,select{cursor:pointer}
@@ -74,9 +74,20 @@ body.fs .time-item .num{font-size:6vh}
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+
+<meta name="application-name" content="上岸日历">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="上岸日历">
+<meta name="theme-color" content="#0A120E">
+<link rel="manifest" href="manifest.json">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="上岸日历">
+<link rel="canonical" href="https://daojishicn.top/qixi-daojishi.html">
+<meta property="og:url" content="https://daojishicn.top/qixi-daojishi.html">
 </head>
 <body>
 <div class="container">
@@ -112,6 +123,9 @@ targetEl.textContent=targetDate.getFullYear()+" 年 "+(targetDate.getMonth()+1)+
 function update(){var now=new Date();var diff=targetDate-now;if(diff<=0){document.getElementById("days").textContent="0";document.getElementById("hours").textContent="00";document.getElementById("minutes").textContent="00";document.getElementById("seconds").textContent="00";document.getElementById("encourage").textContent="时间到!祝一切顺利!";return}var de=document.getElementById("days");var dv=Math.floor(diff/86400000);if(de.textContent!=String(dv)){de.textContent=dv;de.classList.remove("flip");void de.offsetWidth;de.classList.add("flip")}document.getElementById("hours").textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,"0");document.getElementById("minutes").textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,"0");document.getElementById("seconds").textContent=String(Math.floor((diff%60000)/1000)).padStart(2,"0");var d=Math.floor(diff/86400000);if(d<=0){document.title="时间到!"}else{document.title="⏲ "+d+"天 · "+BASE_TITLE}}
 update();setInterval(update,1000);
 function toggleFull(){if(!document.fullscreenElement){document.documentElement.requestFullscreen();document.body.classList.add("fs")}else{document.exitFullscreen();document.body.classList.remove("fs")}}
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 </script>
 </body>
 </html>

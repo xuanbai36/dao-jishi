@@ -7,9 +7,11 @@
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "347a4947308541afa336d0c5c95ca741"}'></script><!-- End Cloudflare Web Analytics -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0A120E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="application-name" content="上岸日历">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="上岸日历">
 <title>上岸日历 - 把重要考试,变成每天看得见的进度</title>
 <meta name="description" content="考研、高考、国考、教资、四六级考试倒计时,备考进度与状态提醒,番茄钟、睡眠计算器、日期计算器等工具,免费使用,无需注册。">
 <meta name="keywords" content="考试倒计时,考研倒计时,高考倒计时,国考倒计时,备考进度,上岸日历,倒计时工具">
@@ -28,6 +30,8 @@
 <meta property="og:title" content="上岸日历 - 把重要考试,变成每天看得见的进度">
 <meta property="og:description" content="考研、高考、国考、教资、四六级考试倒计时与备考工具,免费使用。">
 <meta property="og:url" content="https://daojishicn.top/">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="上岸日历">
 <meta name="twitter:card" content="summary">
 <style>
   :root {
@@ -238,6 +242,7 @@
   .card .days { font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 26px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
   .card .days small { font-size: 12px; color: var(--text-3); font-weight: 500; }
   .card .days.hot { color: var(--danger); }
+  .card .days.past { color: var(--text-3); font-size: 15px; font-weight: 600; letter-spacing: 1px; }
   .card .c-head { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
   .card .c-icon { font-size: 18px; line-height: 1; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); }
   .card .c-bottom { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
@@ -303,9 +308,9 @@
   }
 </style>
 <link rel="icon" type="image/svg+xml" href="/icon.svg">
-<link rel="apple-touch-icon" href="/icon.svg">
-<meta property="og:image" content="https://daojishicn.top/icon.svg">
-<meta name="twitter:image" content="https://daojishicn.top/icon.svg">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<meta property="og:image" content="https://daojishicn.top/og-image.png">
+<meta name="twitter:image" content="https://daojishicn.top/og-image.png">
 </head>
 <body>
 <div class="orb orb-1"></div>
@@ -391,6 +396,7 @@
     <a class="tool-chip" href="fenxiang-haibao.html"><span class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></span>倒计时海报</a>
     <a class="tool-chip" href="wenben-gongju.html"><span class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7V5h16v2M9 20h6M12 5v15"/></svg></span>文本工具箱</a>
     <a class="tool-chip" href="xiaban-daojishi.html"><span class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>工作日倒计时</a>
+    <a class="tool-chip" href="yuchanqi-daojishi.html"><span class="ti"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.3-9C1.2 9 3 5.5 6.5 5.5c2 0 3.4 1.2 4 2.5.6-1.3 2-2.5 4-2.5C18 5.5 19.8 9 18.3 12 16 16.4 12 21 12 21z"/></svg></span>预产期倒计时</a>
   </div>
 </div>
 
@@ -435,17 +441,22 @@ var festivalGrid = document.getElementById("festivalGrid");
 function renderCards(list, box) {
   box.innerHTML = "";
   list.forEach(function (e) {
-    var d = daysLeft(e.date);
+    var ts = new Date(e.date + "T00:00:00").getTime();
+    var past = ts < Date.now();
+    var d = past ? 0 : Math.floor((ts - Date.now()) / 86400000);
     var card = document.createElement("a");
-    card.className = "card";
+    card.className = "card" + (past ? " past" : "");
     card.href = e.url;
     // 红色紧迫色只给考试 ≤7 天用;节日恒用青色
-    var hot = e.cat === "exam" && d <= 7;
-    var pct = Math.max(5, Math.min(100, Math.round(d / 365 * 100)));
+    var hot = !past && e.cat === "exam" && d <= 7;
+    var pct = past ? 100 : Math.max(5, Math.min(100, Math.round(d / 365 * 100)));
+    var daysHtml = past
+      ? '<div class="days past">已结束</div>'
+      : '<div class="days' + (hot ? " hot" : "") + '">' + d + '<small>天</small></div>';
     card.innerHTML =
       '<div class="c-head"><span class="c-icon">' + (e.icon || "📌") + '</span><span class="name">' + e.name + "</span></div>" +
       '<div class="date">' + e.date.split("-")[0] + " 年 " + parseInt(e.date.split("-")[1]) + " 月 " + parseInt(e.date.split("-")[2]) + " 日</div>" +
-      '<div class="c-bottom"><div class="days' + (hot ? " hot" : "") + '">' + d + '<small>天</small></div>' +
+      '<div class="c-bottom">' + daysHtml +
       '<div class="c-bar"><i style="width:' + pct + '%"></i></div></div>';
     box.appendChild(card);
   });
@@ -465,7 +476,14 @@ function filterCards(q) {
 
 var cur = null;
 var sel = document.getElementById("targetSel");
+// 缓存常用 DOM 引用(每秒 tick 复用,减少查询)
+var elDays = document.getElementById("tDays");
+var elHms = document.getElementById("tHms");
+var elStatus = document.getElementById("tStatus");
+var elProgress = document.getElementById("tProgressFill");
 events.forEach(function (e) {
+  var ts = new Date(e.date + "T00:00:00").getTime();
+  if (ts < Date.now()) return; // 已结束的考试/节日不进主目标选择
   var o = document.createElement("option");
   o.value = e.name;
   o.textContent = e.name + "(还剩" + daysLeft(e.date) + "天)";
@@ -482,8 +500,11 @@ function loadTarget() {
   var saved = null;
   try { saved = localStorage.getItem("homeTarget"); } catch (e) {}
   var t = events.find(function (e) { return e.name === saved; });
-  if (t) { cur = t; sel.value = t.name; }
-  else { cur = events[0]; sel.value = events[0].name; } // 默认选中第一个考试(国考)
+  if (t) { cur = t; sel.value = t.name; return; }
+  // 默认选中最近的未来考试/节日
+  var future = events.filter(function (e) { return new Date(e.date + "T00:00:00").getTime() >= Date.now(); });
+  var def = future[0] || events[0];
+  cur = def; sel.value = def.name;
 }
 
 function renderHero() {
@@ -506,29 +527,25 @@ function tick() {
   var s = Math.floor((diff % 60000) / 1000);
   // 备考进度条:以目标前 365 天为起点,已流逝比例
   var pct = Math.max(3, Math.min(100, Math.round((365 - days) / 365 * 100)));
-  var pf = document.getElementById("tProgressFill");
-  if (pf) pf.style.width = pct + "%";
-  var daysEl = document.getElementById("tDays");
-  if (daysEl.textContent !== String(days)) {
-    daysEl.textContent = days;
-    daysEl.classList.remove("flip");
-    void daysEl.offsetWidth;
-    daysEl.classList.add("flip");
+  elProgress.style.width = pct + "%";
+  if (elDays.textContent !== String(days)) {
+    elDays.textContent = days;
+    elDays.classList.remove("flip");
+    void elDays.offsetWidth;
+    elDays.classList.add("flip");
   }
-  var hmsEl = document.getElementById("tHms");
   var hms = (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
-  if (hmsEl.textContent !== hms) {
-    hmsEl.textContent = hms;
-    hmsEl.classList.remove("flip");
-    void hmsEl.offsetWidth;
-    hmsEl.classList.add("flip");
+  if (elHms.textContent !== hms) {
+    elHms.textContent = hms;
+    elHms.classList.remove("flip");
+    void elHms.offsetWidth;
+    elHms.classList.add("flip");
   }
-  var st = document.getElementById("tStatus");
-  if (days > 90) { st.textContent = "保持节奏,稳步推进"; st.className = "t-status"; }
-  else if (days > 30) { st.textContent = "冲刺阶段,全力以赴"; st.className = "t-status"; }
-  else if (days > 7) { st.textContent = "重点检查与模拟冲刺"; st.className = "t-status warn"; }
-  else if (days > 1) { st.textContent = "最终准备,稳住心态"; st.className = "t-status warn"; }
-  else { st.textContent = "目标时刻就要到了!"; st.className = "t-status warn"; }
+  if (days > 90) { elStatus.textContent = "保持节奏,稳步推进"; elStatus.className = "t-status"; }
+  else if (days > 30) { elStatus.textContent = "冲刺阶段,全力以赴"; elStatus.className = "t-status"; }
+  else if (days > 7) { elStatus.textContent = "重点检查与模拟冲刺"; elStatus.className = "t-status warn"; }
+  else if (days > 1) { elStatus.textContent = "最终准备,稳住心态"; elStatus.className = "t-status warn"; }
+  else { elStatus.textContent = "目标时刻就要到了!"; elStatus.className = "t-status warn"; }
 }
 
 function renderMine() {
@@ -537,7 +554,6 @@ function renderMine() {
   try { list = JSON.parse(localStorage.getItem("customCountdowns") || "[]"); } catch (e) {}
   if (list.length === 0) {
     box.innerHTML = '<div class="mine-empty">还没有目标<br><a href="zidingyi-daojishi.html">创建一个目标</a>,或从上面的热门考试开始</div>';
-    document.getElementById("targetBox").style.display = "none";
     return;
   }
   box.innerHTML = "";
@@ -572,8 +588,10 @@ function deleteMine(i) {
     var ht = localStorage.getItem("homeTarget");
     if (ht && ht === (removed.name || "未命名")) { localStorage.removeItem("homeTarget"); }
   } catch (e) {}
-  renderMine(); selectTarget("");
-  refreshMainTarget();
+  renderMine();
+  // 若删掉的是当前主目标,回到默认目标
+  loadTarget();
+  renderHero();
 }
 
 // 主题切换
@@ -606,7 +624,12 @@ document.addEventListener("keydown", function (e) {
 
 loadTarget();
 renderHero();
-setInterval(tick, 1000);
+// 页面隐藏时暂停倒计时刷新,省电省资源
+var tickTimer = setInterval(tick, 1000);
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) { clearInterval(tickTimer); }
+  else { tick(); tickTimer = setInterval(tick, 1000); }
+});
 renderMine();
 </script>
 <script>

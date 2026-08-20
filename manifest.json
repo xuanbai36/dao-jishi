@@ -1,18 +1,19 @@
 {
-  "name": "倒计时与工具箱",
-  "short_name": "倒计时工具",
-  "description": "考研、高考、国考倒计时,睡眠计算器,番茄钟,备考攻略。免费使用。",
+  "name": "上岸日历 - 考试倒计时与备考工具",
+  "short_name": "上岸日历",
+  "description": "考研、高考、国考、教资、四六级考试倒计时与备考进度提醒,番茄钟、睡眠计算器、日期计算器等免费工具,无需注册。",
+  "id": "daojishicn.top",
   "start_url": "https://daojishicn.top/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "lang": "zh-CN",
+  "background_color": "#0A120E",
+  "theme_color": "#0A120E",
+  "categories": ["education", "productivity", "utilities"],
   "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]
 }
